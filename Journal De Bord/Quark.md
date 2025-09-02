@@ -1,6 +1,6 @@
 pour init : 
 ```bash
-cd quark
+cd GAD/GADGIT/quark
 npm start
 ```
 
