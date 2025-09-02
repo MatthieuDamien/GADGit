@@ -46,8 +46,3 @@ Quark doit **se connecter à LabKey Translational** pour :
 2. **Surveillance** : Récupérer l'état du cluster et planifier les tâches en fonction des ressources disponibles.
 3. **Exécution** : Soumettre les tâches, relancer automatiquement en cas d'échec, et analyser les logs.
 4. **Reporting** : Générer des rapports synthétiques pour le suivi des pipelines (ex : qualité des données `/QC`).
-
----
-
- Comment définir et ajuster dynamiquement les priorités entre les tâches  ?
-	Listes de priorité ? `Liste_Prio_Urgent = []; Liste_Prio_Normale = []`

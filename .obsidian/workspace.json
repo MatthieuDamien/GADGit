@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "849c29355e3449b6",
+            "id": "1d720663a6a4dd3d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -22,17 +22,17 @@
             }
           },
           {
-            "id": "1d720663a6a4dd3d",
+            "id": "c671e827c49e6761",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Journal De Bord/Cahier des charges Quark.md",
+                "file": "Journal De Bord/Quark.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cahier des charges Quark"
+              "title": "Quark"
             }
           }
         ],
@@ -184,11 +184,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "1d720663a6a4dd3d",
+  "active": "c671e827c49e6761",
   "lastOpenFiles": [
-    "Journal De Bord/Septembre/2025-09-02.md",
-    "Journal De Bord/Cahier des charges Quark.md",
-    "Journal De Bord/Sujet du stage.md",
-    "Journal De Bord/Septembre/2025-09-01.md"
+    "quark/node_modules/@adobe/css-tools/dist/umd/adobe-css-tools.js.map",
+    "quark/node_modules/@adobe/css-tools/dist/umd/adobe-css-tools.js",
+    "quark/node_modules/@adobe/css-tools/dist/umd/adobe-css-tools.d.ts",
+    "quark/node_modules/@adobe/css-tools/dist/esm/adobe-css-tools.mjs.map",
+    "quark/node_modules/@adobe/css-tools/dist/esm/adobe-css-tools.mjs",
+    "quark/node_modules/@adobe/css-tools/dist/esm/adobe-css-tools.d.mts",
+    "quark/node_modules/@adobe/css-tools/dist/cjs/adobe-css-tools.cjs",
+    "quark/node_modules/@adobe/css-tools/dist/cjs/adobe-css-tools.d.cts",
+    "quark/node_modules/@adobe/css-tools/dist/cjs/adobe-css-tools.cjs.map",
+    "quark/node_modules/@adobe/css-tools/docs/EXAMPLES.md",
+    "quark/node_modules/@adobe/css-tools/docs/CHANGELOG.md",
+    "quark/node_modules/@adobe/css-tools/docs/AST.md",
+    "quark/node_modules/@adobe/css-tools/docs/API.md",
+    "quark/node_modules/@adobe/css-tools/dist/umd",
+    "quark/node_modules/@adobe/css-tools/dist/esm",
+    "quark/node_modules/@adobe/css-tools/README.md",
+    "quark/node_modules/@types/aria-query/README.md",
+    "quark/node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api/README.md",
+    "quark/node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api/LICENSE.md",
+    "quark/node_modules/@testing-library/dom/node_modules/aria-query/README.md",
+    "quark/node_modules/@testing-library/dom/node_modules/aria-query/CHANGELOG.md",
+    "quark/node_modules/@testing-library/user-event/README.md",
+    "quark/node_modules/@testing-library/user-event/CHANGELOG.md",
+    "quark/node_modules/@testing-library/jest-dom/README.md",
+    "quark/node_modules/@testing-library/jest-dom/CHANGELOG.md",
+    "quark/node_modules/@testing-library/react/README.md",
+    "quark/node_modules/@testing-library/react/CHANGELOG.md",
+    "quark/node_modules/@testing-library/dom/README.md",
+    "quark/node_modules/dequal/readme.md",
+    "quark/node_modules/min-indent/readme.md",
+    "quark/node_modules/strip-indent/readme.md",
+    "quark/node_modules/indent-string/readme.md",
+    "quark/node_modules/redent/readme.md",
+    "quark/node_modules/css.escape/README.md",
+    "quark/node_modules/lz-string/README.md",
+    "quark/node_modules/dom-accessibility-api/README.md",
+    "quark/src/logo.svg",
+    "quark/public/logo512.png",
+    "quark/public/logo192.png",
+    "quark/node_modules/serve-index/public/icons/page_world.png",
+    "quark/node_modules/@jest/core/build/assets/jest_logo.png",
+    "quark/node_modules/cra-template/template/src/logo.svg",
+    "quark/node_modules/serve-index/public/icons/page_word.png",
+    "quark/node_modules/serve-index/public/icons/page_white_zip.png",
+    "quark/node_modules/serve-index/public/icons/page_white_wrench.png",
+    "quark/node_modules/serve-index/public/icons/page_white_world.png",
+    "Journal De Bord/Sans titre.canvas"
   ]
 }
