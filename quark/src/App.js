@@ -1,5 +1,14 @@
-import logo from './logo.svg';
+import logo from './logoQuark.svg';
 import './App.css';
+
+
+function MyButton() {
+  return (
+    <button>
+      I'm a button
+    </button>
+  );
+}
 
 function App() {
   return (
@@ -18,6 +27,10 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <h1>Welcome to my app</h1>
+        <MyButton />
+      </div>
     </div>
   );
 }
