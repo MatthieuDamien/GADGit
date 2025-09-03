@@ -8,9 +8,9 @@ si c'est lancé : http://localhost:3000/
 
 ne pas oublier d'installer les dépendances suivantes :
 ```bash
-# Tailwind CSS
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+# Tailwind CSS  --> ne fonctionne pas :'(
+# npm install -D tailwindcss postcss autoprefixer
+# npx tailwindcss init -p
 
 # Lucide React pour les icônes
 npm install lucide-react

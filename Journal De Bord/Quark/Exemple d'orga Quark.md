@@ -18,6 +18,8 @@ Plusieurs serveurs / clusters à interroger ?
 
 Savoir les infos dans la file d'attente + les données à collecter avant, pendant, après un process (ex : logs)
 
+Est-ce que vous avez des documentations sur vos outils ?
+
  Comment définir et ajuster dynamiquement les priorités entre les tâches  ?
 	Listes de priorité ? `Liste_Prio_Urgent = []; Liste_Prio_Normale = []`
 
