@@ -15,6 +15,11 @@ yarn add -D tailwindcss@^3 postcss autoprefixer
 yarn install lucide-react
 ```
 
+Il est possible qu'il y est de petits bugs, donc, parfois, réinstaller react-scripts
+```bash
+yarn add react-scripts
+```
+
 organisation :
 ```
 quark/
