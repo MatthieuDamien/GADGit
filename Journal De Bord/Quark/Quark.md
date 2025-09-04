@@ -13,6 +13,10 @@ yarn add -D tailwindcss@^3 postcss autoprefixer
 
 # Lucide React pour les icônes
 yarn install lucide-react
+
+## Flask pour Run Python
+pip install flask
+
 ```
 
 Il est possible qu'il y est de petits bugs, donc, parfois, réinstaller react-scripts

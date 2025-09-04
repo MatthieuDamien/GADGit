@@ -2,7 +2,7 @@
 ## Questions à poser
 - Avez-vous une documentation sur votre infrastructure SLURM / outils ?
     1wrapper avec 5 scripts différents
-    pas de compte d'asteinte
+    pas de compte d'astreinte
     un compte = une personne
     Clé SSH de groupe ?
 - Existe-t-il des guides d'utilisation pour les utilisateurs actuels ?
@@ -11,7 +11,6 @@
     
 - **Combien d'utilisateurs** ?
     - Faut-il un utilisateur système dédié ou utilisation des comptes individuels ?
-    s
 - **Quels types de jobs** sont les plus fréquents ?
     Exome, génome ? Ou d'autres
 - **Où peut tourner l'orchestrateur** et avec quelles permissions ?
@@ -67,4 +66,41 @@ passé sa maitrise
 réunion lundi 8 septembre
 réunion
 
+# Mercredi [[2025-09-10]]
+## Moi
+
+## Eux
+### Anthony 
+
+
+### Valentin
+
+
+### Emilie
+
+
+### Théo
+
+
+### Yannis
+
+
 # Pas de réunion [[2025-09-17]]
+# Réunion [[2025-09-24]]
+## Moi
+
+## Eux
+### Anthony 
+
+
+### Valentin
+
+
+### Emilie
+
+
+### Théo
+
+
+### Yannis
+

@@ -1,4 +1,5 @@
-> [!info]- [Mail hopital](https://login.chu-dijon.fr/user/auth/dologin?tabId=766684973) :
+
+> [!info]- [Mail hopital](https://webmail.chu-dijon.fr/owa/#path=/mail) :
 DAMA1502040
 Mathopital15!
 

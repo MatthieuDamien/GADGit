@@ -5,24 +5,6 @@ On reprend [[Cahier des charges Quark]]
 **Exécution** : Soumettre les tâches, relancer automatiquement en cas d'échec, et analyser les logs.
 **Reporting** : Générer des rapports synthétiques pour le suivi des pipelines (ex : qualité des données `/QC`).
 
-
-## Questions à résoudre 
-Qui stocke ?
-Qui envoie ?
-Comment ?
-Quels sont les informations à afficher ?
-	Mémoire / GPU libres ?
-	Logs process ?
-Quels paramètres pour lancer un processus ?
-Plusieurs serveurs / clusters à interroger ?
-
-Savoir les infos dans la file d'attente + les données à collecter avant, pendant, après un process (ex : logs)
-
-Est-ce que vous avez des documentations sur vos outils ?
-
- Comment définir et ajuster dynamiquement les priorités entre les tâches  ?
-	Listes de priorité ? `Liste_Prio_Urgent = []; Liste_Prio_Normale = []`
-
 ---
 ## Test
 1. Run, Quark ouvre les yeux 

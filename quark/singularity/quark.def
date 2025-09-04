@@ -1,0 +1,67 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%post
+    # Mise à jour du système
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update && apt-get upgrade -y
+    
+    # Installation des dépendances de base
+    apt-get install -y \
+        curl \
+        wget \
+        git \
+        build-essential \
+        python3 \
+        python3-pip \
+        python3-dev \
+        vim \
+        nano
+    
+    # Installation de Node.js (version 18 LTS)
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    apt-get install -y nodejs
+    
+    # Installation de Yarn
+    npm install -g yarn
+    
+    # Installation des dépendances Python pour Flask
+    pip3 install flask flask-cors
+    
+    # Créer un utilisateur de travail
+    useradd -m -s /bin/bash developer
+    
+    # Nettoyage
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+%environment
+    export PATH=/usr/local/bin:$PATH
+    export PYTHONPATH=/opt/app:$PYTHONPATH
+    
+%runscript
+    echo "Container Quark prêt !"
+    echo "Node.js version: $(node --version)"
+    echo "Python version: $(python3 --version)"
+    echo "Yarn version: $(yarn --version)"
+    echo ""
+    echo "Pour démarrer Qark:"
+    echo "  1. cd /opt/app"
+    echo "  2. yarn install (si première fois)"
+    echo "  3. yarn start"
+    echo ""
+    echo "Pour le backend Python:"
+    echo "  1. cd /opt/app/backend"
+    echo "  2. python3 app.py"
+    
+%labels
+    Author Matthieu Damien (matt.damien@icloud.com)
+    Version 1.0
+    Description Environnement React + Python pour l'app Quark
+
+%help
+    Container Singularity pour le développement React + Python
+    
+    Usage:
+      singularity shell quark.sif    # Mode interactif
+      singularity exec quark.sif command    # Exécuter une commande
