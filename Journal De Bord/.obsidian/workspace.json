@@ -27,16 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Septembre/2025-09-03.md",
+                "file": "Septembre/Réunions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-09-03"
+              "title": "Réunions"
             }
           },
           {
-            "id": "45d0f043249cf560",
+            "id": "ae30f0e97e98d587",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -50,21 +50,21 @@
             }
           },
           {
-            "id": "2b3c6776c6cc7687",
+            "id": "41707237b09fd52c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Quark/Quark.md",
+                "file": "Septembre/2025-09-02.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Quark"
+              "title": "2025-09-02"
             }
           },
           {
-            "id": "bdd4ad67bed9e1ab",
+            "id": "3ef9327cb2ea0e68",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -75,10 +75,38 @@
               },
               "icon": "lucide-file",
               "title": "2025-09-03"
+            }
+          },
+          {
+            "id": "051590f2bd213069",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Quark/Cahier des charges Quark.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Cahier des charges Quark"
+            }
+          },
+          {
+            "id": "fc8318b5470b547d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Quark/Exemple d'orga Quark.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Exemple d'orga Quark"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -135,7 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 223.5
   },
   "right": {
     "id": "22f448a1931b4206",
@@ -226,29 +254,30 @@
       "bases:Create new base": false
     }
   },
-  "active": "bdd4ad67bed9e1ab",
+  "active": "ae30f0e97e98d587",
   "lastOpenFiles": [
-    "Septembre/2025-09-02.md",
-    "Code/gs_solo_nbs.json.md",
-    "Code/gs_solo_nbs.sh.md",
-    "Septembre/Réunions.md",
-    "Code",
-    "Liens utiles.md",
-    "Quark/Quark.md",
-    "Quark/EXQuark.md",
     "Quark/Cahier des charges Quark.md",
     "Quark/Exemple d'orga Quark.md",
+    "Quark/EXQuark.md",
     "Septembre/2025-09-03.md",
+    "Quark/Quark.md",
+    "Septembre/Réunions.md",
+    "Sujet du stage.md",
+    "Liens utiles.md",
+    "Septembre/2025-09-02.md",
+    "Septembre/2025-09-01.md",
+    "Code/gs_solo_nbs.json.md",
+    "Code/gs_solo_nbs.sh.md",
+    "Code",
+    "Cours SLURM - Les bases pour l'utilisation avec Python.md",
     "images/LogoQuark.png",
     "images/2025-09-02Quark.png",
     "images",
     "Quark",
     "Exemple d'orga Quark.md",
-    "Septembre/2025-09-01.md",
     "images/logoQuark.png",
     "Quark.md",
     "Cahier des charges Quark.md",
-    "Sujet du stage.md",
     "Pasted image 20250902215621.png",
     "Bienvenue.md",
     "Sans titre.base",
