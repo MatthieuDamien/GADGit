@@ -8,9 +8,9 @@
     "folder": ""
   },
   "weekly": {
-    "format": "",
+    "format": "gggg-[S]ww",
     "template": "",
-    "folder": "",
+    "folder": "Notes/Septembre",
     "enabled": true
   },
   "monthly": {

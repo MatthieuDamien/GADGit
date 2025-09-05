@@ -45,26 +45,6 @@
   ],
   "fileColors": [
     {
-      "path": "Notes/Septembre",
-      "color": "hMjkvXe8xDoFkSSbrgAf4"
-    },
-    {
-      "path": "Quark",
-      "color": "-FvDoo6xHaUk4CTWBfS2v"
-    },
-    {
-      "path": "images",
-      "color": "dgL54dNonBsGJS9GAvjRp"
-    },
-    {
-      "path": "Excalidraw",
-      "color": "pikdyGyD3Bi2dMRVCv6xX"
-    },
-    {
-      "path": "Autolauncher",
-      "color": "0WyAr3jCZy_5wa04njJ4f"
-    },
-    {
       "path": "Notes/Octobre",
       "color": "v5bt-uN2GGMGCc8wco2YI"
     },
@@ -77,8 +57,28 @@
       "color": "CcMiQ4AHVrBZnIJOv1hXX"
     },
     {
+      "path": "Notes/Septembre",
+      "color": "hMjkvXe8xDoFkSSbrgAf4"
+    },
+    {
+      "path": "Quark",
+      "color": "-FvDoo6xHaUk4CTWBfS2v"
+    },
+    {
+      "path": "Autolauncher",
+      "color": "0WyAr3jCZy_5wa04njJ4f"
+    },
+    {
       "path": "Code",
       "color": "0WyAr3jCZy_5wa04njJ4f"
+    },
+    {
+      "path": "Excalidraw",
+      "color": "pikdyGyD3Bi2dMRVCv6xX"
+    },
+    {
+      "path": "images",
+      "color": "dgL54dNonBsGJS9GAvjRp"
     }
   ]
 }
