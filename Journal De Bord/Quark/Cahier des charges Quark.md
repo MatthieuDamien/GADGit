@@ -1,5 +1,3 @@
-# Cahier des Charges - Orchestrateur Quark
-
 ## 1. Contexte et Objectifs
 
 L'orchestrateur **Quark** est une solution d'orchestration avancée conçue pour optimiser la gestion dynamique de pipelines bioinformatiques sur un cluster HPC dans un environnement hospitalier. Il doit permettre le lancement, le suivi et l'optimisation automatique des analyses génomiques (génome, exome, dépistage néonatal) en tenant compte des ressources disponibles et des priorités cliniques.
@@ -276,7 +274,7 @@ quark report <period>          # Génération de rapports
 - **Configuration** des paramètres
 - **Rapports** interactifs
 
-## 7. Exigences Non-Fonctionnelles
+## 7. Exigences Non Fonctionnelles
 
 ### 7.1 Performance
 
@@ -299,19 +297,16 @@ quark report <period>          # Génération de rapports
 
 ## 8. Plan de Développement
 
-### 8.1 Phase 1 - Core (3-4 mois)
+### 8.1 Phase 1 - Core & Interface (3-4 mois)
 
 - Moteur d'orchestration principal
 - Intégration SLURM et LabKey
 - Système de logging
-
-### 8.2 Phase 2 - Interface (2-3 mois)
-
 - Dashboard web
 - API REST
 - Système de notifications
 
-### 8.3 Phase 3 - Optimisation (2-3 mois)
+### 8.3 Phase 2 - Optimisation (2-3 mois)
 
 - Algorithmes d'optimisation
 - Regroupement intelligent

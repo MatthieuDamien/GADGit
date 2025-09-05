@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Activity, Server, Clock, AlertCircle, XCircle, Cpu, HardDrive, Zap, RefreshCw } from 'lucide-react';
+import logoQuark from './assets/icons/logoQuark.svg';
 
 // ============== COMPOSANTS RÉUTILISABLES ==============
 
 // Composant Card générique
 const Card = ({ children, className = "" }) => (
-  <div className={`bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 ${className}`}>
+  <div className={`bg-marine-500/50 backdrop-blur-sm rounded-xl border border-slate-700 ${className}`}>
     {children}
   </div>
 );
@@ -149,26 +150,26 @@ const ErrorItem = ({ error }) => {
 
 // Composant Header
 const Header = ({ lastUpdate, onRefresh }) => (
-  <header className="border-b border-slate-700 bg-slate-900/50 backdrop-blur-sm">
+  <header className="border-b border-jaune-500 bg-marine-500/50 backdrop-blur-sm">
     <div className="px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-            <Zap className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg flex items-center justify-center shadow-lg">
+            <img src={logoQuark} className="w-10 h-10" alt="Logo Quark" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Quark
             </h1>
           </div>
           <span className="text-sm text-slate-400 ml-2 hidden sm:inline">
-            Orchestrateur de calcul médical
+            Orchestrateur de calcul bioinformatique
           </span>
         </div>
         <div className="flex items-center gap-4">
           <button 
             onClick={onRefresh}
-            className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-marine-600 rounded-lg transition-colors"
             aria-label="Rafraîchir"
           >
             <RefreshCw className="w-5 h-5 text-slate-400" />
@@ -194,23 +195,25 @@ const QuarkDashboard = () => {
   });
 
   const [queue, setQueue] = useState([
-    { id: 'PED10010.1', type: 'Genome', priority: 'Haute', waitTime: '5 min' },
-    { id: 'PED10010.2', type: 'Genome', priority: 'Normale', waitTime: '12 min' },
+    { id: 'PED10010.1', type: 'Genome', priority: 'Urgente', waitTime: '5 min' },
+    { id: 'PED10010.2', type: 'Genome', priority: 'Haute', waitTime: '12 min' },
     { id: 'PED10011.1', type: 'Genome', priority: 'Normale', waitTime: '18 min' },
-    { id: 'djex20024', type: 'Exome', priority: 'Haute', waitTime: '22 min' },
-    { id: 'djenbs104', type: 'Dépistage néonatal', priority: 'Urgente', waitTime: '25 min' }
+    { id: 'djex20024', type: 'Exome', priority: 'Normale', waitTime: '22 min' },
+    { id: 'djenbs104', type: 'Dépistage néonatal', priority: 'Normale', waitTime: '25 min' }
   ]);
 
   const [activeTasks, setActiveTasks] = useState([
-    { id: 'PED12010', type: 'Genome', progress: 75, node: 'gpu-node-01', time: '2h 15min' },
+    { id: 'PED12010', type: 'Genome', progress: 35, node: 'gpu-node-01', time: '2h 15min' },
     { id: 'PED20025', type: 'Genome', progress: 45, node: 'cpu-node-03', time: '1h 08min' },
-    { id: 'djex19087', type: 'Exome', progress: 92, node: 'gpu-node-02', time: '3h 42min' }
+    { id: 'djex19087', type: 'Exome', progress: 8, node: 'gpu-node-02', time: '3h 42min' },
+    { id: 'djen19087', type: 'Dépistage néonatal', progress: 54, node: 'gpu-node-04', time: '3h 42min' }
   ]);
 
   const [errors, setErrors] = useState([
     { id: 'PED20025', type: 'Genome 2', time: '10:32', message: 'Mémoire insuffisante', severity: 'warning' },
     { id: 'djex18045', type: 'Exome', time: '09:15', message: 'Échec connexion LabKey', severity: 'error' },
-    { id: 'PED30012', type: 'Genome', time: '08:47', message: 'Timeout SLURM', severity: 'warning' }
+    { id: 'PED30012', type: 'Genome', time: '08:47', message: 'Timeout SLURM', severity: 'warning' },
+    { id: 'PED30012', type: 'Genome', time: 'hier - 21:12(', message: 'Timeout SLURM', severity: 'warning' }
   ]);
 
   const [lastUpdate, setLastUpdate] = useState(new Date());

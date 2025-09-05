@@ -1,0 +1,84 @@
+{
+  "cascadeColors": true,
+  "colorBackground": false,
+  "palette": [
+    {
+      "id": "hMjkvXe8xDoFkSSbrgAf4",
+      "name": "Septembre",
+      "value": "#a0841c"
+    },
+    {
+      "id": "v5bt-uN2GGMGCc8wco2YI",
+      "name": "Octobre",
+      "value": "#e08910"
+    },
+    {
+      "id": "3VOMN91ThXbkJOWbG_eb7",
+      "name": "Novembre",
+      "value": "#c7430a"
+    },
+    {
+      "id": "CcMiQ4AHVrBZnIJOv1hXX",
+      "name": "Décembre",
+      "value": "#ff0000"
+    },
+    {
+      "id": "-FvDoo6xHaUk4CTWBfS2v",
+      "name": "Quark",
+      "value": "#004971"
+    },
+    {
+      "id": "dgL54dNonBsGJS9GAvjRp",
+      "name": "images",
+      "value": "#ffffff"
+    },
+    {
+      "id": "pikdyGyD3Bi2dMRVCv6xX",
+      "name": "Excalidraw",
+      "value": "#5c5bb9"
+    },
+    {
+      "id": "0WyAr3jCZy_5wa04njJ4f",
+      "name": "Code",
+      "value": "#4297c2"
+    }
+  ],
+  "fileColors": [
+    {
+      "path": "Notes/Septembre",
+      "color": "hMjkvXe8xDoFkSSbrgAf4"
+    },
+    {
+      "path": "Quark",
+      "color": "-FvDoo6xHaUk4CTWBfS2v"
+    },
+    {
+      "path": "images",
+      "color": "dgL54dNonBsGJS9GAvjRp"
+    },
+    {
+      "path": "Excalidraw",
+      "color": "pikdyGyD3Bi2dMRVCv6xX"
+    },
+    {
+      "path": "Autolauncher",
+      "color": "0WyAr3jCZy_5wa04njJ4f"
+    },
+    {
+      "path": "Notes/Octobre",
+      "color": "v5bt-uN2GGMGCc8wco2YI"
+    },
+    {
+      "path": "Notes/Novembre",
+      "color": "3VOMN91ThXbkJOWbG_eb7"
+    },
+    {
+      "path": "Notes/Décembre",
+      "color": "CcMiQ4AHVrBZnIJOv1hXX"
+    },
+    {
+      "path": "Code",
+      "color": "0WyAr3jCZy_5wa04njJ4f"
+    }
+  ]
+}

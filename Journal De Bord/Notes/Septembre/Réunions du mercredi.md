@@ -1,3 +1,4 @@
+14h-16h
 # Mercredi [[2025-09-03]]
 ## Questions à poser
 - Avez-vous une documentation sur votre infrastructure SLURM / outils ?
@@ -36,8 +37,6 @@
 
 Système de score pour augmenter la priorité
 
-
-
 ## Eux
 
 ### Anthony 
@@ -64,7 +63,7 @@ passé sa maitrise
 
 ### Yannis
 réunion lundi 8 septembre
-réunion
+[[Specs features]]
 
 # Mercredi [[2025-09-10]]
 ## Moi

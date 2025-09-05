@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "migrated": 6,
+    "iconPacksPath": ".obsidian/icons",
+    "fontSize": 16,
+    "emojiStyle": "native",
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "LiPen",
+      "LiLeaf",
+      "🎅",
+      "LiSkull",
+      "🎄"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    },
+    "iconInTabsEnabled": false,
+    "iconInTitleEnabled": false,
+    "iconInTitlePosition": "above",
+    "iconInFrontmatterEnabled": false,
+    "iconInFrontmatterFieldName": "icon",
+    "iconColorInFrontmatterFieldName": "iconColor",
+    "iconsBackgroundCheckEnabled": false,
+    "iconsInNotesEnabled": true,
+    "iconsInLinksEnabled": true,
+    "iconIdentifier": ":",
+    "lucideIconPackType": "native",
+    "debugMode": false,
+    "useInternalPlugins": false
+  },
+  "images": "LiImages",
+  "Code": "LiCode2",
+  "Autolauncher": "LiRocket",
+  "Quark": "LiAtom",
+  "Rapport de Stage": "LiNotebookTabs",
+  "Excalidraw": "LiPencilRuler",
+  "Notes/Septembre": "LiCloud",
+  "Notes/Décembre": "🎅",
+  "Notes/Novembre": "LiSkull",
+  "Notes/Octobre": "LiLeaf",
+  "Notes": "LiPen"
+}

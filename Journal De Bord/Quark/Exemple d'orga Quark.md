@@ -11,12 +11,12 @@ On reprend [[Cahier des charges Quark]]
 2. Quark se ping lui-même (vérification réseau)
 	Si ça marche, étape 3
 	Si ça marche pas, erreur réseau "Hors Connexion", boucler
-3. Quark tente de se connecter au cluster via SLURM avec sa clé SSH
+3. Quark tente de se connecter au cluster via SLURM (-> extrêmement bizarre si ça arrive)
 	Si ça marche, étape 4.
 	Si ça marche pas, erreur de connexion "Cluster inaccessible", étape 4? boucler?
 4. Quark demande le login / mdp LabKey de l'utilisateur ? (a-t-il son accès autonome ? -> pb de sécurité mais plus facile à mettre en place)
 	Si ça marche, créer un thread ? -> pas un OS donc non
-5. Création d'un Hook SLURM + Webhook (à déterminer) sur le cluster pour avoir l'update qu'il y a un changement dans l'allocation de la mémoire / GPU du cluster (voir [[Exemple d'orga Quark#Hook]])
+5. Création d'un Hook SLURM + Webhook (à déterminer) sur le cluster pour avoir l'update qu'il y a un changement dans l'allocation de la mémoire / GPU du cluster (voir [[Exemple d'orga Quark#Hook]]), nous n'avons aucun droit sur les API SLURM utilisées ([Voir Sarus](https://sarus.readthedocs.io/en/1.6.4/config/slurm-global-sync-hook.html)) donc pas de hook mais des demandes au cluster
 	s
 
 
