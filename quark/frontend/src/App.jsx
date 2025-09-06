@@ -37,8 +37,10 @@ const CardContent = ({ children, className = "" }) => (
 // Composant de statistique de ressource
 const ResourceCard = ({ label, icon: Icon, iconColor, value, color }) => {
   const getProgressColor = (val) => {
-    if (val > 80) return 'bg-red-500';
-    if (val > 60) return 'bg-orange-500';
+    if (val > 95) return 'bg-red-800';
+    if (val > 90) return 'bg-red-500';
+    if (val > 75) return 'bg-orange-500';
+    if (val > 50) return 'bg-yellow-500';
     return 'bg-green-500';
   };
 
@@ -246,7 +248,7 @@ const QuarkDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-marine-100 via-slate-700 to-marine-100">
       <Header lastUpdate={lastUpdate} onRefresh={handleRefresh} />
 
       <main className="p-6">

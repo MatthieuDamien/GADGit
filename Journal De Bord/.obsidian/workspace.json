@@ -15,7 +15,8 @@
               "state": {
                 "file": "Notes/Septembre/Semaine 36/2025-09-05.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": false
               },
               "icon": "lucide-file",
               "title": "2025-09-05"
@@ -176,8 +177,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 502.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,37 +193,40 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "4963521c1018e409",
+  "active": "c1c5b0b777737dcf",
   "lastOpenFiles": [
-    "Notes/Septembre/Semaine 37",
-    "Notes/Septembre/Réunions du mercredi.md",
+    "Notes/Septembre/Semaine 36/2025-09-05.md",
     "Notes/Septembre/Semaine 36/2025-S36.md",
-    "Notes/Septembre/Semaine 36/2025-09-01.md",
     "Notes/Septembre/Semaine 36/2025-09-03.md",
-    "Notes/Septembre/Semaine 36",
+    "Notes/Septembre/Réunions du mercredi.md",
     "Notes/Septembre/Semaine 36/2025-09-04.md",
+    "Notes/Septembre/Semaine 36/2025-09-01.md",
+    "Quark/Quark.md",
+    "Quark/Cahier des charges Quark.md",
+    "Quark/Exemple d'orga Quark.md",
+    "Quark/Specs features.md",
+    "Rapport de Stage/Sujet du stage.md",
+    "logoQuarkNuBleu.png",
+    "images/logoQuarkNuGris.png",
+    "images/logoQuarkNuBleu.png",
+    "images/logoQuarkNuRouge.png",
+    "logoQuarkNuGris.png",
+    "logoQuarkNuRouge.png",
+    "Quark.md",
+    "images/logoQuark.png",
+    "Notes/Septembre/Semaine 37",
+    "Notes/Septembre/Semaine 36",
     "Septembre/2025-09-01.md",
     "images/Pasted Image 20250905153503_087.png",
     "images/Pasted Image 20250905153502_988.png",
     "images/Organisation Quark.png",
-    "images/Organisation Quark-2(1).png",
-    "images/Organisation Quark-2.png",
-    "images/NovaseqX.jpg",
-    "images/LogoQuark.png",
-    "images/2025-09-02Quark.png",
     "images",
     "Réunions/Réunions du vendredi.md",
     "Réunions",
-    "Rapport de Stage/Sujet du stage.md",
     "Rapport de Stage/Structure du rapport de stage.md",
     "Rapport de Stage",
-    "Quark/Specs features.md",
-    "Quark/Quark.md",
     "Quark/EXQuark.md",
-    "Quark/Exemple d'orga Quark.md",
-    "Quark/Cahier des charges Quark.md",
     "Quark",
-    "Notes/Septembre/Semaine 36/2025-09-05.md",
     "Notes/Septembre/Semaine 36/2025-09-02.md",
     "Notes/Septembre",
     "Liens utiles.md",
@@ -236,10 +239,6 @@
     "Code",
     "Autolauncher/Autolauncher.md",
     "Autolauncher/Autolauncher Novaseqx.md",
-    "Autolauncher",
-    "A etudier.md",
-    "images/logoQuark.png",
-    "Septembre",
-    "Pasted image 20250902215621.png"
+    "Autolauncher"
   ]
 }
