@@ -41,50 +41,28 @@ quark/
 │   │   └── icons/
 │   │       └── logo.svg
 │   │
-│   ├── components/          # Composants réutilisables
-│   │   ├── common/         # Composants génériques
-│   │   │   ├── Card/
-│   │   │   │   ├── Card.jsx
-│   │   │   │   └── index.js
-│   │   │   ├── ProgressBar/
-│   │   │   │   ├── ProgressBar.jsx
-│   │   │   │   └── index.js
-│   │   │   ├── Badge/
-│   │   │   │   ├── Badge.jsx
-│   │   │   │   └── index.js
-│   │   │   └── Button/
-│   │   │       ├── Button.jsx
-│   │   │       └── index.js
-│   │   │
-│   │   ├── dashboard/      # Composants spécifiques au dashboard
-│   │   │   ├── ResourceCard/
-│   │   │   │   ├── ResourceCard.jsx
-│   │   │   │   └── index.js
-│   │   │   ├── QueueItem/
-│   │   │   │   ├── QueueItem.jsx
-│   │   │   │   └── index.js
-│   │   │   ├── ActiveTask/
-│   │   │   │   ├── ActiveTask.jsx
-│   │   │   │   └── index.js
-│   │   │   └── ErrorItem/
-│   │   │       ├── ErrorItem.jsx
-│   │   │       └── index.js
-│   │   │
-│   │   └── layout/         # Composants de mise en page
-│   │       ├── Header/
-│   │       │   ├── Header.jsx
-│   │       │   └── index.js
-│   │       ├── Footer/
-│   │       │   ├── Footer.jsx
-│   │       │   └── index.js
-│   │       └── Layout/
-│   │           ├── Layout.jsx
-│   │           └── index.js
+│   ├── components/ 
+│   │   ├── ui/
+│   │   │   ├── Card.jsx
+│   │   │   ├── ProgressBar.jsx
+│   │   │   └── PriorityBadge.jsx
+│   │   ├── dashboard/ 
+│   │   │   ├── Header.jsx
+│   │   │   ├── ResourceCard.jsx
+│   │   │   ├── QueueSection.jsx 
+│   │   │   ├── ActiveTasksSection.jsx 
+│   │   │   └── ErrorsSection.jsx 
+│   │   ├── modals/ 
+│   │   │   ├── TaskDetailModal.jsx 
+│   │   │   └── ErrorDetailModal.jsx 
+│   │   └── items/ 
+│   │       ├── QueueItem.jsx 
+│   │       ├── ActiveTask.jsx 
+│   │       └── ErrorItem.jsx
 │   │
 │   ├── pages/              # Pages de l'application
 │   │   ├── Dashboard/
 │   │   │   ├── QuarkDashboard.jsx
-│   │   │   └── index.js
 │   │   ├── Queue/          # Future page dédiée
 │   │   ├── Tasks/          # Future page dédiée
 │   │   └── Settings/       # Future page dédiée

@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes/Septembre/Semaine 36/2025-09-05.md",
+                "file": "Notes/Septembre/Semaine 37/2025-09-08.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "2025-09-05"
+              "title": "2025-09-08"
             }
           }
         ]
@@ -177,7 +177,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 502.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -195,15 +196,20 @@
   },
   "active": "c1c5b0b777737dcf",
   "lastOpenFiles": [
+    "Notes/Septembre/Semaine 37/2025-S37.md",
+    "Notes/Septembre/Semaine 37/2025-09-08.md",
+    "Quark/Quark.md",
+    "Notes/Septembre/Semaine 36/2025-09-02.md",
+    "Notes/Septembre/Semaine 36/2025-09-04.md",
+    "Notes/Septembre/Semaine 36/2025-09-03.md",
+    "Notes/Septembre/Semaine 36/2025-09-01.md",
+    "Quark/EXQuark.md",
+    "Quark/Exemple d'orga Quark.md",
+    "Quark/Cahier des charges Quark.md",
+    "Liens utiles.md",
     "Notes/Septembre/Semaine 36/2025-09-05.md",
     "Notes/Septembre/Semaine 36/2025-S36.md",
-    "Notes/Septembre/Semaine 36/2025-09-03.md",
     "Notes/Septembre/Réunions du mercredi.md",
-    "Notes/Septembre/Semaine 36/2025-09-04.md",
-    "Notes/Septembre/Semaine 36/2025-09-01.md",
-    "Quark/Quark.md",
-    "Quark/Cahier des charges Quark.md",
-    "Quark/Exemple d'orga Quark.md",
     "Quark/Specs features.md",
     "Rapport de Stage/Sujet du stage.md",
     "logoQuarkNuBleu.png",
@@ -225,11 +231,8 @@
     "Réunions",
     "Rapport de Stage/Structure du rapport de stage.md",
     "Rapport de Stage",
-    "Quark/EXQuark.md",
     "Quark",
-    "Notes/Septembre/Semaine 36/2025-09-02.md",
     "Notes/Septembre",
-    "Liens utiles.md",
     "Excalidraw/Drawing 2025-09-05 15.36.19.excalidraw.md",
     "Excalidraw/Drawing 2025-09-05 15.34.49.excalidraw.md",
     "Excalidraw",
@@ -238,7 +241,6 @@
     "Code/gs_solo_nbs.sh.md",
     "Code",
     "Autolauncher/Autolauncher.md",
-    "Autolauncher/Autolauncher Novaseqx.md",
     "Autolauncher"
   ]
 }

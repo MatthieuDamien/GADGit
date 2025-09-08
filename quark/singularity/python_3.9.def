@@ -1,0 +1,74 @@
+Bootstrap: docker
+From: centos:8
+
+%help 
+This is a singularity container packing a python 3.9.6 (only version) environment with all the packages necessary to execute all the python scripts present in the version 2.11.0 of the gad pipeline.
+Python v3.9.6 is the latest available version in CentOS v8.5.211 used for this build.
+Authors : valentin.vautrot@u-bourgogne.fr
+
+python3.9.6 is installed in /usr/bin/python3.9/
+
+non-default python3.9.6 libs are installed in /usr/lib/python3.9/site-packages/
+pip-installed packages can be listed with :
+singularity exec -e /path/to/this/sif/image python3 -m pip list installed
+or
+singularity test /path/to/this/sif/image
+
+Other custom GAD packages include GeneralTools, LabkeyTools, InterTools, VcfTools, CnvTools from a specific version of the gadpipeline (see test section)
+
+%setup
+SINGULARITY_ROOTFS=$APPTAINER_ROOTFS
+
+%post
+mkdir /data
+export GAD_VERSION=master
+echo "export GAD_VERSION=${GAD_VERSION}" >> ${SINGULARITY_ENVIRONMENT}
+
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+dnf install -y epel-release
+dnf update -y libmodulemd
+dnf update -y --exclude=filesystem
+# filesystem packages updates poses problems by tempering with /proc, which is supposed to be owned by root, but is not in the .sif image
+dnf remove -y python3 && dnf autoremove
+dnf install -y python39 git-2.27.0-1.el8.x86_64 compat-openssl10.x86_64
+
+# install custom gapipeline packages
+git clone --branch ${GAD_VERSION} http://gitlab.gad-bioinfo.org/gad/gadpipeline.git /data/gadpipeline/
+
+mv -v /data/gadpipeline/common/GeneralTools.py /data/gadpipeline/common/LabkeyTools.py /data/gadpipeline/common/InterTools.py /data/gadpipeline/common/VcfTools.py /data/gadpipeline/common/CnvTools.py /data/gadpipeline/common/HPCTools.py /usr/lib/python3.9/site-packages/
+
+printf "labkey==1.4.0\nnumpy==2.0.2\nmatplotlib==3.9.4\npandas==2.2.3\nchart-studio==1.1.0\nscipy==1.13.1\npyvcf==0.6.8\nsimplejson==3.19.3\nmodified-thompson-tau-test==0.1.3\n" > constraints.txt
+
+# install python pip packages
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ labkey -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ numpy -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ matplotlib -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ pandas -c constraints.txt
+# pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ plotly
+# is causing an error due to plotly.plotly module being deprecated in python3.9. chart-studio package (with the chart_studio.plotly module) is to be used in replacement.
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ chart-studio -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ scipy -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ pyvcf -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ simplejson -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ modified-thompson-tau-test -c constraints.txt
+pip3.9 install --upgrade -t /usr/lib/python3.9/site-packages/ kaleido==0.2.1 -c constraints.txt
+
+# modification of labkey script
+sed -i.bak "s/\(^.*data\['plateMetadata'\] = self.plate_metadata\)/#\1/g" /usr/lib/python3.9/site-packages/labkey/experiment.py
+rm /usr/lib/python3.9/site-packages/labkey/experiment.py.bak
+
+#cleaning
+rm -rf /data/
+
+%test
+echo "python version :"
+python3 -V
+echo "listing installed pip packages :" 
+python3 -m pip list 
+echo "Version of gadpipeline used to create this image: \"${GAD_VERSION}\", to retrieve custom gadpipeline python packages"
+
+%labels 
+Contained_OS_version CentOS_8.5.2110
+Contained_python_version 3.9.6
