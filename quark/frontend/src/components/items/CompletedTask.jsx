@@ -4,10 +4,10 @@ import { CheckCircle } from 'lucide-react';
 // Composant de tâche terminée
 const CompletedTask = ({ task, onClick }) => (
   <div 
-    className="p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg 
+    className="p-3 bg-gray-200 dark:bg-gray-900/50 rounded-lg 
                border border-neutral/10 dark:border-neutral/10 
                hover:border-green-500 dark:hover:border-green-400 
-               hover:bg-gray-100 dark:hover:bg-gray-800/70
+               hover:bg-gray-200 dark:hover:bg-gray-800/70
                transition-all duration-300 cursor-pointer group"
     onClick={() => onClick && onClick(task)}
   >

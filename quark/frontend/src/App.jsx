@@ -115,8 +115,8 @@ const QuarkDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 
-                    dark:from-black dark:via-gray-900 dark:to-black transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-marine-interactive300 via-gray-100 to-marine-interactive300
+                    dark:from-black dark:via-jaune-bg200 dark:to-black transition-colors duration-300">
       <Header 
         lastUpdate={lastUpdate} 
         onRefresh={handleRefresh} 

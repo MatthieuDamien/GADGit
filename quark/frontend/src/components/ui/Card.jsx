@@ -2,9 +2,9 @@ import React from 'react';
 
 // Composant Card générique
 const Card = ({ children, className = "" }) => (
-  <div className={`bg-white dark:bg-gray-900 backdrop-blur-sm rounded-xl 
+  <div className={`bg-gray-200 dark:bg-gris-500 backdrop-blur-sm rounded-xl 
                    border border-neutral/20 dark:border-neutral/10 
-                   shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
+                   shadow-sm hover:shadow-md transition-shadow duration-200 rt-variant-surface ${className}`}>
     {children}
   </div>
 );

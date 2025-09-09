@@ -15,10 +15,10 @@ const ErrorItem = ({ error, onClick }) => {
 
   return (
     <button className="flex items-center justify-between p-3 w-full
-                       bg-gray-50 dark:bg-gray-900/50 rounded-lg 
+                       bg-gray-200 dark:bg-gray-900/50 rounded-lg 
                        border border-neutral/10 dark:border-neutral/10 
                        hover:border-orange-500/75 dark:hover:border-orange-400/75 
-                       hover:bg-gray-100 dark:hover:bg-gray-800/70
+                       hover:bg-gray-200 dark:hover:bg-gray-800/70
                        transition-all duration-300 cursor-pointer group"
             onClick={() => onClick && onClick(error)}>
       <div className="flex items-center gap-3">
