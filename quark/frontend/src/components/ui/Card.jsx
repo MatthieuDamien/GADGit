@@ -2,21 +2,23 @@ import React from 'react';
 
 // Composant Card générique
 const Card = ({ children, className = "" }) => (
-  <div className={`bg-marine-500/50 backdrop-blur-sm rounded-xl border border-slate-700 ${className}`}>
+  <div className={`bg-white dark:bg-gray-900 backdrop-blur-sm rounded-xl 
+                   border border-neutral/20 dark:border-neutral/10 
+                   shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
     {children}
   </div>
 );
 
 // En-tête de Card
-const CardHeader = ({ title, icon: Icon, iconColor = "text-slate-400", count, children }) => (
-  <div className="p-4 border-b border-slate-700">
+const CardHeader = ({ title, icon: Icon, iconColor = "text-neutral", count, children }) => (
+  <div className="p-4 border-b border-neutral/10 dark:border-neutral/10">
     <div className="flex items-center justify-between">
-      <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+      <h2 className="text-lg font-semibold text-primary-light dark:text-white flex items-center gap-2">
         {Icon && <Icon className={`w-5 h-5 ${iconColor}`} />}
         {title}
       </h2>
       {count !== undefined && (
-        <span className="text-sm text-slate-400">{count}</span>
+        <span className="text-sm text-neutral">{count}</span>
       )}
       {children}
     </div>
