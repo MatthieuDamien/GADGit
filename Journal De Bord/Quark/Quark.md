@@ -1,6 +1,6 @@
 pour init : 
 ```bash
-cd GAD/GADGIT/quark
+cd quark/frontend
 yarn start
 ```
 Pourquoi Yarn : [[2025-09-03]]
@@ -12,11 +12,15 @@ ne pas oublier d'installer les dépendances suivantes :
 yarn add -D tailwindcss@^3 postcss autoprefixer
 
 # Lucide React pour les icônes
-yarn install lucide-react
+yarn add lucide-react
 
-## Flask pour Run Python
-pip install flask
+# Flask pour Run Python
+# pip install flask
 
+# Radix-ui (pour des couleurs)
+yarn add radix-ui
+
+nginex
 ```
 
 Il est possible qu'il y est de petits bugs, donc, parfois, réinstaller react-scripts

@@ -11,7 +11,7 @@ const Card = ({ children, className = "" }) => (
 
 // En-tête de Card
 const CardHeader = ({ title, icon: Icon, iconColor = "text-neutral", count, children }) => (
-  <div className="p-4 border-b border-neutral/10 dark:border-neutral/10">
+  <div className="p-4 border-b border-neutral/10 dark:border-neutral/70">
     <div className="flex items-center justify-between">
       <h2 className="text-lg font-semibold text-primary-light dark:text-white flex items-center gap-2">
         {Icon && <Icon className={`w-5 h-5 ${iconColor}`} />}

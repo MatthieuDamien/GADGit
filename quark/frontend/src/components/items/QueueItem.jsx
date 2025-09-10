@@ -4,8 +4,8 @@ import PriorityBadge from '../ui/PriorityBadge';
 // Composant d'élément de file d'attente
 const QueueItem = ({ task, index, onClick }) => (
   <div className="flex items-center justify-between p-3 
-                  bg-gray-200 dark:bg-gray-900/50 rounded-lg 
-                  border border-neutral/10 dark:border-neutral/10
+                  rounded-lg 
+                  border border-neutral/10 dark:border-neutral/20
                   hover:border-marine-border800 dark:hover:border-primary-dark 
                   hover:bg-gray-200 dark:hover:bg-gray-800/70
                   transition-all duration-300 cursor-pointer"

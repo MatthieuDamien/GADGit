@@ -6,7 +6,7 @@ import DarkModeToggle from '../ui/DarkModeToggle';
 // Composant Header
 const Header = ({ lastUpdate, onRefresh, isDarkMode, onToggleDarkMode }) => (
   <header className="sticky top-0 z-50 border-b border-marine-border800 dark:border-primary-dark 
-                     bg-white/95 dark:bg-black/95 backdrop-blur-sm shadow-sm">
+                     bg-white/95 dark:bg-gris-300 backdrop-blur-sm shadow-sm">
     <div className="px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

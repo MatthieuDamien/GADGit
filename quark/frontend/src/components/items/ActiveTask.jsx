@@ -3,8 +3,8 @@ import { ProgressBar } from '../ui/ProgressBar';
 
 // Composant de tâche active
 const ActiveTask = ({ task, onClick }) => (
-  <div className="p-3 bg-gray-200 dark:bg-gray-900/50 rounded-lg 
-                  border border-neutral/10 dark:border-neutral/10 
+  <div className="p-3  rounded-lg 
+                  border border-neutral/10 dark:border-neutral/20 
                   hover:border-marine-border800 dark:hover:border-primary-dark 
                   hover:bg-marine-bg200 dark:hover:bg-gray-800/70
                   transition-all duration-300 cursor-pointer"
@@ -27,7 +27,7 @@ const ActiveTask = ({ task, onClick }) => (
     <ProgressBar 
       value={task.progress} 
       className="bg-gradient-to-r from-primary-light to-marine-border700 
-                 dark:from-jaune-interactive500 dark:to-jaune-main/70"
+                 dark:from-jaune-border700 dark:to-jaune-main/70"
     />
   </div>
 );

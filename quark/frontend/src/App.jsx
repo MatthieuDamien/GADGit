@@ -7,8 +7,14 @@ import ActiveTask from './components/items/ActiveTask';
 import ErrorItem from './components/items/ErrorItem';
 import CompletedTask from './components/items/CompletedTask';
 import Header from './components/dashboard/Header';
+import TaskDialog from './components/dialogs/TaskDialog';
+import useTaskStore from './store/taskStore';
+
 
 const QuarkDashboard = () => {
+  // Store Zustand
+  const { openDialog } = useTaskStore();
+
   // État pour le dark mode
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Vérifier la préférence locale ou système
@@ -84,10 +90,12 @@ const QuarkDashboard = () => {
   // Gestion des clics
   const handleTaskClick = (task) => {
     console.log('Tâche cliquée:', task);
+    openDialog(task);
   };
 
   const handleErrorClick = (error) => {
     console.log('Erreur cliquée:', error);
+    openDialog(error);
   };
 
   // Simulation de mise à jour des données
@@ -261,6 +269,7 @@ const QuarkDashboard = () => {
           </Card>
         </section>
       </main>
+      <TaskDialog />
     </div>
   );
 };

@@ -65,24 +65,30 @@ passé sa maitrise
 réunion lundi 8 septembre
 [[Specs features]]
 
-# Mercredi [[2025-09-10]]
+# Mercredi [[2025-09-11]]
 ## Moi
 
 ## Eux
 ### Anthony 
-
-
+Soumis l'abstract pour les assises
+limite de 2000 jobs atteinte 
 ### Valentin
+Soumis l'abstract pour les assises de génétique 
+	Dernière à Paris
+Bugs notation phasing
 
+Bug avec organize de l'autolauncher. 
+Cleaner : nettoyer fichier de logs.
 
+Regarder les terminaux Nix
 ### Emilie
-
+Fusion des branchs Gitlab
 
 ### Théo
 
 
 ### Yannis
-
+On va vers un marquage CE IVDR
 
 # Pas de réunion [[2025-09-17]]
 # Réunion [[2025-09-24]]
