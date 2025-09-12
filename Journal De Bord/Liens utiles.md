@@ -11,6 +11,10 @@ Matgad15!
 umw040ir
 PaeDaegh5uiX
 Port 22
+```
+ssh -X umw040ir@login-1.mesobfc.fr
+```
+
 
 [Documentation MesoBFC](https://doc.mesobfc.fr/)
 Rocky Linux 8 is deployed on all nodes.

@@ -65,7 +65,7 @@ passé sa maitrise
 réunion lundi 8 septembre
 [[Specs features]]
 
-# Mercredi [[2025-09-11]]
+# Mercredi [[2025-09-10]]
 ## Moi
 
 ## Eux
