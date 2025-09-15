@@ -19,12 +19,6 @@ Author : matt.damien@icloud.com
 SINGULARITY_ROOTFS=$APPTAINER_ROOTFS
 
 %post
-# Version du piepline GitLab
-export GAD_VERSION=master
-export TOKEN_IDENTIFICATION=a_modifier
-
-
-
 # Mise à jour du système
 apt-get update && apt-get upgrade -y
 
@@ -69,25 +63,6 @@ yarn add react-scripts
 
 # Configuration de Tailwind CSS
 npx tailwindcss init -p
-
-
-
-
-# GitLab GAD 
-
-mkdir /git
-echo "export GAD_VERSION=${GAD_VERSION}" >> ${SINGULARITY_ENVIRONMENT}
-
-git clone --branch ${GAD_VERSION} http://gitlab.gad-bioinfo.org/gad/gadpipeline.git /git/gadpipeline/
-
-## Token/ Clé SSH ; ${TOKEN_IDENTIFICATION}
-
-mv -v /git/gadpipeline/quark/ /git/gadpipeline/common/GeneralTools.py /git/gadpipeline/common/LabkeyTools.py
-echo "Version du pipeline utilisé pour créer ce conteneur: \"${GAD_VERSION}\"
-
-# Cleaner (non utilisé mais si jamais)
-# rm -rf /git/
-
 
 
 

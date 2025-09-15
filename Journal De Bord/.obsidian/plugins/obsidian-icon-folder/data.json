@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "🏃‍♂️",
       "🇧🇪",
       "LiStars",
       "LiRocket",
-      "LiCode",
-      "LiImage"
+      "LiCode"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -47,5 +47,6 @@
   "Code": "LiCode",
   "Autolauncher": "LiRocket",
   "Notes/Septembre/Semaine 36": "LiStars",
-  "Notes/Septembre/Semaine 37": "🇧🇪"
+  "Notes/Septembre/Semaine 37": "🇧🇪",
+  "Notes/Septembre/Semaine 38": "🏃‍♂️"
 }

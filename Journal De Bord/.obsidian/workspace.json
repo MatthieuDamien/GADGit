@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes/Septembre/Semaine 37/2025-09-12.md",
+                "file": "Notes/Septembre/Semaine 38/2025-S38.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "2025-09-12"
+              "title": "2025-S38"
             }
           },
           {
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Notes/Septembre/Semaine 37/2025-09-12.md",
+                "file": "Notes/Septembre/Semaine 38/2025-S38.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rétrolien pour 2025-09-12"
+              "title": "Rétrolien pour 2025-S38"
             }
           },
           {
@@ -208,10 +208,16 @@
       "periodic-notes:Open this week": false
     }
   },
-  "active": "e1c66411a6cec13c",
+  "active": "4963521c1018e409",
   "lastOpenFiles": [
-    "Excalidraw/Drawing 2025-09-11.excalidraw.md",
+    "Notes/Septembre/Semaine 38/2025-09-15.md",
+    "Notes/Septembre/Semaine 38/2025-S38.md",
     "Notes/Septembre/Semaine 37/2025-09-12.md",
+    "Notes/Septembre/Semaine 38",
+    "Quark/Exemple d'orga Quark.md",
+    "Quark/Cahier des charges Quark.md",
+    "Quark/Quark.md",
+    "Excalidraw/Drawing 2025-09-11.excalidraw.md",
     "Notes/Septembre/Semaine 37/2025-09-10.md",
     "Notes/Septembre/Réunions du mercredi.md",
     "Notes/Septembre/Semaine 37/2025-09-11.md",
@@ -220,7 +226,6 @@
     "Liens utiles.md",
     "Cours SLURM - Les bases pour l'utilisation avec Python.md",
     "Excalidraw/Drawing 2025-09-08 16.29.21.excalidraw.md",
-    "Quark/Quark.md",
     "Rapport de Stage/Structure du rapport de stage.md",
     "Rapport de Stage/Sujet du stage.md",
     "Notes/Septembre/Semaine 36/2025-09-05.md",
@@ -238,11 +243,7 @@
     "images/2025-09-02Quark.png",
     "images/SLURM Logo.png",
     "images/GitLab Logo.png",
-    "Code/svg.md",
     "Excalidraw/Sans titre.canvas",
-    "Notes/Septembre/Semaine 36/2025-09-02.md",
-    "Notes/Septembre/Semaine 36/2025-09-01.md",
-    "Quark/EXQuark.md",
     "logoQuarkNuBleu.png",
     "images/logoQuarkNuGris.png",
     "images/logoQuarkNuBleu.png",
@@ -255,7 +256,6 @@
     "Quark",
     "Notes/Septembre",
     "Excalidraw",
-    "Code",
-    "Autolauncher"
+    "Code"
   ]
 }
