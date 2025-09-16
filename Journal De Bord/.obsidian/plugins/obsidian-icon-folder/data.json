@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiCloudRainWind",
       "🏃‍♂️",
       "🇧🇪",
       "LiStars",
-      "LiRocket",
-      "LiCode"
+      "LiRocket"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -38,7 +38,7 @@
   "Notes/Novembre": "LiSkull",
   "Notes/Octobre": "LiLeaf",
   "Notes": "LiPen",
-  "Notes/Septembre": "LiCloud",
+  "Notes/Septembre": "LiCloudRainWind",
   "Quark": "LiAtom",
   "Rapport de Stage": "LiNotebook",
   "Réunions": "LiTimer",

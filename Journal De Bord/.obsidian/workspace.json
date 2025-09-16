@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes/Septembre/Semaine 38/2025-S38.md",
+                "file": "Notes/Septembre/Semaine 37/2025-09-11.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "2025-S38"
+              "title": "2025-09-11"
             }
           },
           {
@@ -69,7 +69,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "sacctmg",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -94,7 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 219.5
+    "width": 236.5
   },
   "right": {
     "id": "22f448a1931b4206",
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Notes/Septembre/Semaine 38/2025-S38.md",
+                "file": "Notes/Septembre/Semaine 37/2025-09-11.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rétrolien pour 2025-S38"
+              "title": "Rétrolien pour 2025-09-11"
             }
           },
           {
@@ -211,21 +211,24 @@
   "active": "4963521c1018e409",
   "lastOpenFiles": [
     "Notes/Septembre/Semaine 38/2025-09-15.md",
+    "Liens utiles.md",
+    "Notes/Septembre/Semaine 38/2025-09-16.md",
     "Notes/Septembre/Semaine 38/2025-S38.md",
+    "Notes/Septembre/2025-09-15.md",
+    "Notes/Septembre/Réunions du mercredi.md",
+    "Quark/Cahier des charges Quark.md",
+    "A etudier.md",
+    "Excalidraw/Drawing 2025-09-11.excalidraw.md",
+    "Excalidraw/Drawing 2025-09-08 16.29.21.excalidraw.md",
+    "Cours SLURM - Les bases pour l'utilisation avec Python.md",
+    "Notes/Septembre/Semaine 37/2025-S37.md",
+    "Notes/Septembre/Semaine 37/2025-09-10.md",
     "Notes/Septembre/Semaine 37/2025-09-12.md",
+    "Notes/Septembre/Semaine 37/2025-09-11.md",
     "Notes/Septembre/Semaine 38",
     "Quark/Exemple d'orga Quark.md",
-    "Quark/Cahier des charges Quark.md",
     "Quark/Quark.md",
-    "Excalidraw/Drawing 2025-09-11.excalidraw.md",
-    "Notes/Septembre/Semaine 37/2025-09-10.md",
-    "Notes/Septembre/Réunions du mercredi.md",
-    "Notes/Septembre/Semaine 37/2025-09-11.md",
-    "Notes/Septembre/Semaine 37/2025-S37.md",
     "Excalidraw/Sans titre.md",
-    "Liens utiles.md",
-    "Cours SLURM - Les bases pour l'utilisation avec Python.md",
-    "Excalidraw/Drawing 2025-09-08 16.29.21.excalidraw.md",
     "Rapport de Stage/Structure du rapport de stage.md",
     "Rapport de Stage/Sujet du stage.md",
     "Notes/Septembre/Semaine 36/2025-09-05.md",
@@ -234,9 +237,6 @@
     "Notes/Septembre/Semaine 37/2025-09-09.md",
     "Excalidraw/Drawing 2025-09-05 15.34.49.excalidraw.md",
     "Excalidraw/Drawing 2025-09-05 15.36.19.excalidraw.md",
-    "Notes/Septembre/2025-09-11.md",
-    "Notes/Septembre/Semaine 36/2025-09-03.md",
-    "Notes/Septembre/Semaine 36/2025-S36.md",
     "images/TaskDialog 2025-09-10.png",
     "images/LightMode 2025-09-09.png",
     "images/Darkmode - 2025-09-09.png",
