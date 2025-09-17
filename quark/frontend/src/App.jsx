@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Activity, Server, Clock, AlertCircle, Cpu, HardDrive, Zap, CheckIcon } from 'lucide-react';
 import { Card, CardHeader, CardContent } from './components/ui/Card';
 import { ResourceCard } from './components/dashboard/ResourceCard';
+import SlurmDashboard from './components/dashboard/SlurmDashboard';
 import QueueItem from './components/items/QueueItem';
 import ActiveTask from './components/items/ActiveTask';
 import ErrorItem from './components/items/ErrorItem';
@@ -161,6 +162,11 @@ const QuarkDashboard = () => {
           />
         </section>
         
+        <section className="mb-6">
+            <SlurmDashboard />
+        </section>
+
+
         {/* Section Erreurs */}
         <section className="mb-6">
           <Card>

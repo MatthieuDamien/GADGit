@@ -1,0 +1,83 @@
+## Structure générale
+
+### Répertoire principal : `/work/work/shared/s-noemics`
+
+Le cluster MesoBFC est organisé autour d'un répertoire principal contenant plusieurs composants essentiels :
+
+#### **Composants système**
+
+- **`bin/`** : Scripts binaires exécutables
+- **`soft/`** : Logiciels installés
+- **`lib/`** : Bibliothèques partagées
+- **`include/`** : Fichiers d'en-tête pour la compilation C++ (.h)
+- **`pipeline/`** : Branches du dépôt Git contenant les pipelines d'analyse
+
+#### **Gestion des données (`data/`)**
+
+La gestion des données suit un workflow structuré en plusieurs étapes :
+
+##### 1. **`incoming/`** - Données brutes
+
+- Réception des données brutes à analyser par le pipeline
+- Organisation par flowcell dans `/neomics/seq1/`
+    - Chaque dossier de flowcell contient de nombreux fichiers `fastq.gz`
+    - Génération de fichiers R1 et R2 morcelés en 8 parties
+- Création de fichiers `.end` vides pour R1 et R2 signalant la fin de la concaténation
+
+##### 2. **`organize/`** - Organisation par échantillon
+
+- Création d'un répertoire par échantillon (R1 et R2)
+- Mise en place de l'architecture standard : `logs/`, `qc/`, `tmp/`
+- Gestion du fichier `info-file/sample_correspondance.info` contenant :
+    - Nom de l'échantillon
+    - Niveau d'urgence
+    - Numéro de pedigree
+    - Structure familiale
+- Les données arrivent dans cette section uniquement quand toute la famille est concaténée (important pour l'analyse des trios)
+
+##### 3. **`analyse/`** - Traitement par famille
+
+- Organisation basée sur `sample_correspondance.info`
+- Création d'un répertoire d'analyse par famille
+- Nomenclature : `PEDXXXXXX.1` (origine, point index)
+    - `.2`, `.3`, etc. : autres membres de la famille
+    - Possibilité d'avoir deux analyses djenbs simultanées
+- Lancement automatique de l'analyse via `gs_solo_nbs.sh` quand tous les fichiers sont présents
+- Génération des logs associés
+
+##### 4. **`database/`** - Données de référence
+
+- Génomes de référence (grch38/hg38)
+- Base de données des variations pour identifier les mutations rares (>2%)
+- Accès aux génomes sans connexion réseau nécessaire
+
+##### 5. **`sandbox/`** - Environnement de test
+
+- Dossiers dédiés aux tests et développements
+
+##### 6. **`qualification/`** - Validation
+
+- Tests de validation pour garantir la qualité des résultats
+
+### **Archives et stockage (`Archive/gad/shared/`)**
+
+Le système d'archivage contient :
+
+- **Sorties complètes** : logs, résultats, fichiers intermédiaires, contrôles qualité
+- **Données brutes** : fichiers fastq (R1 et R2) conservés depuis le début
+- **Fichiers de variants** : fichiers VCF contenant tous les variants identifiés
+- **Fichiers d'alignement** : BAM T2T et BAM hg38
+
+### **Gestion des utilisateurs**
+
+- **Espace utilisateur** : 10 Go par utilisateur
+- **Recommandation** : privilégier l'utilisation du `sandbox/`
+- **Accès aux archives** : utiliser `transfer` pour lancer un job d'accès aux données archivées
+- **Gestion des comptes** : documentation disponible via `sacctmgr`
+
+## Workflow de traitement
+
+1. **Réception** : Les données arrivent dans `incoming/`
+2. **Organisation** : Structuration par échantillon dans `organize/`
+3. **Analyse** : Traitement par famille dans `analyse/`
+4. **Archivage** : Stockage long terme dans `Archive/gad/shared/`
