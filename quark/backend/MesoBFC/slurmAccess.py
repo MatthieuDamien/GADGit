@@ -72,7 +72,7 @@ def printer():
     # print("\n-------------------\n")
     # print(get_squeue(ssh))
     # print("\n-------------------\n")
-    # print(get_sacct(ssh))
+    # print(get_sacct(ssh)) 
     exec_sortie_ssh(sinfo)
     exec_sortie_ssh(squeue)
     #exec_sortie_ssh(sacct)

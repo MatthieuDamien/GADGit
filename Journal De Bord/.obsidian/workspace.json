@@ -4,38 +4,25 @@
     "type": "split",
     "children": [
       {
-        "id": "c5594dd9f70f4640",
+        "id": "c7916b1c213bc53e",
         "type": "tabs",
         "children": [
           {
-            "id": "a9f4aac4a3e30b00",
+            "id": "7f2d0d1c0d28cb70",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes/Septembre/Semaine 38/2025-09-17.md",
+                "file": "Notes/Septembre/2025-09-22.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "2025-09-17"
-            }
-          },
-          {
-            "id": "c9f6005d0ff77d84",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/Diagramme de Gant.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "Diagramme de Gant"
+              "title": "2025-09-22"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -108,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Excalidraw/Diagramme de Gant.md",
+                "file": "Notes/Septembre/Semaine 38/2025-09-19.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rétrolien pour Diagramme de Gant"
+              "title": "Rétrolien pour 2025-09-19"
             }
           },
           {
@@ -206,45 +193,47 @@
       "periodic-notes:Open this week": false
     }
   },
-  "active": "c9f6005d0ff77d84",
+  "active": "7f2d0d1c0d28cb70",
   "lastOpenFiles": [
-    "Notes/Septembre/Semaine 38/2025-09-17.md",
-    "images/Gant2025-09-17.png",
-    "Liens utiles.md",
-    "A etudier.md",
-    "Notes/Septembre/Semaine 38/2025-09-16.md",
+    "Excalidraw/Drawing 2025-09-18 10.25.10.excalidraw.md",
+    "Notes/Septembre/2025-09-22.md",
     "Excalidraw/Diagramme de Gant.md",
-    "Notes/Septembre/Semaine 38/2025-S38.md",
-    "Notes/Septembre/Semaine 36/2025-09-05.md",
-    "Notes/Septembre/Semaine 36/2025-09-04.md",
-    "Notes/Septembre/Semaine 38/2025-09-15.md",
-    "Notes/Septembre/Semaine 37/2025-09-12.md",
-    "Notes/Septembre/Semaine 37/2025-09-11.md",
-    "Notes/Septembre/Semaine 37/2025-09-10.md",
-    "Notes/Septembre/Semaine 37/2025-09-09.md",
-    "Notes/Septembre/Semaine 37/2025-09-08.md",
-    "Notes/Septembre/Semaine 36/2025-09-03.md",
-    "Notes/Septembre/Semaine 36/2025-09-02.md",
-    "Notes/Septembre/Réunions du mercredi.md",
-    "Notes/Septembre/Semaine 36/2025-09-01.md",
+    "Notes/Septembre/Semaine 38/2025-09-17.md",
+    "Notes/Septembre/Semaine 38/2025-09-18.md",
+    "Notes/Septembre/Semaine 38/2025-09-19.md",
+    "Notes/Septembre/Semaine 39/2025-S39.md",
+    "Notes/Septembre/Semaine 39/2025-09-22.md",
+    "Excalidraw/Drawing 2025-09-18 10.11.04.excalidraw.md",
     "Excalidraw/Drawing 2025-09-11.excalidraw.md",
-    "Excalidraw/Sans titre.canvas",
-    "Excalidraw/Drawing 2025-09-08 16.29.21.excalidraw.md",
     "Anthony.md",
-    "Quark/Architecture MesoBFC.md",
-    "Réunions/Réunions du vendredi.md",
-    "Code/gs_solo_nbs.sh.md",
-    "Notes/Septembre/Semaine 37/2025-S37.md",
-    "Notes/Septembre/Semaine 38",
-    "images/TaskDialog 2025-09-10.png",
+    "Excalidraw/Drawing 2025-09-08 16.29.21.excalidraw.md",
+    "Notes/Septembre/Semaine 38/2025-S38.md",
+    "Notes/Septembre/Semaine 39",
     "images/LightMode 2025-09-09.png",
-    "images/Darkmode - 2025-09-09.png",
-    "images/2025-09-02Quark.png",
-    "images/SLURM Logo.png",
-    "images/GitLab Logo.png",
-    "logoQuarkNuBleu.png",
-    "images/logoQuarkNuGris.png",
+    "images/logoQuark.png",
     "images/logoQuarkNuBleu.png",
+    "images/logoQuarkNuGris.png",
+    "images/logoQuarkNuRouge.png",
+    "images/NovaseqX.jpg",
+    "images/Organisation Quark.png",
+    "images/Organisation Quark-2.png",
+    "images/Organisation Quark-2(1).png",
+    "Quark/Cahier des charges Quark.md",
+    "Quark/Exemple d'orga Quark.md",
+    "Quark/Quark.md",
+    "Quark/EXQuark.md",
+    "Quark/Specs features.md",
+    "Quark/Architecture MesoBFC.md",
+    "images/Darkmode - 2025-09-09.png",
+    "Excalidraw/Drawing 2025-09-05 15.34.49.excalidraw.md",
+    "Excalidraw/Drawing 2025-09-05 15.36.19.excalidraw.md",
+    "Excalidraw/Sans titre.md",
+    "Réunions/Réunions du vendredi.md",
+    "Liens utiles.md",
+    "Notes/Septembre/Semaine 38/2025-09-16.md",
+    "Notes/Septembre/Semaine 38/Sans titre.md",
+    "Excalidraw/Sans titre.canvas",
+    "Notes/Septembre/Semaine 38",
     "Notes/Septembre/Semaine 37",
     "Notes/Septembre/Semaine 36",
     "images",
@@ -252,7 +241,6 @@
     "Rapport de Stage",
     "Quark",
     "Notes/Septembre",
-    "Excalidraw",
-    "Code"
+    "Excalidraw"
   ]
 }

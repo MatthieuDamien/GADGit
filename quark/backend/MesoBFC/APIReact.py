@@ -33,6 +33,10 @@ def fetch_slurm_data():
     if not ssh:
         return None
     
+    squeue_data = []
+    sacct_data = []
+    sinfo_data = []
+    
     try:
         # Récupérer les données
         squeue_data = get_squeue(ssh)
@@ -126,7 +130,8 @@ def refresh_data():
         else:
             return jsonify({
                 "success": False,
-                "message": "Erreur lors du rafraîchissement"
+                "message": "Erreur lors du rafraîchissement",
+                "data": data  # On envoie quand même les anciennes données
             }), 500
     except Exception as e:
         return jsonify({

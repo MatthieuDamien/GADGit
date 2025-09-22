@@ -58,7 +58,7 @@ module.exports = {
         },
         'bordeaux': {
           500:'#8a0f22',
-          600:'#db0026',
+          600:'#db0026', // main
           800:'#e31937',
         },   
         'gris': {

@@ -17,4 +17,4 @@ ssh -X umw040ir@login-1.mesobfc.fr
 
 
 [Documentation MesoBFC](https://doc.mesobfc.fr/)
-Rocky Linux 8 is deployed on all nodes.
+	Rocky Linux 8 is deployed on all nodes.
