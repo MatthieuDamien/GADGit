@@ -20,13 +20,13 @@ logger = logging.getLogger(__name__)
 # Vos imports (à adapter selon votre structure)
 try:
     from slurmAccess import connect_ssh
-    from slurmInfo import get_sinfo
-    from slurmQueue import get_squeue
-    from slurmSacct import get_sacct
+    from slurmInfo   import get_sinfo
+    from slurmQueue  import get_squeue
+    from slurmSacct  import get_sacct
     logger.info("IMPORTS: Imports SLURM reussis")
+
 except ImportError as e:
     logger.error(f"IMPORT ERROR: {e}")
-    logger.error("Verifiez que les fichiers slurmAccess.py, slurmInfo.py, etc. sont presents")
 
 app = Flask(__name__)
 CORS(app)

@@ -4,7 +4,8 @@ def get_sacct(ssh):
     list_jobs_sacct = []
     
     # Utiliser le format original sans délimiteur
-    stdin, stdout, stderr = ssh.exec_command("sacct -a --format JobID,JobName%50,Partition,AllocCPUS,State,ExitCode,Elapsed,NNodes,NTasks,NodeList")
+    stdin, stdout, stderr = ssh.exec_command("sacct -a -X --format JobID,JobName%50,Partition,AllocCPUS,State,ExitCode,Elapsed,NNodes,NodeList")  #,NTasks mais toujours null
+    nb_colonnes = 9  # Nombre de colonnes attendues dans la sortie
     output = stdout.read().decode()
     error = stderr.read().decode()
  
@@ -27,19 +28,19 @@ def get_sacct(ssh):
             parts = re.split(r'\s+', line)
             
             # Si moins de 10 colonnes
-            if len(parts) < 10:
+            if len(parts) < nb_colonnes:
                 # Compléter avec des valeurs vides
-                parts.extend([''] * (10 - len(parts)))
-            elif len(parts) > 10:
+                parts.extend([''] * (nb_colonnes - len(parts)))
+            elif len(parts) > nb_colonnes:
                 # Si plus de 10, prendre les 9 premiers et joindre le reste pour NodeList
-                nodelist_parts = parts[9:]  # Tout ce qui reste va dans NodeList
-                parts = parts[:9] + [' '.join(nodelist_parts)]
+                nodelist_parts = parts[nb_colonnes-1:]  # Tout ce qui reste va dans NodeList
+                parts = parts[:nb_colonnes-1] + [' '.join(nodelist_parts)]
             
             # S'assurer qu'on a  10 éléments
-            parts = parts[:10]
+            parts = parts[:nb_colonnes]
             
             try:
-                JOBID, JOBNAME, PARTITION, ALLOCCPUS, STATE, EXITCODE, ELAPSED, NNODES, NTASKS, NODELIST = parts
+                JOBID, JOBNAME, PARTITION, ALLOCCPUS, STATE, EXITCODE, ELAPSED, NNODES, NODELIST = parts  #NTASKS
                 
                 # Nettoyer les valeurs (enlever les espaces)
                 job_data = {
@@ -51,7 +52,7 @@ def get_sacct(ssh):
                     "EXITCODE":  EXITCODE.strip(),
                     "ELAPSED":   ELAPSED.strip(),
                     "NNODES":    NNODES.strip(),
-                    "NTASKS":    NTASKS.strip() if NTASKS and NTASKS.strip() else None,
+                    # "NTASKS":    NTASKS.strip(),
                     "NODELIST":  NODELIST.strip() if NODELIST and NODELIST.strip() else None
                 }
                 
