@@ -13,6 +13,7 @@ const SlurmDashboard = () => {
     completedTasks,
     lastUpdate
   } = useSlurmData(true, 5000); // Auto-refresh toutes les 5s
+  // TODO : hidrater les données dans le composant et pas de force reload
 
   const handleRefresh = async () => {
     await refreshData();
@@ -22,6 +23,7 @@ const SlurmDashboard = () => {
     return <div className="p-4">Chargement des données SLURM...</div>;
   }
 
+  // Afficher l'ancienne data et mettre un pop-up autre part sur la page
   if (error) {
     return (
       <div className="p-4 bg-red-100 border border-red-400 rounded">
@@ -67,7 +69,7 @@ const SlurmDashboard = () => {
                 <div className="flex justify-between">
                   <span className="font-medium">{task.JOBID}</span>
                   <span className={`px-2 py-1 rounded text-xs ${
-                    task.STATE === 'RUNNING' ? 'bg-green-100 text-green-800' :
+                    task.STATE === 'RUNNING' ? 'bg-blue-100 text-blue-800' :
                     task.STATE === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
                     'bg-gray-100 text-gray-800'
                   }`}>
