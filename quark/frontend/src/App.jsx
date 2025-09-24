@@ -29,13 +29,7 @@ const QuarkDashboard = () => {
     return false;
   });
 
-  // États existants
-  const [resources, setResources] = useState({
-    cpu: 68,
-    memory: 72,
-    gpu: 45,
-    storage: 89
-  });
+
 
   const [queue, setQueue] = useState([
     { id: 'djen10010.1', type: 'Genome', priority: 'Urgente', waitTime: '5 min' },
@@ -97,27 +91,7 @@ const QuarkDashboard = () => {
   const handleErrorClick = (error) => {
     console.log('Erreur cliquée:', error);
     openDialog(error);
-  };
-
-  // Simulation de mise à jour des données
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLastUpdate(new Date());
-      setResources(prev => ({
-        cpu: Math.min(100, Math.max(0, prev.cpu + (Math.random() - 0.5) * 10)),
-        memory: Math.min(100, Math.max(0, prev.memory + (Math.random() - 0.5) * 8)),
-        gpu: Math.min(100, Math.max(0, prev.gpu + (Math.random() - 0.5) * 12)),
-        storage: Math.min(100, Math.max(0, prev.storage + (Math.random() - 0.5) * 2))
-      }));
-
-      setActiveTasks(prev => prev.map(task => ({
-        ...task,
-        progress: Math.min(100, task.progress + Math.random() * 2)
-      })));
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  }
 
   const handleRefresh = () => {
     setLastUpdate(new Date());
@@ -135,35 +109,12 @@ const QuarkDashboard = () => {
 
       <main className="p-6">
         {/* Grille de ressources */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <ResourceCard 
-            label="CPU" 
-            icon={Cpu} 
-            iconColor="text-primary-light dark:text-primary-dark" 
-            value={resources.cpu} 
-          />
-          <ResourceCard 
-            label="Mémoire" 
-            icon={Server} 
-            iconColor="text-primary-light dark:text-primary-dark" 
-            value={resources.memory} 
-          />
-          <ResourceCard 
-            label="GPU" 
-            icon={Zap} 
-            iconColor="text-primary-light dark:text-primary-dark" 
-            value={resources.gpu} 
-          />
-          <ResourceCard 
-            label="Stockage" 
-            icon={HardDrive} 
-            iconColor="text-primary-light dark:text-primary-dark" 
-            value={resources.storage} 
-          />
+        <section className="mb-6">
+          <ResourceCard />
         </section>
         
         <section className="mb-6">
-            <SlurmDashboard />
+          <SlurmDashboard />
         </section>
 
 

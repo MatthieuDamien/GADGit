@@ -4,10 +4,12 @@ import SlurmAPI from '../../services/slurmAPI';
 // 30000 ms = 30s
 export const useSlurmData = (autoRefresh = true, refreshInterval = 5000) => {
   const [data, setData] = useState({
+    connection_status: 'unknown',
+    last_error: null,
+    last_update: null,
     sacct:  [],
     squeue: [],
     sinfo:  [],
-    last_update: null
   });
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);                // Différencier chargement initial vs refresh
@@ -66,33 +68,33 @@ export const useSlurmData = (autoRefresh = true, refreshInterval = 5000) => {
   }, [updateData]);
 
 
-
+// Inutile car fetchAllData fait la même chose en mieux
   // Forcer le rafraîchissement
-  const refreshData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+//   const refreshData = useCallback(async () => {
+//     setLoading(true);
+//     setError(null);
     
-    try {
-      const response = await SlurmAPI.getAllData();
-      if (response.success && response.data) {
-        updateData(response.data);
-        setError(null);
-        setConnectionStatus(response.data.connection_status || 'success');
-        lastUpdatRef.current = response.data.last_update;
-      } else {
-        setError('Erreur de raffraichissment :', response);
-        console.warn('Erreur de raffraichissment :  ', response);
-      }
-    } catch (err) {
-      setError(err.message);
-      console.error('Erreur refreshData:', err);
-    } finally {
-      setLoading(false);
-    }
- }, [updateData]);
+//     try {
+//       const response = await SlurmAPI.getAllData();
+//       if (response.success && response.data) {
+//         updateData(response.data);
+//         setError(null);
+//         setConnectionStatus(response.data.connection_status || 'success');
+//         lastUpdatRef.current = response.data.last_update;
+//       } else {
+//         setError('Erreur de raffraichissment :', response);
+//         console.warn('Erreur de raffraichissment :  ', response);
+//       }
+//     } catch (err) {
+//       setError(err.message);
+//       console.error('Erreur refreshData:', err);
+//     } finally {
+//       setLoading(false);
+//     }
+//  }, [updateData]);
 
 
- 
+
   // Récupérer les détails d'un job
   const getJobDetails = useCallback(async (jobId) => {
     try {
@@ -118,7 +120,7 @@ export const useSlurmData = (autoRefresh = true, refreshInterval = 5000) => {
     data,
     loading,
     error,
-    refreshData,
+    // refreshData,
     fetchAllData,
     getJobDetails,
     // Données spécifiques pour faciliter l'utilisation

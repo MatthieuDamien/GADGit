@@ -94,6 +94,7 @@ On va vers un marquage CE IVDR
 # Réunion [[2025-09-24]]
 ## Moi
 
+
 ## Eux
 ### Anthony 
 
@@ -104,7 +105,7 @@ On va vers un marquage CE IVDR
 ### Emilie
 
 
-### Théo
+### Fridolin
 
 
 ### Yannis
