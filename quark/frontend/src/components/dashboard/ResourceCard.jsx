@@ -20,7 +20,7 @@ const getPartitionStats = (sinfo) => {
 
     partitions[PARTITION].totalNodes += total;
 
-    if (STATE === 'running' | STATE === 'idle') { // | STATE === 'idle'
+    if (STATE === 'running') { // | STATE === 'idle'    Pour les tests si rien en actif
       partitions[PARTITION].runningNodes += idle;
     } else if (STATE === 'down*' || STATE === 'down' || STATE === 'drained' || STATE === 'drained*') {
       partitions[PARTITION].downOrDrainedNodes += total;
@@ -95,7 +95,7 @@ const ResourceCard = () => {
 
   // Affichage des cartes par partition
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {Object.entries(partitionStats).map(([partitionName, stats]) => (
         <PartitionCard
           key={partitionName}

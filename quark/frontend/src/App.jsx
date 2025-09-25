@@ -112,11 +112,6 @@ const QuarkDashboard = () => {
         <section className="mb-6">
           <ResourceCard />
         </section>
-        
-        <section className="mb-6">
-          <SlurmDashboard />
-        </section>
-
 
         {/* Section Erreurs */}
         <section className="mb-6">
@@ -225,6 +220,12 @@ const QuarkDashboard = () => {
             </CardContent>
           </Card>
         </section>
+
+                
+        <section className="mb-6">
+          <SlurmDashboard />
+        </section>
+        
       </main>
       <TaskDialog />
     </div>

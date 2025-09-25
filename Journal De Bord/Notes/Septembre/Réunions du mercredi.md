@@ -97,16 +97,23 @@ On va vers un marquage CE IVDR
 
 ## Eux
 ### Anthony 
-
+Trucs qui marchent pas 
 
 ### Valentin
-
-
+Nettoyeur d'autolauncher
+Simplification des mails de l'autolauncher
+Pourquoi pas le nombre de base : pb de colonnes ?
+### Anne-Sophie
+Fichier des parents mais pas de l'enfant
+Epigénomède fini à Dijon maintenant Besançon
 ### Emilie
-
-
+Pipeline, classification des résultats avec les 808 gènes
 ### Fridolin
-
-
+Powerpoint + Cours 
 ### Yannis
+Bug avec la singu accède au user et crash. pas eldap donc compliqué
+mardi 25 octobre?? à 9h y'a des trucs théoriques
 
+Calendrier astreinte dispo en commande, donc à ajouter sur Quark
+
+Vendredi [[2025-10-03]] -> ESEO amphi toute la journée
