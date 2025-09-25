@@ -1,0 +1,5 @@
+# logs locaux
+api_slurm.log
+
+# cache Python
+backend/sctripts/MesoBFC/__pycache__
