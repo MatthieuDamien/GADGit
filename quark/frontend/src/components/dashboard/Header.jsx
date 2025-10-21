@@ -5,22 +5,22 @@ import DarkModeToggle from '../ui/DarkModeToggle';
 
 // Composant Header
 const Header = ({ lastUpdate, onRefresh, isDarkMode, onToggleDarkMode }) => (
-  <header className="sticky top-0 z-50 border-b border-marine-border800 dark:border-primary-dark 
-                     bg-white/95 dark:bg-gris-300 backdrop-blur-sm shadow-sm">
+  <header className="sticky top-0 z-50 border-b border-gray-6 dark:border-lime-6 
+                     backdrop-blur-sm shadow-sm">
     <div className="px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 bg-gradient-to-br from-primary-light to-marine-border700 
-                          dark:from-jaune-interactive300 dark:to-jaune-interactive500/70 
+          <div className="w-14 h-14 bg-gradient-to-br from-blue-9 to-blue-7 
+                          dark:from-lime-3 dark:to-lime-5 
                           rounded-lg flex items-center justify-center shadow-lg">
             <img src={logoQuark} className="w-10 h-10" alt="Logo Quark" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-marine-text1300 dark:text-jaune-text1200">
+            <h1 className="text-3xl font-bold text-blue-12 dark:text-lime-12">
               Quark
             </h1>
           </div>
-          <span className="text-sm text-marine-border600 dark:text-jaune-text1300 ml-2 hidden sm:inline">
+          <span className="text-sm text-gray-11 dark:text-lime-11 ml-2 hidden sm:inline">
             Orchestrateur de calcul bioinformatique
           </span>
         </div>
@@ -28,13 +28,13 @@ const Header = ({ lastUpdate, onRefresh, isDarkMode, onToggleDarkMode }) => (
           <DarkModeToggle isDark={isDarkMode} onToggle={onToggleDarkMode} />
           <button 
             onClick={onRefresh}
-            className="p-2 hover:bg-neutral/10 dark:hover:bg-neutral/20 
+            className="p-2 hover:bg-gray-4 dark:hover:bg-lime-4 
                        rounded-lg transition-colors"
             aria-label="Rafraîchir"
           >
-            <RefreshCw className="w-5 h-5 text-neutral" />
+            <RefreshCw className="w-5 h-5 text-gray-11 dark:text-lime-11" />
           </button>
-          <div className="text-sm text-neutral">
+          <div className="text-sm text-gray-11 dark:text-lime-11">
             MAJ: {lastUpdate.toLocaleTimeString()}
           </div>
         </div>

@@ -1,0 +1,450 @@
+[	
+	{
+		"name":"wgs_analysis",
+		"tree":
+		{
+			"rename_fastq":
+			{
+				"parent": ["None"],
+				"logname": "rename_fastq.log",
+				"sge_name": "None",
+				"log_type": "analysisdir"
+			}, 
+			"organize_data_folder":
+			{
+				"parent":["rename_fastq"],
+				"logname": "organize_data_folder.log",
+				"sge_name": "None",
+				"log_type": "analysisdir"
+			},
+			"check_trio":
+			{
+				"parent": ["organize_data_folder"],
+				"logname": "run_check_trio.$(date).log",
+				"sge_name": "check_trio",
+				"log_type": "general"
+			}, 
+			"compute_fastq_md5": 
+			{
+				"parent": ["organize_data_folder"],
+				"logname": "run_md5_fastq.$(date).log", 
+				"sge_name": "run_md5_fastq_$(sample)",
+				"log_type": "sample"
+			}, 
+			"fastqc_fp_R1":
+			{
+				"parent":["organize_data_folder"],
+				"logname": "process_fastqc_R1.$(date).log",
+				"sge_name": "fastqc_FP_R1_$(sample)",
+				"log_type": "sample"
+			},
+			"fastqc_fp_R2":
+			{
+				"parent":["organize_data_folder"],
+				"logname": "process_fastqc_R2.$(date).log",
+				"sge_name": "fastqc_FP_R2_$(sample)",
+				"log_type": "sample"
+			},
+			"fq2bam":
+			{
+				"parent":["organize_data_folder"],
+				"logname": "fq2bam.$(date).log",
+				"sge_name": "fq2bam_$(sample)",
+				"log_type": "sample"
+			},
+			"process_varcall_by_chunks":
+			{
+				"parent":["fq2bam"],
+				"logname": "process_varcall_by_chunks.$(sample).$(date).log",
+				"sge_name": "process_varcall_by_chunks_$(sample)",
+				"log_type": "sample"
+			},
+			"check_jobs_varcall":
+			{
+				"parent":["process_varcall_by_chunks"],
+				"logname": "check_jobs_varcall.$(sample).$(date).log",
+				"sge_name": "check_jobs_varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"merge_varcall_by_chunks":
+			{
+				"parent":["check_jobs_varcall"],
+				"logname": "merge_varcall_by_chunks.$(date).log",
+				"sge_name": "merge_varcall_by_chunks_$(directory)",
+				"log_type": "general"
+			},			
+			"check_jobs_merge_varcall":
+			{
+				"parent":["merge_varcall_by_chunks"],
+				"logname": "check_jobs_merge_varcall.$(date).log",
+				"sge_name": "check_jobs_merge_varcall_$(directory)",
+				"log_type": "general"
+			},				
+			"merge_varcall_by_sample":
+			{
+				"parent":["check_jobs_merge_varcall"],
+				"logname": "merge_varcall_by_sample.$(sample).$(date).log",
+				"sge_name": "merge_varcall_by_sample_$(sample)",
+				"log_type": "sample"
+			},				
+			"select_variants_by_chunks":
+			{
+				"parent":["check_jobs_merge_varcall"],
+				"logname": "select_varcall_by_chunks.$(sample).$(date).log",
+				"sge_name": "select_variants_by_chunks_$(sample)",
+				"log_type": "sample"
+			},			
+			"check_jobs_select_variants":
+			{
+				"parent":["select_variants_by_chunks"],
+				"logname": "check_jobs_select_varcall.$(sample).$(date).log",
+				"sge_name": "check_jobs_select_variants_$(sample)",
+				"log_type": "sample"
+			},				
+			"filter_varcall_by_chunks":
+			{
+				"parent":["check_jobs_select_variants"],
+				"logname": "filter_varcall_by_chunks.$(sample).$(date).log",
+				"sge_name": "filter_varcall_by_chunks_$(sample)",
+				"log_type": "sample"
+			},						
+			"check_jobs_filter_varcall":
+			{
+				"parent":["filter_varcall_by_chunks"],
+				"logname": "check_jobs_filter_varcall.$(sample).$(date).log",
+				"sge_name": "check_jobs_filter_varcall_$(sample)",
+				"log_type": "sample"
+			},									
+			"annotate_variants_snpeff_by_chunks":
+			{
+				"parent":["check_jobs_filter_varcall"],
+				"logname": "annotate_snpeff_by_chunks.$(sample).$(date).log",
+				"sge_name": "annotate_variants_snpeff_by_chunks_$(sample)",
+				"log_type": "sample"
+			},										
+			"check_jobs_annotate_variants_snpeff":
+			{
+				"parent":["annotate_variants_snpeff_by_chunks"],
+				"logname": "check_jobs_annotate_snpeff.$(sample).$(date).log",
+				"sge_name": "check_jobs_annotate_variants_snpeff_$(sample)",
+				"log_type": "sample"
+			},			
+			"annotate_variants_spip_by_chunks":
+			{
+				"parent":["check_jobs_annotate_variants_snpeff"],
+				"logname": "annotate_spip_by_chunks.$(sample).$(date).log",
+				"sge_name": "annotate_variants_spip_by_chunks_$(sample)",
+				"log_type": "sample"
+			},								
+			"check_jobs_annotate_variants_spip":
+			{
+				"parent":["annotate_variants_spip_by_chunks"],
+				"logname": "check_jobs_annotate_spip.$(sample).$(date).log",
+				"sge_name": "check_jobs_annotate_variants_spip_$(sample)",
+				"log_type": "sample"
+			},		
+			"annotate_variants_by_chunks":
+			{
+				"parent":["check_jobs_annotate_variants_spip"],
+				"logname": "annotate_varcall_by_chunks.$(sample).$(date).log",
+				"sge_name": "annotate_variants_by_chunks_$(sample)",
+				"log_type": "sample"
+			},			
+			"check_jobs_annotate_variants":
+			{
+				"parent":["annotate_variants_by_chunks"],
+				"logname": "check_jobs_annotate_varcall.$(sample).$(date).log",
+				"sge_name": "check_jobs_annotate_variants_$(sample)",
+				"log_type": "sample"
+			},			
+			"regroup_vcf_from_chunks":
+			{
+				"parent":["check_jobs_annotate_variants"],
+				"logname": "regroup_vcf_from_chunks.$(sample).$(date).log",
+				"sge_name": "regroup_vcf_from_chunks_$(sample)",
+				"log_type": "sample"
+			},				
+			"check_jobs_regroup_vcf_from_chunks":
+			{
+				"parent":["regroup_vcf_from_chunks"],
+				"logname": "check_jobs_regroup_vcf_from_chunks_$(sample).$(date).log",
+				"sge_name": "check_jobs_regroup_vcf_from_chunks_$(sample)",
+				"log_type": "sample"
+			},			
+			"rare_varcall_full_nsssi":
+			{
+				"parent":["check_jobs_regroup_vcf_from_chunks"],
+				"logname": "analyse_rare_variants_full_nsssi.$(date).log",
+				"sge_name": "rare_varcall_full_nsssi_$(sample)",
+				"log_type": "sample"
+			},				
+			"rare_varcall_full_genic":
+			{
+				"parent":["check_jobs_regroup_vcf_from_chunks"],
+				"logname": "analyse_rare_variants_full_genic.$(date).log",
+				"sge_name": "rare_varcall_full_genic_$(sample)",
+				"log_type": "sample"
+			},				
+			"rare_varcall_full_intergenic":
+			{
+				"parent":["check_jobs_regroup_vcf_from_chunks"],
+				"logname": "analyse_rare_variants_full_intergenic.$(date).log",
+				"sge_name": "rare_varcall_full_intergenic_$(sample)",
+				"log_type": "sample"
+			},			
+			"report_varcall_full_nsssi":
+			{
+				"parent":["rare_varcall_full_nsssi"],
+				"logname": "report_vcf.full.nsssi.$(date).log",
+				"sge_name": "report_varcall_full_nsssi_$(sample)",
+				"log_type": "sample"
+			},				
+			"report_varcall_full_genic":
+			{
+				"parent":["rare_varcall_full_genic"],
+				"logname": "report_vcf.full.genic.$(date).log",
+				"sge_name": "report_varcall_full_genic_$(sample)",
+				"log_type": "sample"
+			},					
+			"report_varcall_full_intergenic":
+			{
+				"parent":["rare_varcall_full_intergenic"],
+				"logname": "report_vcf.full.intergenic.$(date).log",
+				"sge_name": "report_varcall_full_intergenic_$(sample)",
+				"log_type": "sample"
+			},
+			"process_controlfreec":
+			{
+				"parent":["fq2bam"],
+				"logname": "process_controlfreec.$(date).log",
+				"sge_name": "process_controlfreec_$(sample)",
+				"log_type": "sample"
+			},			
+			"process_lumpy":
+			{
+				"parent":["fq2bam"],
+				"logname": "process_lumpy.$(date).log",
+				"sge_name": "process_lumpy_$(sample)",
+				"log_type": "sample"
+			},				
+			"format_controlfreec":
+			{
+				"parent":["process_controlfreec", "process_lumpy"],
+				"logname": "wrapper_format_CNV_ControlFreec.$(date).log",
+				"sge_name": "format_controlfreec_result_$(sample)",
+				"log_type": "sample"
+			},					
+			"format_lumpy":
+			{
+				"parent":["process_controlfreec", "process_lumpy"],
+				"logname": "wrapper_format_CNV_Lumpy.$(date).log",
+				"sge_name": "format_lumpy_result_$(sample)",
+				"log_type": "sample"
+			},		
+			"merge_intervals":
+			{
+				"parent":["format_controlfreec", "format_lumpy"],
+				"logname": "concamerge.$(date).log",
+				"sge_name": "merge_intervals_$(sample)",
+				"log_type": "sample"
+			},				
+			"bed4Interesect":
+			{
+				"parent":["merge_intervals"],
+				"logname": "bed4Interesect.$(date).log",
+				"sge_name": "bed4Interesect_$(sample)",
+				"log_type": "sample"
+			},					
+			"process_interesect":
+			{
+				"parent":["bed4Interesect"],
+				"logname": "intersect.$(date).log",
+				"sge_name": "ProcessInteresect_$(sample)",
+				"log_type": "sample"
+			},					
+			"compare_cnv":
+			{
+				"parent":["merge_intervals"],
+				"logname": "compare_c.$(date).log",
+				"sge_name": "compare_cnv_$(directory)",
+				"log_type": "general"
+			},
+			"annotate_cnv":
+			{
+				"parent":["compare_cnv", "process_interesect"],
+				"logname": "annotate_cnv.$(date).log",
+				"sge_name": "annotate_cnv_$(sample)",
+				"log_type": "sample"
+			},				
+			"report_cnv":
+			{
+				"parent":["annotate_cnv"],
+				"logname": "report_cnv.$(date).log",
+				"sge_name": "report_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_cnv":
+			{
+				"parent":["report_cnv"],
+				"logname": "plot_cnv_wgs.$(date).log",
+				"sge_name": "plot_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"cnvcaller":
+			{
+				"parent":["process_controlfreec"],
+				"logname": "cnvcaller.$(date).log",
+				"sge_name": "cnvcaller_$(sample)",
+				"log_type": "sample"
+			},
+			"merge_cnvcaller":
+			{
+				"parent":["cnvcaller"],
+				"logname": "merge_cnvcaller.$(date).log",
+				"sge_name": "merge_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},	
+			"compare_cnvcaller":
+			{
+				"parent":["merge_cnvcaller"],
+				"logname": "compare_cnvcaller.$(date).log",
+				"sge_name": "compare_cnvcaller_$(directory)",
+				"log_type": "general"
+			},
+			"filter_cnvcaller":
+			{
+				"parent":["compare_cnvcaller"],
+				"logname": "filter_cnvcaller.$(date).log",
+				"sge_name": "filter_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},	
+			"bed4Interesect_cnvcaller":			
+			{
+				"parent":["filter_cnvcaller"],
+				"logname": "bed4Interesect_cnvcaller.$(date).log",
+				"sge_name": "bed4Interesect_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},			
+			"process_interesect_cnvcaller":			
+			{
+				"parent":["bed4Interesect_cnvcaller"],
+				"logname": "intersect_cnvcaller.$(date).log",
+				"sge_name": "ProcessInteresect_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},	
+			"annotate_cnvcaller":			
+			{
+				"parent":["process_interesect_cnvcaller"],
+				"logname": "annotate_cnvcaller.$(date).log",
+				"sge_name": "annotate_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},
+			"report_cnvcaller":			
+			{
+				"parent":["annotate_cnvcaller"],
+				"logname": "report_cnvcaller.$(date).log",
+				"sge_name": "report_cnvcaller_$(sample)",
+				"log_type": "sample"
+			},	
+			"expansion_hunter":			
+			{
+				"parent":["fq2bam"],
+				"logname": "expansion_hunter.$(date).log",
+				"sge_name": "expansion_hunter_$(sample)",
+				"log_type": "sample"
+			},
+			"outlier_detection":			
+			{
+				"parent":["expansion_hunter"],
+				"logname": "outlier_detection.$(date).log",
+				"sge_name": "outlier_detection_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_outlier_detection":			
+			{
+				"parent":["outlier_detection"],
+				"logname": "plot_outlier_detection.$(date).log",
+				"sge_name": "plot_outlier_detection_$(sample)",
+				"log_type": "sample"
+			},		
+			"haplogrep_mito":			
+			{
+				"parent":["check_jobs_select_variants"],
+				"logname": "haplogrep.$(sample).$(date).log",
+				"sge_name": "haplogrep_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"tree_mito":			
+			{
+				"parent":["haplogrep_mito"],
+				"logname": "tree.$(sample).$(date).log",
+				"sge_name": "tree_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"annot_mito":			
+			{
+				"parent":["tree_mito","rare_varcall_full_intergenic"],
+				"logname": "annotMITO.$(sample).$(date).log",
+				"sge_name": "annotMITO_$(sample)",
+				"log_type": "sample"
+			},
+			"report_mito":			
+			{
+				"parent":["annot_mito"],
+				"logname": "report.$(sample).$(date).log",
+				"sge_name": "report_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"collect_metrics":			
+			{
+				"parent":["fq2bam"],
+				"logname": "collect_metrics.$(date).log",
+				"sge_name": "collect_$(sample)",
+				"log_type": "sample"
+			},
+			"doc_refseq":			
+			{
+				"parent":["fq2bam"],
+				"logname": "doc_refseq.$(date).log",
+				"sge_name": "doc_refseq_$(sample)",
+				"log_type": "sample"
+			},
+			
+			"qc_summary":			
+			{
+				"parent":["collect_metrics","doc_refseq"],
+				"logname": "summarize_QC.$(date).log",
+				"sge_name": "summarize_QC",
+				"log_type": "general"
+			},
+			"qc_annotation":			
+			{
+				"parent":["doc_refseq"],
+				"logname": "annotate_sample_interval_summary.$(date).log",
+				"sge_name": "annotate_interval_summary_$(sample)",
+				"log_type": "sample"
+			},
+			"upload_qc":			
+			{
+				"parent":["plot_cnv","report_cnvcaller","qc_summary"],
+				"logname": "qc_to_labkey.$(date).log",
+				"sge_name": "qc_to_labkey",
+				"log_type": "general"
+			},																									
+			"get_exit_code":
+			{
+				"parent":["report_varcall_full_nsssi", "report_varcall_full_genic", "report_varcall_full_intergenic","plot_cnv","report_cnvcaller","plot_outlier_detection","report_mito","upload_qc","qc_annotation","merge_varcall_by_sample"],
+				"logname": "get_exit_code.$(date).log",
+				"sge_name": "get_exit_code_$(directory)",
+				"log_type": "general"
+			},
+			"upload_labkey":
+			{
+				"parent":["get_exit_code"],
+				"logname": "upload_labkey.$(date).log",
+				"sge_name": "upload_labkey_$(directory)",
+				"log_type": "general"
+			}
+		}
+	}
+]

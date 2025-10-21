@@ -142,6 +142,115 @@
   }
 }
 
+:root, .light, .light-theme {
+  --green-1: #fbfefb;
+  --green-2: #f4fbf4;
+  --green-3: #e9f7e9;
+  --green-4: #d9f2d9;
+  --green-5: #c6eac6;
+  --green-6: #b0dfb0;
+  --green-7: #92d192;
+  --green-8: #6ac06a;
+  --green-9: #46a746;
+  --green-10: #3d913d;
+  --green-11: #2f7c2f;
+  --green-12: #1d4a1d;
+
+  --yellow-1: #fdfdf8;
+  --yellow-2: #fefce9;
+  --yellow-3: #fff8d6;
+  --yellow-4: #fff4c2;
+  --yellow-5: #ffefac;
+  --yellow-6: #f9e68d;
+  --yellow-7: #f2d96b;
+  --yellow-8: #e6c740;
+  --yellow-9: #f5d90a;
+  --yellow-10: #e6c800;
+  --yellow-11: #998200;
+  --yellow-12: #524200;
+
+  --orange-1: #fefdfb;
+  --orange-2: #fff8f5;
+  --orange-3: #fff0e9;
+  --orange-4: #ffe6d9;
+  --orange-5: #ffd9c6;
+  --orange-6: #ffc9b0;
+  --orange-7: #ffb592;
+  --orange-8: #f99d6a;
+  --orange-9: #f76808;
+  --orange-10: #e85e00;
+  --orange-11: #c54a00;
+  --orange-12: #592300;
+
+  --red-1: #fffcfc;
+  --red-2: #fff8f8;
+  --red-3: #ffefef;
+  --red-4: #ffe5e5;
+  --red-5: #ffd8d8;
+  --red-6: #ffc9c9;
+  --red-7: #ffb5b5;
+  --red-8: #f99d9d;
+  --red-9: #e5484d;
+  --red-10: #dc3d43;
+  --red-11: #ce2c31;
+  --red-12: #5C1F21;
+}
+
+.dark, .dark-theme {
+  --green-1: #0d120d;
+  --green-2: #121a12;
+  --green-3: #172517;
+  --green-4: #1b2e1b;
+  --green-5: #203a20;
+  --green-6: #274827;
+  --green-7: #305830;
+  --green-8: #3c6f3c;
+  --green-9: #46a746;
+  --green-10: #57b957;
+  --green-11: #66c666;
+  --green-12: #bDECB6;
+
+  --yellow-1: #12120c;
+  --yellow-2: #1a1a0f;
+  --yellow-3: #252310;
+  --yellow-4: #2e2a12;
+  --yellow-5: #3a3416;
+  --yellow-6: #48401b;
+  --yellow-7: #594f21;
+  --yellow-8: #6e6026;
+  --yellow-9: #f5d90a;
+  --yellow-10: #ffea47;
+  --yellow-11: #f0c000;
+  --yellow-12: #fff1a8;
+
+  --orange-1: #14100d;
+  --orange-2: #1b140f;
+  --orange-3: #261a12;
+  --orange-4: #301f13;
+  --orange-5: #3c2616;
+  --orange-6: #4a311a;
+  --orange-7: #5c3e20;
+  --orange-8: #754f24;
+  --orange-9: #f76808;
+  --orange-10: #ff802b;
+  --orange-11: #ff964f;
+  --orange-12: #ffe0cf;
+
+  --red-1: #140d0d;
+  --red-2: #1b1212;
+  --red-3: #261616;
+  --red-4: #301a1a;
+  --red-5: #3c2020;
+  --red-6: #4a2727;
+  --red-7: #5c3030;
+  --red-8: #753b3b;
+  --red-9: #e5484d;
+  --red-10: #f16065;
+  --red-11: #ff6369;
+  --red-12: #ffc9c9;
+}
+
+
 
 
 /* Dark Theme */

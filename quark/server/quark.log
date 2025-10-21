@@ -1,0 +1,408 @@
+2025-10-13 13:58:13,426 - INFO - === Début cycle Quark ===
+2025-10-13 13:58:13,427 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:13,427 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-13 13:58:13,473 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-13 13:58:13,615 - INFO - Authentication (publickey) failed.
+2025-10-13 13:58:13,702 - INFO - Authentication (password) successful!
+2025-10-13 13:58:14,105 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:15,302 - INFO - Snapshot stocké: 68ece9573df649d091ad3ea8
+2025-10-13 13:58:15,302 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-13 13:58:15,310 - INFO - Sélection des prochains jobs...
+2025-10-13 13:58:15,312 - INFO - Ressources disponibles: Nodes: 0, CPUs: 624, GPUs: 6
+2025-10-13 13:58:15,314 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-13 13:58:15,315 - INFO - === Fin cycle Quark ===
+2025-10-13 13:58:15,925 - INFO - === Début cycle Quark ===
+2025-10-13 13:58:15,926 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:15,926 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-13 13:58:15,960 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-13 13:58:16,046 - INFO - Authentication (publickey) failed.
+2025-10-13 13:58:16,117 - INFO - Authentication (password) successful!
+2025-10-13 13:58:16,521 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:17,734 - INFO - Snapshot stocké: 68ece95901e5bce110d47150
+2025-10-13 13:58:17,735 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-13 13:58:17,737 - INFO - Sélection des prochains jobs...
+2025-10-13 13:58:17,738 - INFO - Ressources disponibles: Nodes: 0, CPUs: 624, GPUs: 6
+2025-10-13 13:58:17,739 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-13 13:58:17,740 - INFO - === Fin cycle Quark ===
+2025-10-13 13:58:18,410 - INFO - === Début cycle Quark ===
+2025-10-13 13:58:18,410 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:18,410 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-13 13:58:18,441 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-13 13:58:18,544 - INFO - Authentication (publickey) failed.
+2025-10-13 13:58:18,624 - INFO - Authentication (password) successful!
+2025-10-13 13:58:19,035 - INFO - Collecte des données SLURM...
+2025-10-13 13:58:20,203 - INFO - Snapshot stocké: 68ece95c43da9a958d7652b7
+2025-10-13 13:58:20,203 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-13 13:58:20,205 - INFO - Sélection des prochains jobs...
+2025-10-13 13:58:20,206 - INFO - Ressources disponibles: Nodes: 0, CPUs: 624, GPUs: 6
+2025-10-13 13:58:20,208 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-13 13:58:20,208 - INFO - === Fin cycle Quark ===
+2025-10-14 09:45:03,788 - INFO - === Début cycle Quark ===
+2025-10-14 09:45:03,789 - INFO - Collecte des données SLURM...
+2025-10-14 09:45:03,790 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-14 09:45:03,888 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-14 09:45:04,218 - INFO - Authentication (publickey) failed.
+2025-10-14 09:45:04,446 - INFO - Authentication (password) successful!
+2025-10-14 09:45:04,935 - INFO - Collecte des données SLURM...
+2025-10-14 09:45:06,727 - INFO - Snapshot stocké: 68edff821207d251f779b447
+2025-10-14 09:45:06,727 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-14 09:45:06,741 - INFO - Sélection des prochains jobs...
+2025-10-14 09:45:06,745 - INFO - Ressources disponibles: Nodes: 17, CPUs: 788, GPUs: 6
+2025-10-14 09:45:06,751 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-14 09:45:06,751 - INFO - === Fin cycle Quark ===
+2025-10-14 10:28:11,690 - INFO - === Début cycle Quark ===
+2025-10-14 10:28:11,691 - INFO - Collecte des données SLURM...
+2025-10-14 10:28:11,691 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-14 10:28:11,744 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-14 10:28:11,868 - INFO - Authentication (publickey) failed.
+2025-10-14 10:28:11,941 - INFO - Authentication (password) successful!
+2025-10-14 10:28:12,334 - INFO - Collecte des données SLURM...
+2025-10-14 10:28:13,431 - INFO - Snapshot stocké avec l'ID: 68ee099dbfe5636c488b7aca
+2025-10-14 10:28:13,431 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-14 10:28:13,434 - INFO - Sélection des prochains jobs...
+2025-10-14 10:28:13,435 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-14 10:28:13,437 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-14 10:28:13,437 - INFO - === Fin cycle Quark ===
+2025-10-14 14:12:32,877 - INFO - === Début cycle Quark ===
+2025-10-14 14:12:32,878 - INFO - Collecte des données SLURM...
+2025-10-14 14:12:32,878 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-14 14:12:32,932 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-14 14:12:33,085 - INFO - Authentication (publickey) failed.
+2025-10-14 14:12:33,159 - INFO - Authentication (password) successful!
+2025-10-14 14:12:33,584 - INFO - Collecte des données SLURM...
+2025-10-14 14:12:34,747 - INFO - Snapshot stocké avec l'ID: 68ee3e328efbf3f09ae8ffe0
+2025-10-14 14:12:34,747 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-14 14:12:34,770 - INFO - Sélection des prochains jobs...
+2025-10-14 14:12:34,774 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-14 14:12:34,780 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-14 14:12:34,780 - INFO - === Fin cycle Quark ===
+2025-10-14 15:10:18,068 - INFO - === Début cycle Quark ===
+2025-10-14 15:10:18,070 - INFO - Collecte des données SLURM...
+2025-10-14 15:10:18,070 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-14 15:10:18,130 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-14 15:10:18,264 - INFO - Authentication (publickey) failed.
+2025-10-14 15:10:18,337 - INFO - Authentication (password) successful!
+2025-10-14 15:10:18,737 - INFO - Collecte des données SLURM...
+2025-10-14 15:10:19,827 - INFO - Snapshot stocké avec l'ID: 68ee4bbbe5d86e8a57eb9903
+2025-10-14 15:10:19,827 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-14 15:10:19,843 - INFO - Sélection des prochains jobs...
+2025-10-14 15:10:19,845 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-14 15:10:19,847 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-14 15:10:19,847 - INFO - === Fin cycle Quark ===
+2025-10-15 11:35:34,435 - INFO - === Début cycle Quark ===
+2025-10-15 11:35:34,436 - INFO - Collecte des données SLURM...
+2025-10-15 11:35:34,437 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-15 11:35:34,498 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-15 11:35:34,645 - INFO - Authentication (publickey) failed.
+2025-10-15 11:35:34,719 - INFO - Authentication (password) successful!
+2025-10-15 11:35:35,309 - INFO - Collecte des données SLURM...
+2025-10-15 11:35:36,496 - INFO - Snapshot stocké avec l'ID: 68ef6ae899a0c3da21108a41
+2025-10-15 11:35:36,496 - INFO - Métriques GPU - Total: 6, Idle: 0, Allocated: 6
+2025-10-15 11:35:36,496 - INFO - Mise à jour de l'état des analyses...
+2025-10-15 11:35:36,497 - INFO - Début de la mise à jour des analyses depuis les données SLURM.
+2025-10-15 11:35:36,497 - INFO - Mise à jour des analyses terminée.
+2025-10-15 11:35:36,497 - INFO - Sélection des prochains jobs...
+2025-10-15 11:35:36,515 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-15 11:35:36,527 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-15 11:35:36,527 - INFO - === Fin cycle Quark ===
+2025-10-17 11:09:35,812 - INFO - === Début cycle Quark ===
+2025-10-17 11:09:35,814 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:09:35,863 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:09:36,001 - INFO - Authentication (publickey) failed.
+2025-10-17 11:09:36,076 - INFO - Authentication (password) successful!
+2025-10-17 11:09:36,481 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:09:37,725 - INFO - Données collectées: 10 sinfo, 0 squeue, 4 sacct
+2025-10-17 11:09:37,726 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:09:37,737 - INFO - Calcul des métriques cluster...
+2025-10-17 11:09:37,753 - INFO - Snapshot cluster stocké avec l'ID: 68f207d12155cddfe751a52c
+2025-10-17 11:09:37,753 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-17 11:09:37,753 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:09:37,753 - INFO - Regroupement des analyses...
+2025-10-17 11:09:37,754 - INFO - Mise à jour de 4 jobs utilitaires...
+2025-10-17 11:09:37,777 - INFO - Snapshot d'analyse stocké (ID: 68f207d12155cddfe751a52d)
+2025-10-17 11:09:37,777 - INFO - Métriques Analyses - Total: 0, Running: 0, Pending: 0, Error: 0
+2025-10-17 11:09:37,777 - INFO - Mise à jour de l'état des analyses individuelles...
+2025-10-17 11:09:37,777 - INFO - Début de la mise à jour des analyses depuis les données SLURM.
+2025-10-17 11:09:37,778 - INFO - Mise à jour des analyses terminée.
+2025-10-17 11:09:37,778 - INFO - Sélection des prochains jobs...
+2025-10-17 11:09:37,784 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:09:37,789 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:09:37,789 - INFO - === Fin cycle Quark ===
+2025-10-17 11:09:37,791 - INFO - Connexion SSH fermée.
+2025-10-17 11:32:22,692 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:32:22,694 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:32:22,756 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:32:22,766 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:32:22,766 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:32:22,768 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:32:22,776 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:32:22,776 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:32:22,779 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:32:22,802 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:32:22,802 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:32:22,805 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:32:22,806 - INFO - === Début cycle Quark ===
+2025-10-17 11:32:22,806 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:32:22,891 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:32:23,893 - INFO - Authentication (publickey) failed.
+2025-10-17 11:32:24,070 - INFO - Authentication (password) successful!
+2025-10-17 11:32:24,883 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:32:26,526 - INFO - Données collectées: 11 sinfo, 152 squeue, 14 sacct
+2025-10-17 11:32:26,527 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:32:26,527 - INFO - Calcul des métriques cluster...
+2025-10-17 11:32:26,546 - INFO - Snapshot cluster stocké avec l'ID: 68f20d2a2486bfae46ba86ed
+2025-10-17 11:32:26,547 - INFO - Métriques GPU - Total: 6, Idle: 0, Allocated: 6
+2025-10-17 11:32:26,547 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:32:26,547 - INFO - Regroupement des analyses...
+2025-10-17 11:32:26,548 - INFO - Création du snapshot pour 159 jobs utilitaires...
+2025-10-17 11:32:26,560 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 11:32:26,566 - ERROR - Erreur MongoDB durant la collection d'analyse: E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }', 'keyPattern': {'sample_id': 1}, 'keyValue': {'sample_id': None}}
+Traceback (most recent call last):
+  File "c:\Users\skycr\ProDisk\Stages\GAD\CloneGAD\gadpipeline\quark\backend\scripts\slurm\job_grouper.py", line 150, in process_and_store
+    result = self.db.analysis_snapshots.insert_one(snapshot_document)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 891, in insert_one
+    self._insert_one(
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2082, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 1968, in _retry_with_session
+    return self._retry_internal(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2014, in _retry_internal
+    ).run()
+      ^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2765, in run
+    return self._read() if self._is_read else self._write()
+                                              ^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2897, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\helpers_shared.py", line 322, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\helpers_shared.py", line 292, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }', 'keyPattern': {'sample_id': 1}, 'keyValue': {'sample_id': None}}
+2025-10-17 11:32:26,570 - INFO - Mise à jour de l'état des analyses individuelles...
+2025-10-17 11:32:26,570 - INFO - Début de la mise à jour des analyses depuis les données SLURM.
+2025-10-17 11:32:26,571 - INFO - Mise à jour des analyses terminée.
+2025-10-17 11:32:26,571 - INFO - Sélection des prochains jobs...
+2025-10-17 11:32:26,586 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:32:26,596 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:32:26,597 - INFO - === Fin cycle Quark ===
+2025-10-17 11:32:26,597 - INFO - Connexion SSH fermée.
+2025-10-17 11:34:44,676 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:34:44,677 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:34:44,680 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:34:44,692 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:34:44,692 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:34:44,698 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:34:44,730 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:34:44,731 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:34:44,735 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:34:44,746 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:34:44,747 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:34:44,749 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:34:44,749 - INFO - === Début cycle Quark ===
+2025-10-17 11:34:44,749 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:34:44,792 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:34:44,878 - INFO - Authentication (publickey) failed.
+2025-10-17 11:34:44,952 - INFO - Authentication (password) successful!
+2025-10-17 11:34:45,356 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:34:46,518 - INFO - Données collectées: 11 sinfo, 151 squeue, 14 sacct
+2025-10-17 11:34:46,518 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:34:46,519 - INFO - Calcul des métriques cluster...
+2025-10-17 11:34:46,522 - INFO - Snapshot cluster stocké avec l'ID: 68f20db6cfc2da5d57947b1c
+2025-10-17 11:34:46,523 - INFO - Métriques GPU - Total: 6, Idle: 0, Allocated: 6
+2025-10-17 11:34:46,523 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:34:46,523 - INFO - Regroupement des analyses...
+2025-10-17 11:34:46,524 - INFO - Création du snapshot pour 159 jobs utilitaires...
+2025-10-17 11:34:46,526 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 11:34:46,527 - ERROR - Erreur MongoDB durant la collection d'analyse: E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }', 'keyPattern': {'sample_id': 1}, 'keyValue': {'sample_id': None}}
+Traceback (most recent call last):
+  File "c:\Users\skycr\ProDisk\Stages\GAD\CloneGAD\gadpipeline\quark\backend\scripts\slurm\job_grouper.py", line 150, in process_and_store
+    result = self.db.analysis_snapshots.insert_one(snapshot_document)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 891, in insert_one
+    self._insert_one(
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2082, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 1968, in _retry_with_session
+    return self._retry_internal(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\_csot.py", line 125, in csot_wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2014, in _retry_internal
+    ).run()
+      ^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2765, in run
+    return self._read() if self._is_read else self._write()
+                                              ^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\mongo_client.py", line 2897, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\synchronous\collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\helpers_shared.py", line 322, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+  File "C:\Users\skycr\AppData\Roaming\Python\Python312\site-packages\pymongo\helpers_shared.py", line 292, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: quark_db.analysis_snapshots index: sample_id_1 dup key: { sample_id: null }', 'keyPattern': {'sample_id': 1}, 'keyValue': {'sample_id': None}}
+2025-10-17 11:34:46,530 - INFO - Mise à jour de l'état des analyses individuelles...
+2025-10-17 11:34:46,530 - INFO - Début de la mise à jour des analyses depuis les données SLURM.
+2025-10-17 11:34:46,531 - INFO - Mise à jour des analyses terminée.
+2025-10-17 11:34:46,531 - INFO - Sélection des prochains jobs...
+2025-10-17 11:34:46,533 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:34:46,534 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:34:46,535 - INFO - === Fin cycle Quark ===
+2025-10-17 11:34:46,535 - INFO - Connexion SSH fermée.
+2025-10-17 11:38:51,184 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:38:51,184 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:38:51,187 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:38:51,210 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:38:51,211 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:38:51,214 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:38:51,253 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:38:51,253 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:38:51,255 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:38:51,287 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:38:51,287 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:38:51,289 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:38:51,290 - INFO - === Début cycle Quark ===
+2025-10-17 11:38:51,290 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:38:51,395 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:38:52,095 - INFO - Authentication (publickey) failed.
+2025-10-17 11:38:52,601 - INFO - Authentication (password) successful!
+2025-10-17 11:38:53,214 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:38:54,660 - INFO - Données collectées: 11 sinfo, 151 squeue, 14 sacct
+2025-10-17 11:38:54,661 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:38:54,661 - INFO - Calcul des métriques cluster...
+2025-10-17 11:38:54,662 - INFO - Snapshot cluster stocké avec l'ID: 68f20eae77c361ea38d68352
+2025-10-17 11:38:54,662 - INFO - Métriques GPU - Total: 6, Idle: 0, Allocated: 6
+2025-10-17 11:38:54,662 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:38:54,663 - INFO - Regroupement des analyses...
+2025-10-17 11:38:54,663 - INFO - Création du snapshot pour 159 jobs utilitaires...
+2025-10-17 11:38:54,665 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 11:38:54,666 - INFO - Snapshot d'analyse stocké (ID: 68f20eae77c361ea38d68354)
+2025-10-17 11:38:54,666 - INFO - Métriques Analyses - Total: 0, Running: 0, Pending: 0, Error: 0
+2025-10-17 11:38:54,666 - INFO - Mise à jour de l'état des analyses individuelles...
+2025-10-17 11:38:54,666 - INFO - Début de la mise à jour des analyses depuis les données SLURM.
+2025-10-17 11:38:54,667 - INFO - Mise à jour des analyses terminée.
+2025-10-17 11:38:54,667 - INFO - Sélection des prochains jobs...
+2025-10-17 11:38:54,668 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:38:54,670 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:38:54,671 - INFO - === Fin cycle Quark ===
+2025-10-17 11:38:54,671 - INFO - Connexion SSH fermée.
+2025-10-17 11:49:01,851 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:49:01,853 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:49:01,854 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:49:01,886 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:49:01,886 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:49:01,887 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:49:01,929 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:49:01,929 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:49:01,931 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:49:01,963 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:49:01,963 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:49:01,964 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:49:01,965 - INFO - === Début cycle Quark ===
+2025-10-17 11:49:01,965 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:49:02,021 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:49:02,139 - INFO - Authentication (publickey) failed.
+2025-10-17 11:49:02,214 - INFO - Authentication (password) successful!
+2025-10-17 11:49:02,623 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:49:03,730 - INFO - Données collectées: 12 sinfo, 147 squeue, 22 sacct
+2025-10-17 11:49:03,730 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:49:03,731 - INFO - Calcul des métriques cluster...
+2025-10-17 11:49:03,734 - INFO - Snapshot cluster stocké avec l'ID: 68f2110fb774b491a4329176
+2025-10-17 11:49:03,734 - INFO - Métriques GPU - Total: 6, Idle: 2, Allocated: 4
+2025-10-17 11:49:03,734 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:49:03,735 - INFO - Regroupement des analyses...
+2025-10-17 11:49:03,736 - INFO - Création du snapshot pour 152 jobs utilitaires...
+2025-10-17 11:49:03,738 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 11:49:03,739 - INFO - Snapshot d'analyse stocké (ID: 68f2110fb774b491a4329178)
+2025-10-17 11:49:03,739 - INFO - Métriques Analyses - Total: 1, Running: 0, Pending: 1, Error: 0
+2025-10-17 11:49:03,739 - INFO - Sélection des prochains jobs...
+2025-10-17 11:49:03,742 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:49:03,744 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:49:03,744 - INFO - === Fin cycle Quark ===
+2025-10-17 11:49:03,744 - INFO - Connexion SSH fermée.
+2025-10-17 11:53:03,910 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:53:03,911 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:53:03,912 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:53:03,940 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:53:03,941 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:53:03,942 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:53:03,972 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:53:03,973 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:53:03,974 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:53:04,005 - INFO - Connexion à MongoDB réussie.
+2025-10-17 11:53:04,005 - INFO - Vérification et création des index MongoDB...
+2025-10-17 11:53:04,006 - ERROR - Erreur lors de la création d'un index: Index already exists with a different name: analysis_id_1, full error: {'ok': 0.0, 'errmsg': 'Index already exists with a different name: analysis_id_1', 'code': 85, 'codeName': 'IndexOptionsConflict'}
+2025-10-17 11:53:04,006 - INFO - === Début cycle Quark ===
+2025-10-17 11:53:04,007 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 11:53:04,036 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 11:53:04,144 - INFO - Authentication (publickey) failed.
+2025-10-17 11:53:04,218 - INFO - Authentication (password) successful!
+2025-10-17 11:53:04,628 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 11:53:05,739 - INFO - Données collectées: 12 sinfo, 145 squeue, 29 sacct
+2025-10-17 11:53:05,739 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 11:53:05,740 - INFO - Calcul des métriques cluster...
+2025-10-17 11:53:05,741 - INFO - Snapshot cluster stocké avec l'ID: 68f21201c5faa432b1451115
+2025-10-17 11:53:05,742 - INFO - Métriques GPU - Total: 6, Idle: 4, Allocated: 2
+2025-10-17 11:53:05,742 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 11:53:05,742 - INFO - Regroupement des analyses...
+2025-10-17 11:53:05,743 - INFO - Création du snapshot pour 5 jobs utilitaires...
+2025-10-17 11:53:05,744 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 11:53:05,745 - INFO - Snapshot d'analyse stocké (ID: 68f21201c5faa432b1451117)
+2025-10-17 11:53:05,745 - INFO - Métriques Analyses - Total: 4, Running: 3, Pending: 1, Error: 0
+2025-10-17 11:53:05,745 - INFO - Sélection des prochains jobs...
+2025-10-17 11:53:05,746 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 11:53:05,747 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 11:53:05,748 - INFO - === Fin cycle Quark ===
+2025-10-17 11:53:05,748 - INFO - Connexion SSH fermée.
+2025-10-17 13:56:38,517 - INFO - Connexion à MongoDB réussie.
+2025-10-17 13:56:38,519 - INFO - Vérification et création des index MongoDB...
+2025-10-17 13:56:38,622 - INFO - Les index existent déjà, aucune action requise.
+2025-10-17 13:56:38,648 - INFO - Connexion à MongoDB réussie.
+2025-10-17 13:56:38,649 - INFO - Vérification et création des index MongoDB...
+2025-10-17 13:56:38,653 - INFO - Les index existent déjà, aucune action requise.
+2025-10-17 13:56:38,675 - INFO - Connexion à MongoDB réussie.
+2025-10-17 13:56:38,675 - INFO - Vérification et création des index MongoDB...
+2025-10-17 13:56:38,679 - INFO - Les index existent déjà, aucune action requise.
+2025-10-17 13:56:38,690 - INFO - Connexion à MongoDB réussie.
+2025-10-17 13:56:38,690 - INFO - Vérification et création des index MongoDB...
+2025-10-17 13:56:38,694 - INFO - Les index existent déjà, aucune action requise.
+2025-10-17 13:56:38,694 - INFO - === Début cycle Quark ===
+2025-10-17 13:56:38,694 - INFO - Connexion SSH à login-1.mesobfc.fr...
+2025-10-17 13:56:38,751 - INFO - Connected (version 2.0, client OpenSSH_8.0)
+2025-10-17 13:56:38,892 - INFO - Authentication (publickey) failed.
+2025-10-17 13:56:38,966 - INFO - Authentication (password) successful!
+2025-10-17 13:56:39,366 - INFO - Collecte des données sinfo, squeue et sacct...
+2025-10-17 13:56:40,450 - INFO - Données collectées: 11 sinfo, 239 squeue, 93 sacct
+2025-10-17 13:56:40,451 - INFO - Génération du snapshot de l'état du cluster...
+2025-10-17 13:56:40,451 - INFO - Calcul des métriques cluster...
+2025-10-17 13:56:40,481 - INFO - Snapshot cluster stocké avec l'ID: 68f22ef8f83ba4f334765cca
+2025-10-17 13:56:40,482 - INFO - Métriques GPU - Total: 6, Idle: 6, Allocated: 0
+2025-10-17 13:56:40,482 - INFO - Génération du snapshot des analyses groupées...
+2025-10-17 13:56:40,482 - INFO - Regroupement des analyses...
+2025-10-17 13:56:40,484 - INFO - Mise à jour de 8 analyses dans la base de données...
+2025-10-17 13:56:40,520 - INFO - Analyses mises à jour avec succès.
+2025-10-17 13:56:40,520 - INFO - Création du snapshot pour 6 jobs utilitaires...
+2025-10-17 13:56:40,521 - INFO - Snapshot des jobs utilitaires stocké avec succès.
+2025-10-17 13:56:40,522 - INFO - Sélection des prochains jobs...
+2025-10-17 13:56:40,532 - INFO - Ressources disponibles: Nodes: 0, CPUs: 0, GPUs: 0
+2025-10-17 13:56:40,540 - INFO - 0 jobs sélectionnés pour soumission
+2025-10-17 13:56:40,540 - INFO - === Fin cycle Quark ===
+2025-10-17 13:56:40,541 - INFO - Connexion SSH fermée.

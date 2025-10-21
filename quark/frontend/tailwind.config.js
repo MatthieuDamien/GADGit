@@ -6,79 +6,49 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Couleurs pour le thème light/dark
-        'primary': {
-          light: '#004970', // bleu en light mode
-          dark: '#AEC923',  // jaune en dark mode
+        // Mapping des variables Radix pour une utilisation avec Tailwind
+        // Exemple : bg-blue-1, text-gray-12, border-lime-7
+        blue: {
+          1: 'var(--blue-1)', 2: 'var(--blue-2)', 3: 'var(--blue-3)', 4: 'var(--blue-4)',
+          5: 'var(--blue-5)', 6: 'var(--blue-6)', 7: 'var(--blue-7)', 8: 'var(--blue-8)',
+          9: 'var(--blue-9)', 10: 'var(--blue-10)', 11: 'var(--blue-11)', 12: 'var(--blue-12)',
+          contrast: 'var(--blue-contrast)', surface: 'var(--blue-surface)',
+          indicator: 'var(--blue-indicator)', track: 'var(--blue-track)',
         },
-        'background': {
-          light: '#FFFFFF',
-          dark: '#000000',
+        gray: {
+          1: 'var(--gray-1)', 2: 'var(--gray-2)', 3: 'var(--gray-3)', 4: 'var(--gray-4)',
+          5: 'var(--gray-5)', 6: 'var(--gray-6)', 7: 'var(--gray-7)', 8: 'var(--gray-8)',
+          9: 'var(--gray-9)', 10: 'var(--gray-10)', 11: 'var(--gray-11)', 12: 'var(--gray-12)',
+          contrast: 'var(--gray-contrast)', surface: 'var(--gray-surface)',
+          indicator: 'var(--gray-indicator)', track: 'var(--gray-track)',
         },
-        'surface': {
-          light: '#F8F9FA',
-          dark: '#0A0A0A',
+        lime: {
+          1: 'var(--lime-1)', 2: 'var(--lime-2)', 3: 'var(--lime-3)', 4: 'var(--lime-4)',
+          5: 'var(--lime-5)', 6: 'var(--lime-6)', 7: 'var(--lime-7)', 8: 'var(--lime-8)',
+          9: 'var(--lime-9)', 10: 'var(--lime-10)', 11: 'var(--lime-11)', 12: 'var(--lime-12)',
+          contrast: 'var(--gray-contrast)', surface: 'var(--gray-surface)',
+          indicator: 'var(--gray-indicator)', track: 'var(--gray-track)',
         },
-        'border': {
-          light: '#E2E4E9',
-          dark: '#1A1A1A',
+        orange: {
+          1: "var(--orange-1)", 2: "var(--orange-2)", 3: "var(--orange-3)", 4: "var(--orange-4)",
+          5: "var(--orange-5)", 6: "var(--orange-6)", 7: "var(--orange-7)", 8: "var(--orange-8)",
+          9: "var(--orange-9)", 10: "var(--orange-10)", 11: "var(--orange-11)", 12: "var(--orange-12)",
         },
-        'neutral': '#8B8D98', // gris pour les deux modes
-        
-        // Couleurs originales conservées
-        'jaune': {
-          bg100:'#000',   // Background
-          bg200:'#101209',   // Background
-          interactive300:'#202410',   // Composant interactif
-          interactive400:'#2D3412',   // Composant interactif
-          interactive500:'#394217',   // Composant interactif
-          border600:'#46501C',   // Bordures et séparateurs
-          border700:'#546020',   // Bordures et séparateurs
-          border800:'#637223',   // Bordures et Focus ring (permet de savoir quel élément est sélectionné)
-          main:'#AEC923',
-          1000:'#AEC923',  // Couleur solide, boutons
-          1100:'#A4BE04',  // Couleur solide, boutons
-          text1200:'#A4BE04',  // Texte accessible (secondary text, links)
-          text1300:'#E1F1AF',  // Texte accessible (High contrast)
+        green: {
+          1: "var(--green-1)", 2: "var(--green-2)", 3: "var(--green-3)", 4: "var(--green-4)",
+          5: "var(--green-5)", 6: "var(--green-6)", 7: "var(--green-7)", 8: "var(--green-8)",
+          9: "var(--green-9)", 10: "var(--green-10)", 11: "var(--green-11)", 12: "var(--green-12)",
         },
-        'marine': {
-          bg100:'#F8FEFF',   // Background
-          bg200:'#F0FAFF',   // Background
-          interactive300:'#DDF6FF',   // Composant interactif
-          interactive400:'#CAEFFF',   // Composant interactif
-          interactive500:'#B4E6FF',   // Composant interactif
-          border600:'#9BD9FF',   // Bordures et séparateurs
-          border700:'#7AC9FF',   // Bordures et séparateurs
-          border800:'#4BB1F5',   // Bordures et Focus ring (permet de savoir quel élément est sélectionné)
-          main:'#004970',
-          1000:'#004970',  // Couleur solide, boutons
-          1100:'#1B5A82',  // Couleur solide, boutons
-          text1200:'#0072B1',  // Texte accessible (secondary text, links)
-          text1300:'#003F65',  // Texte accessible (High contrast)
+        yellow: {
+          1: "var(--yellow-1)", 2: "var(--yellow-2)", 3: "var(--yellow-3)", 4: "var(--yellow-4)",
+          5: "var(--yellow-5)", 6: "var(--yellow-6)", 7: "var(--yellow-7)", 8: "var(--yellow-8)",
+          9: "var(--yellow-9)", 10: "var(--yellow-10)", 11: "var(--yellow-11)", 12: "var(--yellow-12)",
         },
-        'bordeaux': {
-          500:'#8a0f22',
-          600:'#db0026', // main
-          800:'#e31937',
-        },   
-        'gris': {
-          300:'#1F1F22',
-          400 : '#2C2C30',
-          500 : '#393A3F',
-        }
-      },
-      backgroundColor: {
-        'base': 'var(--bg-base)',
-        'surface': 'var(--bg-surface)',
-        'elevated': 'var(--bg-elevated)',
-      },
-      textColor: {
-        'primary': 'var(--text-primary)',
-        'secondary': 'var(--text-secondary)',
-        'accent': 'var(--text-accent)',
-      },
-      borderColor: {
-        'default': 'var(--border-default)',
+        red: {
+          1: 'var(--red-1)', 2: 'var(--red-2)', 3: 'var(--red-3)', 4: 'var(--red-4)',
+          5: 'var(--red-5)', 6: 'var(--red-6)', 7: 'var(--red-7)', 8: 'var(--red-8)',
+          9: 'var(--red-9)', 10: 'var(--red-10)', 11: 'var(--red-11)', 12: 'var(--red-12)',
+        },
       }
     },
   },

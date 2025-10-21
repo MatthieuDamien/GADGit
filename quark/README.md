@@ -9,3 +9,4 @@ Cette application suit une architecture modern full stack:
 - `docs/`: Documents utiles pour la compréhension de l'app (vides)
 - `backend/`: Application pour serveur Python
 - `singularity/`: les .def pour les conteneurs des applications (non fonctionnels, à ajouter un clone du gitlab)
+- `quark_launcher`: futur auto_lancheur pour les analyses

@@ -1,0 +1,125 @@
+14h-16h
+# Mercredi [[2025-09-03]]
+## Questions à poser
+- Avez-vous une documentation sur votre infrastructure SLURM / outils ?
+    1wrapper avec 5 scripts différents
+    pas de compte d'astreinte
+    un compte = une personne
+    Clé SSH de groupe ?
+- Existe-t-il des guides d'utilisation pour les utilisateurs actuels ?
+    
+- **Quel est votre setup SLURM actuel ?** (version, partitions, authentification)
+    
+- **Combien d'utilisateurs** ?
+    - Faut-il un utilisateur système dédié ou utilisation des comptes individuels ?
+- **Quels types de jobs** sont les plus fréquents ?
+    Exome, génome ? Ou d'autres
+- **Où peut tourner l'orchestrateur** et avec quelles permissions ?
+    -> il faut se log pour envoyer ?
+- **Y a-t-il des outils existants** à intégrer ou remplacer ?
+- **Quelles sont vos contraintes de sécurité** ?
+	- ISO2701 (je crois)
+	- séparé
+- Qui s'occupera de la maintenance ?
+- Qui stocke ?
+- Qui envoie ?
+- Comment ?
+- Quels sont les informations à afficher ?
+    - Mémoire / GPU libres ?
+    - Logs process ?
+- Quels paramètres pour lancer un processus ?
+- Plusieurs serveurs / clusters à interroger ?
+
+- Savoir les infos dans la file d'attente + les données à collecter avant, pendant, après un process (ex : logs)
+
+ - Comment définir et ajuster dynamiquement les priorités entre les tâches  ?
+    - Listes de priorité ? `Liste_Prio_Urgent = []; Liste_Prio_Normale = []`
+
+Système de score pour augmenter la priorité
+
+## Eux
+
+### Anthony 
+
+Bossé sur le pipeline Génome
+	Presque fini
+	carte de chunk
+	fichier en entrée vide lance des chunks
+	Travaille sur l'abstract
+
+### Valentin
+
+RNASEC
+	pb de certificat de Labkey -> plus de pb
+		Certificat change tous les ans
+	Nettoyeur de l'autolauncher
+		Archivages par mois des logs
+
+### Emilie
+24h -> 1h pour Exome (bg)
+J'ai rien compris
+### Théo
+passé sa maitrise
+
+### Yannis
+réunion lundi 8 septembre
+[[Specs features]]
+
+# Mercredi [[2025-09-10]]
+## Moi
+
+## Eux
+### Anthony 
+Soumis l'abstract pour les assises
+limite de 2000 jobs atteinte 
+### Valentin
+Soumis l'abstract pour les assises de génétique 
+	Dernière à Paris
+Bugs notation phasing
+
+Bug avec organize de l'autolauncher. 
+Cleaner : nettoyer fichier de logs.
+
+Regarder les terminaux Nix
+### Emilie
+Fusion des branchs Gitlab
+
+### Théo
+
+
+### Yannis
+On va vers un marquage CE IVDR
+
+# Pas de réunion [[2025-09-17]]
+# Réunion [[2025-09-24]]
+## Moi
+
+
+## Eux
+### Anthony 
+Trucs qui marchent pas 
+
+### Valentin
+Nettoyeur d'autolauncher
+Simplification des mails de l'autolauncher
+Pourquoi pas le nombre de base : pb de colonnes ?
+### Anne-Sophie
+Fichier des parents mais pas de l'enfant
+Epigénomède fini à Dijon maintenant Besançon
+### Emilie
+Pipeline, classification des résultats avec les 808 gènes
+### Fridolin
+Powerpoint + Cours 
+### Yannis
+Bug avec la singu accède au user et crash. pas eldap donc compliqué
+mardi 25 octobre?? à 9h y'a des trucs théoriques
+
+Calendrier astreinte dispo en commande, donc à ajouter sur Quark
+
+Vendredi [[2025-10-03]] -> ESEO amphi toute la journée
+
+
+
+Suite : Voir 
+
+# Les suivantes : [[Réunions du mercredi d'Octobre]]

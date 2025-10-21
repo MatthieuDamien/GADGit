@@ -1,5 +1,16 @@
 # logs locaux
 api_slurm.log
 
+.vscode/
+.pytest_cache/
+.idea
+.claude
+
+
 # cache Python
-backend/sctripts/MesoBFC/__pycache__
+backend/__pycache__/
+backend/scripts/__pycache__/
+backend/scripts/api/__pycache__/
+backend/scripts/database/__pycache__/
+backend/scripts/slurm/__pycache__/
+backend/tests/slurm/__pycache__/

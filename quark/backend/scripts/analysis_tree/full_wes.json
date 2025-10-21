@@ -1,0 +1,491 @@
+[	
+	{
+		"name":"wes_analysis",
+		"tree":
+		{
+			"rename_fastq":
+			{
+				"parent": ["None"],
+				"logname": "rename_fastq.log",
+				"sge_name": "None",
+				"log_type": "analysisdir"
+			}, 
+			"organize_data_folder":
+			{
+				"parent":["rename_fastq"],
+				"logname": "organize_data_folder.log",
+				"sge_name": "None",
+				"log_type": "analysisdir"
+			},
+			"fastqc_fp_R1":
+			{
+				"parent":["organize_data_folder"],
+				"logname": "process_fastqc_R1.$(date).log",
+				"sge_name": "fastqc_FP_R1_$(sample)",
+				"log_type": "sample"
+			},
+			"fastqc_fp_R2":
+			{
+				"parent":["organize_data_folder"],
+				"logname": "process_fastqc_R2.$(date).log",
+				"sge_name": "fastqc_FP_R2_$(sample)",
+				"log_type": "sample"
+			},
+			"fastqc_sp_R1":
+			{
+				"parent":["trimming"],
+				"logname": "process_fastqc_SP_R1.$(date).log",
+				"sge_name": "fastqc_SP_R1_$(sample)",
+				"log_type": "sample"
+			},
+			"fastqc_sp_R2":
+			{
+				"parent":["trimming"],
+				"logname": "process_fastqc_SP_R2.$(date).log",
+				"sge_name": "fastqc_SP_R2_$(sample)",
+				"log_type": "sample"
+			},
+			"trimming":
+			{
+				"parent":["fastqc_fp_R1","fastqc_fp_R2"],
+				"logname": "trim_fastq.$(date).log",
+				"sge_name": "trim_fastq_$(sample)",
+				"log_type": "sample"
+			},
+			"check_trio":
+			{
+				"parent": ["organize_data_folder"],
+				"logname": "run_check_trio.$(date).log",
+				"sge_name": "check_trio_$(directory)",
+				"log_type": "general"
+			}, 
+			"compute_fastq_md5": 
+			{
+				"parent": ["organize_data_folder"],
+				"logname": "run_md5_fastq.$(date).log", 
+				"sge_name": "run_md5_fastq_$(sample)",
+				"log_type": "sample"
+			}, 
+			"check_bam":
+			{
+				"parent":["bqsr"],
+				"logname": "check_bam.$(date).log",
+				"sge_name": "check_$(sample)",
+				"log_type": "sample"
+			},
+			"report_varcall":
+			{
+				"parent":["rare_varcall"],
+				"logname": "report_vcf.$(date).log",
+				"sge_name": "report_varcall_$(sample)",
+				"log_type": "sample"
+			}, 
+			"rare_varcall":
+			{
+				"parent":["varcall_annotation"],
+				"logname": "analyse_rare_variants.$(date).log",
+				"sge_name": "rare_varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"varcall_annotation":
+			{
+				"parent":["spip_annotation","annot_cnv"],
+				"logname": "annotate_variants.$(date).log",
+				"sge_name": "annotate_varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"spip_annotation":
+			{
+				"parent":["snpeff_annotation"],
+				"logname": "annotate_variants_spip.$(date).log",
+				"sge_name": "annotate_spip_$(sample)",
+				"log_type": "sample"
+			},
+			"snpeff_annotation":
+			{
+				"parent":["varcall_filter"],
+				"logname": "annotate_variants_snpeff.$(date).log",
+				"sge_name": "annotate_snpeff_$(sample)",
+				"log_type": "sample"
+			},
+			"varcall_filter":
+			{
+				"parent":["varcall_select"],
+				"logname": "filter_varcall.$(date).log",
+				"sge_name": "filter_varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"varcall_select":
+			{
+				"parent":["merge_varcall"],
+				"logname": "select_variants.$(date).log",
+				"sge_name": "select_varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"varcall":
+			{
+				"parent":["bqsr"],
+				"logname": "process_varcall.$(date).log",
+				"sge_name": "varcall_$(sample)",
+				"log_type": "sample"
+			},
+			"merge_varcall":
+			{
+				"parent":["varcall"],
+				"logname": "merge_varcall.$(date).log",
+				"sge_name": "merge_varcall_$(directory)",
+				"log_type": "general"
+			},
+			"bqsr":
+			{
+				"parent":["dedup"],
+				"logname": "recal_bam.$(date).log",
+				"sge_name": "recal_$(sample)",
+				"log_type": "sample"
+			},
+			"dedup":
+			{
+				"parent":["clean"],
+				"logname": "mark_duplicates.$(date).log",
+				"sge_name": "mark_$(sample)",
+				"log_type": "sample"
+			},
+			"clean":
+			{
+				"parent":["alignment"],
+				"logname": "clean_bam.$(date).log",
+				"sge_name": "clean_$(sample)",
+				"log_type": "sample"
+			},
+			"alignment":
+			{
+				"parent":["trimming"],
+				"logname": "align_bwamem.$(date).log",
+				"sge_name": "aln_$(sample)",
+				"log_type": "sample"
+			},
+			"extract_mito": 
+			{
+				"parent": ["check_bam"],
+				"logname": "extract.clean.dedup.mito.$(sample).$(date).log", 
+				"sge_name": "extract_mito_$(sample)",
+				"log_type": "sample"
+			}, 
+			"vc_mito": 
+			{
+				"parent": ["extract_mito"],
+				"logname": "varcall.mito.$(sample).$(date).log", 
+				"sge_name": "vcf_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"hpg_mito": 
+			{
+				"parent": ["vc_mito"],
+				"logname": "haplogrep.$(sample).$(date).log", 
+				"sge_name": "haplogrep_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"tree_mito": 
+			{
+				"parent": ["hpg_mito"],
+				"logname": "tree.$(sample).$(date).log", 
+				"sge_name": "tree_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"annot_mito": 
+			{
+				"parent": ["tree_mito"],
+				"logname": "annotMITO.$(sample).$(date).log", 
+				"sge_name": "annotMITO_$(sample)",
+				"log_type": "sample"
+			},
+			"report_mito": 
+			{
+				"parent": ["annot_mito"],
+				"logname": "report.$(sample).$(date).log", 
+				"sge_name": "report_mito_$(sample)",
+				"log_type": "sample"
+			},
+			"doc_cnv":
+			{
+				"parent":["bqsr"],
+				"logname": "process_doc_cnv.$(date).log",
+				"sge_name": "process_doc_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"merge_cnv":
+			{
+				"parent":["doc_cnv"],
+				"logname": "merge_doc.$(date).log",
+				"sge_name": "merge_doc_$(directory)",
+				"log_type": "general"
+			},
+			"calling_cnv":
+			{
+				"parent":["merge_cnv"],
+				"logname": "process_cnvcall.$(date).log",
+				"sge_name": "process_cnvcall_$(directory)",
+				"log_type": "general"
+			},
+			"select_cnv":
+			{
+				"parent":["calling_cnv"],
+				"logname": "select_cnv.$(date).log",
+				"sge_name": "select_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"annot_cnv":
+			{
+				"parent":["select_cnv"],
+				"logname": "annotate_cnv.$(date).log",
+				"sge_name": "annotate_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"rare_cnv":
+			{
+				"parent":["annot_cnv"],
+				"logname": "analyse_rare_cnv.$(date).log",
+				"sge_name": "analyse_rare_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_cnv":
+			{
+				"parent":["annot_cnv"],
+				"logname": "plot_cnv.$(date).log",
+				"sge_name": "plot_cnv_$(sample)",
+				"log_type": "sample"
+			},
+			"collect_metrics":
+			{
+				"parent":["check_bam"],
+				"logname": "collect_metrics.$(date).log",
+				"sge_name": "collect_$(sample)",
+				"log_type": "sample"
+			},
+			"doc_target":
+			{
+				"parent":["check_bam"],
+				"logname": "doc_target.$(date).log",
+				"sge_name": "doc_target_$(sample)",
+				"log_type": "sample"
+			},
+			"doc_refseq":
+			{
+				"parent":["check_bam"],
+				"logname": "doc_refseq.$(date).log",
+				"sge_name": "doc_refseq_$(sample)",
+				"log_type": "sample"
+			},
+			"qc_summary":
+			{
+				"parent":["doc_refseq", "doc_target"],
+				"logname": "summarize_QC.$(date).log",
+				"sge_name": "summarize_QC_$(directory)",
+				"log_type": "general"
+			},
+			"qc_annotation":
+			{
+				"parent":["doc_refseq"],
+				"logname": "annotate_sample_interval_summary.$(date).log",
+				"sge_name": "annotate_interval_summary_$(sample)",
+				"log_type": "sample"
+			},
+			"extract_gt":
+			{
+				"parent":["varcall"],
+				"logname": "extract_gt.$(date).log",
+				"sge_name": "extract_GT_$(sample)",
+				"log_type": "sample"
+			},
+			"upload_gt":
+			{
+				"parent":["extract_gt"],
+				"logname": "upload_genotype.$(date).log",
+				"sge_name": "upload_GT_$(sample)",
+				"log_type": "sample"
+			},
+			"vcf_qc":
+			{
+				"parent":["merge_varcall"],
+				"logname": "process_vcf_qc.$(date).log",
+				"sge_name": "process_vcf_qc_$(directory)",
+				"log_type": "general"
+			},
+			"upload_qc":
+			{
+				"parent":["vcf_qc"],
+				"logname": "qc_to_labkey.$(date).log",
+				"sge_name": "qc_to_labkey_$(directory)",
+				"log_type": "general"
+			},
+			"create_interval_logica":
+			{
+				"parent":["merge_cnv","extract_gt"],
+				"logname": "create_sample_interval_summary_list.$(date).log",
+				"sge_name": "create_sample_interval_summary_list_$(sample)",
+				"log_type": "sample"
+			},
+			"merge_doc_M_logica":
+			{
+				"parent":["merge_cnv","create_interval_logica"],
+				"logname": "merge_doc_M.$(date).log",
+				"sge_name": "merge_doc_M_$(directory)",
+				"log_type": "general"
+			},
+			"merge_doc_F_logica":
+			{
+				"parent":["merge_cnv","create_interval_logica"],
+				"logname": "merge_doc_F.$(date).log",
+				"sge_name": "merge_doc_F_$(directory)",
+				"log_type": "general"
+			},
+			"cnvcall_M_logica":
+			{
+				"parent":["merge_cnv","create_interval_logica"],
+				"logname": "process_cnvcall_M.$(date).log",
+				"sge_name": "process_cnvcall_M_$(directory)",
+				"log_type": "general"
+			},
+			"cnvcall_F_logica":
+			{
+				"parent":["merge_cnv","create_interval_logica"],
+				"logname": "process_cnvcall_F.$(date).log",
+				"sge_name": "process_cnvcall_F_$(directory)",
+				"log_type": "general"
+			},
+			"AB_logica":
+			{
+				"parent":["varcall_annotation","extract_gt"],
+				"logname": "analyse_allelic_balance.$(date).log",
+				"sge_name": "analyse_allelic_balance_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_chr_AB_logica":
+			{
+				"parent":["AB_logica"],
+				"logname": "plot_allelic_balance_by_chr.$(date).log",
+				"sge_name": "plot_analyse_allelic_balance_by_chr_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_pos_AB_logica":
+			{
+				"parent":["AB_logica"],
+				"logname": "plot_allelic_balance_by_pos.$(date).log",
+				"sge_name": "plot_analyse_allelic_balance_by_pos_$(sample)",
+				"log_type": "sample"
+			},
+			"format_zscore_logica":
+			{
+				"parent":["extract_gt", "cnvcall_M_logica", "cnvcall_F_logica"],
+				"logname": "format_zscore_matrix.$(date).log",
+				"sge_name": "format_zscore_matrix_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_chr_cnv_logica":
+			{
+				"parent":["extract_gt", "cnvcall_M_logica", "cnvcall_F_logica"],
+				"logname": "plot_cnv_by_chr.$(date).log",
+				"sge_name": "plot_cnv_by_chr_$(sample)",
+				"log_type": "sample"
+			},
+			"plot_zscore_distrib_logica":
+			{
+				"parent":["format_zscore_logica"],
+				"logname": "plot_zscores.$(date).log",
+				"sge_name": "plot_zscores_$(sample)",
+				"log_type": "sample"
+			},
+			"analyse_transmission_logica":
+			{
+				"parent":["extract_gt","varcall_annotation"],
+				"logname": "analyse_transmission.$(date).log",
+				"sge_name": "analyse_transmission_$(sample)",
+				"log_type": "denovo"
+			},
+			"plot_transmission_logica":
+			{
+				"parent":["analyse_transmission_logica"],
+				"logname": "plot_transmission.$(date).log",
+				"sge_name": "plot_transmission_$(sample)",
+				"log_type": "denovo"
+			},
+			"check_logica":
+			{
+				"parent":["AB_logica","format_zscore_logica","analyse_transmission_logica"],
+				"logname": "check_params.$(date).log",
+				"sge_name": "check_params_$(sample)",
+				"log_type": "sample"
+			},
+			"coverage_mei":
+			{
+				"parent":["bqsr"],
+				"logname": "coverage.$(sample).$(date).log",
+				"sge_name": "coverage_$(sample)",
+				"log_type": "sample"
+			},
+			"preprocess_mei":
+			{
+				"parent":["coverage_mei"],
+				"logname": "preprocess.$(sample).$(date).log",
+				"sge_name": "preprocess_$(sample)",
+				"log_type": "sample"
+			},
+			"melt_mei":
+			{
+				"parent":["preprocess_mei"],
+				"logname": "melt.$(sample).$(date).log",
+				"sge_name": "melt_$(sample)",
+				"log_type": "sample"
+			},
+			"concat_mei":
+			{
+				"parent":["melt_mei"],
+				"logname": "concat.$(sample).$(date).log",
+				"sge_name": "concat_$(sample)",
+				"log_type": "sample"
+			},
+			"dict_mei":
+			{
+				"parent":["concat_mei"],
+				"logname": "dico.$(sample).$(date).log",
+				"sge_name": "dico_$(sample)",
+				"log_type": "sample"
+			},
+			"trio_mei":
+			{
+				"parent":["concat_mei", "dict_mei"],
+				"logname": "trio.$(date).log",
+				"sge_name": "trio_$(directory)",
+				"log_type": "general"
+			},
+			"annotation_mei":
+			{
+				"parent":["concat_mei", "dict_mei","trio_mei"],
+				"logname": "annotsv.$(sample).$(date).log",
+				"sge_name": "annotSV_$(sample)",
+				"log_type": "sample"
+			},
+			"report_mei":
+			{
+				"parent":["concat_mei", "dict_mei","trio_mei", "annotation_mei"],
+				"logname": "report.$(sample).$(date).log",
+				"sge_name": "report_$(sample)",
+				"log_type": "sample"
+			},
+			"get_exit_code":
+			{
+				"parent":["report_mei", "check_logica", "vcf_qc", "qc_summary", "report_varcall","plot_cnv"],
+				"logname": "get_exit_code.$(date).log",
+				"sge_name": "get_exit_code_$(directory)",
+				"log_type": "general"
+			},
+			"upload_labkey":
+			{
+				"parent":["get_exit_code"],
+				"logname": "upload_labkey.$(date).log",
+				"sge_name": "upload_labkey_$(directory)",
+				"log_type": "general"
+			}
+		}
+	}
+]

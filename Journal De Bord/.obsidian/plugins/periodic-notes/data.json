@@ -9,8 +9,8 @@
   },
   "weekly": {
     "format": "gggg-[S]ww",
-    "template": "",
-    "folder": "Notes/Septembre",
+    "template": "Templates/Semaines.md",
+    "folder": "Notes/Octobre",
     "enabled": true
   },
   "monthly": {

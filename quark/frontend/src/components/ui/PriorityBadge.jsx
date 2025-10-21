@@ -5,15 +5,15 @@ const PriorityBadge = ({ priority }) => {
   const getColorClass = () => {
     switch(priority) {
       case 'Urgente': 
-        return 'bg-red-500 dark:bg-red-500/80 text-white';
+        return 'bg-red-4 text-red-11';
       case 'Haute': 
-        return 'bg-orange-500 dark:bg-orange-500/80 text-white';
+        return 'bg-orange-4 text-orange-11';
       case 'Normale': 
-        return 'bg-primary-light dark:bg-primary-dark text-white dark:text-black';
+        return 'bg-blue-4 text-blue-11 dark:bg-lime-4 dark:text-lime-11';
       case 'Basse': 
-        return 'bg-neutral/50 dark:bg-neutral/30 text-neutral dark:text-neutral';
+        return 'bg-gray-4 text-gray-11';
       default: 
-        return 'bg-neutral/50 dark:bg-neutral/30 text-neutral dark:text-neutral';
+        return 'bg-gray-4 text-gray-11';
     }
   };
 

@@ -1,102 +1,85 @@
 import React from 'react';
-import { Card, CardContent } from '../ui/Card';
-import { AntiProgressBar } from '../ui/AntiProgressBar';
-import { useSlurmData } from '../hooks/UseSlurmData';
+import { Card, CardContent, CardTitle } from '../ui/Card';
+import { ProgressBar} from '../ui/ProgressBar';
 
-// Fonction pour calculer les stats par partition
-const getPartitionStats = (sinfo) => {
-  const partitions = {};
-  sinfo.forEach((node) => {
-    const { PARTITION, STATE, NODES_AIOT } = node;
-    const [, idle, , total] = NODES_AIOT.split('/').map(Number);
-
-    if (!partitions[PARTITION]) {
-      partitions[PARTITION] = {
-        totalNodes: 0,
-        runningNodes: 0,
-        downOrDrainedNodes: 0,
-      };
-    }
-
-    partitions[PARTITION].totalNodes += total;
-
-    if (STATE === 'running') { // | STATE === 'idle'    Pour les tests si rien en actif
-      partitions[PARTITION].runningNodes += idle;
-    } else if (STATE === 'down*' || STATE === 'down' || STATE === 'drained' || STATE === 'drained*') {
-      partitions[PARTITION].downOrDrainedNodes += total;
-    }
-  });
-  return partitions;
-};
-
-// Composant pour afficher une partition
 const PartitionCard = ({ partitionName, stats }) => {
-  const { totalNodes, runningNodes, downOrDrainedNodes } = stats;
+  const { nodes, cpus, gpus } = stats;
+  const totalNodes = nodes.total;
+  const runningNodes = nodes.allocated;
+  const downOrDrainedNodes = nodes.other;
+
   const runningPercent = totalNodes > 0 ? (runningNodes / totalNodes) * 100 : 0;
   const downPercent = totalNodes > 0 ? (downOrDrainedNodes / totalNodes) * 100 : 0;
   const idleNodes = totalNodes - runningNodes - downOrDrainedNodes;
   const idlePercent = totalNodes > 0 ? (idleNodes / totalNodes) * 100 : 0;
-  const allowedRunningNodesPercent = totalNodes > 0 && runningNodes > 0 ? runningNodes/(totalNodes - downOrDrainedNodes)*100 : 0;
+  const allowedRunningNodesPercent = totalNodes > 0 && runningNodes > 0 ? runningNodes / (totalNodes - downOrDrainedNodes) * 100 : 0;
+
+  // Détermine dynamiquement le nombre de colonnes pour la grille
+  const gridColsClass = gpus.total > 0 ? 'grid-cols-3' : 'grid-cols-2';
 
   return (
-    <Card>
-      <CardContent className="">
+    <Card className="shadow-md pt-6">
+      <CardContent>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-bold mb-2">{partitionName}</h3>
-          <h3 className="flex items-end text-gray-600 mb-4 dark:text-gray-400">{parseFloat(allowedRunningNodesPercent).toFixed(2)}%</h3>
+          <CardTitle>{partitionName}</CardTitle>
+          <div className="text-gray-11 dark:text-gray-11">{parseFloat(allowedRunningNodesPercent).toFixed(2)}%</div>
         </div>
-        <AntiProgressBar
-          blueValue={runningPercent}
-          redValue ={downPercent}
+        <ProgressBar
+          allocatedValue={runningPercent}
+          otherValue={downPercent}
           idleValue={idlePercent}
         />
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          <div>
-            <p className="text-sm text-gray-500">Total Nodes</p>
-            <p className="font-bold">{totalNodes}</p>
+        {/* Utilise la classe dynamique pour la grille */}
+        <div className={`grid ${gridColsClass} gap-4 mt-4`}>
+          <div className="text-center">
+            <p className="text-sm text-gray-11 dark:text-gray-11">Total Nodes</p>
+            <p className="font-bold text-gray-12 dark:text-gray-12">{runningNodes}/{totalNodes - downOrDrainedNodes}</p>
           </div>
-          <div>
-            <p className="text-sm text-gray-500">Running Nodes</p>
-            <p className="font-bold">{runningNodes}</p>
+          <div className="text-center">
+            <p className="text-sm text-gray-11 dark:text-gray-11">CPUs</p>
+            <p className="font-bold text-gray-12 dark:text-gray-12">{cpus.allocated}/{cpus.total - cpus.other}</p>
           </div>
-          <div>
-            <p className="text-sm text-gray-500">Down/Drained Nodes</p>
-            <p className="font-bold">{downOrDrainedNodes}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Idle Nodes</p>
-            <p className="font-bold">{idleNodes}</p>
-          </div>
+          {gpus.total > 0 && (
+            <div className="text-center"> 
+              <p className="text-sm text-gray-11 dark:text-gray-11">GPUs</p>
+              <p className="font-bold text-gray-12 dark:text-gray-12">{gpus.allocated}/{gpus.total - gpus.other}</p>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>
   );
 };
 
-
 // Composant principal
-const ResourceCard = () => {
-  const { loading, error, clusterInfo } = useSlurmData(true, 5000);
-
-  if (error) {
+const ResourceCard = ({ metrics }) => {
+  if (!metrics || !metrics.partitions) {
     return (
-      <div className="p-4 bg-red-100 border border-red-400 rounded">
-        <h3 className="text-red-800">Erreur</h3>
+      <div className="p-4 text-center text-gray-11 dark:text-gray-11">
+        Aucune donnée de partition disponible.
       </div>
     );
   }
 
-  if (loading) {
-    return <div className="p-4">Chargement des données SLURM...</div>;
-  }
-
-  // Calcul des stats par partition
-  const partitionStats = getPartitionStats(clusterInfo);
+  const getGridLayoutClass = (count) => {
+    switch (count) {
+      case 1:
+        return "grid grid-cols-1 gap-4 justify-center";
+      case 2:
+        return "grid grid-cols-1 md:grid-cols-2 gap-4 justify-center";
+      case 3:
+      case 5:
+      case 6:
+        return "grid grid-cols-1 md:grid-cols-3 gap-4 justify-center";
+      default: // 4, 7, 8, etc.
+        return "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center";
+    }
+  };
 
   // Affichage des cartes par partition
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {Object.entries(partitionStats).map(([partitionName, stats]) => (
+    <div className={getGridLayoutClass(Object.keys(metrics.partitions).length)}>
+      {Object.entries(metrics.partitions).map(([partitionName, stats]) => (
         <PartitionCard
           key={partitionName}
           partitionName={partitionName}

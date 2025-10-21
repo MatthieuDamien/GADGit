@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Server, Clock, AlertCircle, Cpu, HardDrive, Zap, CheckIcon } from 'lucide-react';
-import { Card, CardHeader, CardContent } from './components/ui/Card';
-import { ResourceCard } from './components/dashboard/ResourceCard';
-import SlurmDashboard from './components/dashboard/SlurmDashboard';
-import QueueItem from './components/items/QueueItem';
-import ActiveTask from './components/items/ActiveTask';
-import ErrorItem from './components/items/ErrorItem';
-import CompletedTask from './components/items/CompletedTask';
 import Header from './components/dashboard/Header';
 import TaskDialog from './components/dialogs/TaskDialog';
-import useTaskStore from './store/taskStore';
-
+import ClusterMetrics from './components/hooks/ClusterMetrics';
+import AnalysisSection from './components/dashboard/AnalysisSection';
+import AnalysisSectionParent from './components/dashboard/AnalysisSectionParent';
+import { getAnalysisSummaries, getHealthStatus } from './services/mongoAPI'; // Ajout de getHealthStatus
+import { Smile } from 'lucide-react';
 
 const QuarkDashboard = () => {
-  // Store Zustand
-  const { openDialog } = useTaskStore();
+  const [analyses, setAnalyses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
 
   // État pour le dark mode
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -29,43 +26,6 @@ const QuarkDashboard = () => {
     return false;
   });
 
-
-
-  const [queue, setQueue] = useState([
-    { id: 'djen10010.1', type: 'Genome', priority: 'Urgente', waitTime: '5 min' },
-    { id: 'djen10010.2', type: 'Genome', priority: 'Haute', waitTime: '12 min' },
-    { id: 'djen10011.1', type: 'Genome', priority: 'Normale', waitTime: '18 min' },
-    { id: 'djex20024', type: 'Exome', priority: 'Normale', waitTime: '22 min' },
-    { id: 'djenbs104', type: 'Dépistage néonatal', priority: 'Normale', waitTime: '25 min' }
-  ]);
-
-  const [activeTasks, setActiveTasks] = useState([
-    { id: 'djen12010', type: 'Genome', progress: 35, user: 'Yannis', node: 'gpu-node-01', time: '2h 15min' },
-    { id: 'djen20025', type: 'Genome', progress: 45, user: 'AutoLauncher', node: 'cpu-node-03', time: '1h 08min' },
-    { id: 'djex19087', type: 'Exome', progress: 8, user: 'NovaSeqX (AL)', node: 'gpu-node-02', time: '3h 42min' },
-    { id: 'djenbs19087', type: 'Dépistage néonatal', user: 'AutoLauncher', progress: 54, node: 'gpu-node-04', time: '3h 42min' }
-  ]);
-
-  const [errors, setErrors] = useState([
-    { id: 'djen20025', type: 'Genome', time: '10:32', message: 'Mémoire insuffisante', severity: 'warning' },
-    { id: 'djex18045', type: 'Exome', time: '09:15', message: 'Échec connexion LabKey', severity: 'error' },
-    { id: 'djen30012', type: 'Genome', time: '08:47', message: 'Timeout SLURM', severity: 'warning' },
-    { id: 'djen30012', type: 'Genome', time: 'hier - 21:12', message: 'Mémoire insuffisante', severity: 'error' }
-  ]);
-
-  const [doneTasks, setDoneTasks] = useState([
-    { id: 'djen12001', type: 'Genome', node: 'gpu-node-01', timeToBeDone: '2h 15min', time: 'Auj - 08:23' },
-    { id: 'djen20002', type: 'Genome', node: 'cpu-node-03', timeToBeDone: '1h 08min', time: 'Hier - 21:32'},
-    { id: 'djenbs19008', type: 'Dépistage néonatal', node: 'gpu-node-04', timeToBeDone: '3h 42min', time: 'Hier - 16:12'},
-    { id: 'djex19003', type: 'Exome', node: 'gpu-node-02', timeToBeDone: '3h 42min', time: 'Hier - 14:05' },
-    { id: 'djenbs19004', type: 'Dépistage néonatal', node: 'gpu-node-04', timeToBeDone: '44min', time: 'Hier - 12:30' },
-    { id: 'djen12005', type: 'Genome', node: 'gpu-node-01', timeToBeDone: '2h 15min', time: '08/09/25 - 18:15' },
-    { id: 'djen20006', type: 'Genome', node: 'cpu-node-03', timeToBeDone: '1h 08min', time: '08/09/24 - 11:42' },
-    { id: 'djex19007', type: 'Exome', node: 'gpu-node-02', timeToBeDone: '3h 42min', time: '08/09/23 - 09:17' },
-  ]);
-
-  const [lastUpdate, setLastUpdate] = useState(new Date());
-
   // Effet pour appliquer/retirer la classe dark sur le document
   useEffect(() => {
     if (isDarkMode) {
@@ -77,29 +37,56 @@ const QuarkDashboard = () => {
     localStorage.setItem('darkMode', isDarkMode.toString());
   }, [isDarkMode]);
 
+  // Effet pour récupérer les données des analyses
+  useEffect(() => {
+    const fetchAnalyses = async () => {
+      try {
+        setLoading(true);
+        setError(null); // Réinitialiser l'erreur au début de chaque fetch
+        const response = await getAnalysisSummaries();
+        // On trie les analyses pour avoir un ordre prédictible
+        // S'assurer que response.data est un tableau avant de trier
+        const analysesData = Array.isArray(response.data) ? response.data : [];
+
+        const sortedAnalyses = analysesData.sort((a, b) => 
+            new Date(b.last_update) - new Date(a.last_update)
+          );
+        setAnalyses(sortedAnalyses);
+      } catch (err) {
+        console.error("Erreur lors de la récupération des analyses:", err);
+        // On vérifie l'état de la connexion pour affiner le message d'erreur.
+        try {
+          const health = await getHealthStatus();
+          if (health.data.mongodb !== 'connected') {
+            setError("Erreur : La connexion à la base de données a échoué.");
+          } else {
+            setError("Impossible de charger les analyses. Le serveur répond mais les données sont inaccessibles.");
+          }
+        } catch (healthErr) {
+          setError("Erreur : Impossible de se connecter au serveur backend.");
+        }
+        setAnalyses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnalyses();
+  }, [lastUpdate]); // Se déclenche au montage et lors du rafraîchissement
+
   // Fonction pour toggle le dark mode
   const handleToggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Gestion des clics
-  const handleTaskClick = (task) => {
-    console.log('Tâche cliquée:', task);
-    openDialog(task);
-  };
-
-  const handleErrorClick = (error) => {
-    console.log('Erreur cliquée:', error);
-    openDialog(error);
-  }
-
   const handleRefresh = () => {
     setLastUpdate(new Date());
   };
 
+  const noData = !loading && analyses.length === 0 && !error;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-marine-interactive300 via-gray-100 to-marine-interactive300
-                    dark:from-black dark:via-jaune-bg200 dark:to-black transition-colors duration-300">
+    <div className="min-h-screen">
       <Header 
         lastUpdate={lastUpdate} 
         onRefresh={handleRefresh} 
@@ -107,125 +94,30 @@ const QuarkDashboard = () => {
         onToggleDarkMode={handleToggleDarkMode}
       />
 
-      <main className="p-6">
-        {/* Grille de ressources */}
+      <main className="p-6 min-h-screen bg-gradient-to-br 
+                    from-blue-3 via-gray-2 to-blue-3 
+                    dark:from-lime-2 dark:via-gray-2 dark:to-lime-2
+                    bg-lime-1 text-gray-12 dark:text-lime-12 
+                    transition-colors duration-300" >
+        {/* Métriques du cluster */}
         <section className="mb-6">
-          <ResourceCard />
+          <ClusterMetrics />
         </section>
 
-        {/* Section Erreurs */}
-        <section className="mb-6">
-          <Card>
-            <CardHeader 
-              title="Erreurs récentes" 
-              icon={AlertCircle} 
-              iconColor="text-red-500 dark:text-red-400"
-              count={`${errors.length} erreurs`}
-            />
-            <CardContent>
-              {errors.length === 0 ? (
-                <div className="text-neutral text-center py-4">Aucune erreur récente.</div>
-              ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 max-h-60 overflow-y-auto">
-                  {errors.map((error, index) => (
-                    <ErrorItem 
-                      key={`${error.id}-${index}`} 
-                      error={error} 
-                      onClick={handleErrorClick}
-                    />
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Grille principale */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          {/* File d'attente */}
-          <Card>
-            <CardHeader 
-              title="File d'attente" 
-              icon={Clock} 
-              iconColor="text-orange-400 dark:text-orange-300"
-              count={`${queue.length} tâches`}
-            />
-            <CardContent>
-              {queue.length === 0 ? (
-                <div className="text-neutral text-center py-4">Aucune tâche en attente.</div>
-              ) : (
-                <div className="space-y-3 max-h-80 overflow-y-auto">
-                  {queue.map((task, index) => (
-                    <QueueItem 
-                      key={task.id} 
-                      task={task} 
-                      index={index} 
-                      onClick={handleTaskClick}
-                    />
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Tâches en cours */}
-          <Card>
-            <CardHeader 
-              title="Tâches en cours" 
-              icon={Activity} 
-              iconColor="text-primary-light dark:text-primary-dark"
-              count={`${activeTasks.length} actives`}
-            />
-            <CardContent>
-              {activeTasks.length === 0 ? (
-                <div className="text-neutral text-center py-4">Aucune tâche en cours.</div>
-              ) : (
-                <div className="space-y-3 max-h-80 overflow-y-auto">
-                  {activeTasks.map(task => (
-                    <ActiveTask 
-                      key={task.id} 
-                      task={task} 
-                      onClick={handleTaskClick}
-                    />
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-        
-        {/* Tâches terminées */}
         <section>
-          <Card>
-            <CardHeader 
-              title="Tâches terminées" 
-              icon={CheckIcon} 
-              iconColor="text-green-400 dark:text-green-300"
-              count={`${doneTasks.length} tâches terminées durant les 3 derniers mois`}
-            />
-            <CardContent>
-              {doneTasks.length === 0 ? (
-                <div className="text-neutral text-center py-4">Aucune tâche terminée récemment.</div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3 max-h-80 overflow-y-auto">
-                  {doneTasks.map((task, index) => (
-                    <CompletedTask 
-                      key={`${task.id}-completed-${index}`} 
-                      task={task} 
-                      onClick={handleTaskClick}
-                    />
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </section>
+          {loading && <div className="text-center p-10">Chargement des analyses...</div>}
+          {error && <div className="text-center p-10 text-red-500">{error}</div>}
+          {noData && (
+            <div className="text-center p-10 flex flex-col items-center justify-center text-gray-11 dark:text-gray-10">
+              <Smile size={40} className="mb-4" />
+              <p className="text-xl">Aucune analyse à signaler ici !</p>
+            </div>
+          )}
 
-                
-        <section className="mb-6">
-          <SlurmDashboard />
+          {!loading && !error && analyses.length > 0 && (
+            <AnalysisSectionParent analyses={analyses} />
+          )}
         </section>
-        
       </main>
       <TaskDialog />
     </div>

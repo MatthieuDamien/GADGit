@@ -37,4 +37,20 @@ a1246c63fc6b4080
 > [!info]- Token GitLab
 > glpat--cDK9zGcvMivVzr3dfjp
 
-``SHA256:kPerX9d8slWAc1T9jjiuDu59wDtMceiWRLXukgnvjik matthiue.damien@reseau.eseo.fr``
+``SHA256:kPerX9d8slWAc1T9jjiuDu59wDtMceiWRLXukgnvjik matthieu.damien@reseau.eseo.fr``
+
+
+MSI
+1500e : https://pcpartpicker.com/list/kQbR74
+2700e: https://pcpartpicker.com/list/YNKZVF
+6000e: https://pcpartpicker.com/list/ck6PZc
+
+examples : https://pcpartpicker.com/b/rVXbt6
+
+CPU :
+https://pcpartpicker.com/list/MJNFv4
+- Core Ultra 7 265KF -> à l'air banger rapport qualité prix
+- Ryzen 7 7800X3D
+- i7-14700K
+![[ordi.png]]
+https://pcpartpicker.com/list/nsRmwY

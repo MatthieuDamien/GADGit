@@ -34,7 +34,7 @@
   "defaultOpenArea": "view",
   "customPromptsFolder": "copilot-custom-prompts",
   "indexVaultToVectorStore": "ON MODE SWITCH",
-  "qaExclusions": "copilot-conversations,copilot-custom-prompts",
+  "qaExclusions": "copilot-conversations,copilot-custom-prompts,copilot",
   "qaInclusions": "",
   "chatNoteContextPath": "",
   "chatNoteContextTags": [],
@@ -343,5 +343,11 @@
     "replaceInFile"
   ],
   "reasoningEffort": "low",
-  "verbosity": "medium"
+  "verbosity": "medium",
+  "generateAIChatTitleOnSave": true,
+  "enableInlineCitations": true,
+  "memoryFolderName": "copilot/memory",
+  "enableRecentConversations": false,
+  "enableSavedMemory": false,
+  "maxRecentConversations": 30
 }

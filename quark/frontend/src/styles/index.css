@@ -1,30 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './theme.css';
 
 @layer base {
-  :root {
-    --bg-base: #FFFFFF;
-    --bg-surface: #F8F9FA;
-    --bg-elevated: #FFFFFF;
-    --text-primary: #1A1A1A;
-    --text-secondary: #8B8D98;
-    --text-accent: #004970;
-    --border-default: #E2E4E9;
-  }
-
-  .dark {
-    --bg-base: #000000;
-    --bg-surface: #0A0A0A;
-    --bg-elevated: #141414;
-    --text-primary: #FFFFFF;
-    --text-secondary: #8B8D98;
-    --text-accent: #AEC923;
-    --border-default: #1A1A1A;
-  }
-
   body {
-    @apply bg-base text-primary transition-colors duration-200;
+    /* Utilisation des variables Radix (gray scale) pour le fond et le texte par défaut */
+    @apply bg-gray-1 text-gray-12 transition-colors duration-200;
   }
 }
 

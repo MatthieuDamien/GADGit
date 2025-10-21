@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:24.04
+From: node:20-alpine
 
 %help 
 This is a singularity container to launch a React application named quark with yarn.
@@ -8,206 +8,300 @@ Author : matt.damien@icloud.com
 
 %labels
     Author Matthieu Damien
-    Version 0.1
-    Description Application React avec yarn, Tailwind CSS, Lucide React et support offline
+    Version 0.6
+    Description Application React Quark avec yarn, Tailwind CSS, Lucide React
     Maintainer matt.damien@icloud.com
     NodeJS_version 20.x
-    Yarn_version 1.22.x
+    Yarn_version Pre-installed in node:20-alpine
     React_version 19.x
 
 %setup
-SINGULARITY_ROOTFS=$APPTAINER_ROOTFS
+    SINGULARITY_ROOTFS=$APPTAINER_ROOTFS
 
 %post
-# Version du piepline GitLab
-export GAD_VERSION=master
-export TOKEN_IDENTIFICATION=a_modifier
+    # Desactiver le mode debug bash
+    set +x
+    
+    # Variables de configuration
+    export GAD_VERSION=quark
 
+    # Mise a jour du systeme (Alpine)
+    apk update && apk upgrade
 
+    # Installation des dependances systeme pour Alpine
+    apk add --no-cache \
+        git \
+        curl \
+        wget \
+        bash \
+        ca-certificates \
+        python3 \
+        make \
+        g++
 
-# Mise à jour du système
-apt-get update && apt-get upgrade -y
+    # Verification que Yarn est present
+    echo "=== Verification des outils disponibles ==="
+    echo "Node.js version: $(node --version)"
+    echo "npm version: $(npm --version)"
+    echo "Yarn version: $(yarn --version)"
+    echo "=========================================="
 
+    # Creation du repertoire Git
+    mkdir -p /git
 
+    # Clone du repository GitLab
+    echo "Clonage du repository GitLab..."
+    cd /git
+    git clone --branch ${GAD_VERSION} \
+        http://gitlab.gad-bioinfo.org/gad/gadpipeline.git \
+        gadpipeline
 
+    # Verification du clone
+    if [ ! -d "/git/gadpipeline" ]; then
+        echo "ERREUR: Le clonage du repository a echoue"
+        exit 1
+    fi
 
+    echo "Repository clone avec succes"
 
-# Installation des dépendances système
-apt-get install -y \
-    curl \
-    wget \
-    gnupg2 \
-    software-properties-common \
-    build-essential \
-    git \
-    ca-certificates
+    # Deplacement de l'application Quark/frontend vers /app
+    mkdir -p /app
+    if [ -d "/git/gadpipeline/quark/frontend" ]; then
+        cp -r /git/gadpipeline/quark/frontend/* /app/
+        echo "Application Quark frontend copiee avec succes"
+    else
+        echo "ERREUR: Le repertoire quark/frontend n'existe pas dans le depot"
+        exit 1
+    fi
 
-# Installation de Node.js 20.x (version LTS recommandée)
-curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt-get install -y nodejs
+    # Copie des fichiers communs si necessaire
+    mkdir -p /app/common
+    if [ -f "/git/gadpipeline/common/GeneralTools.py" ]; then
+        cp /git/gadpipeline/common/GeneralTools.py /app/common/
+    fi
+    if [ -f "/git/gadpipeline/common/LabkeyTools.py" ]; then
+        cp /git/gadpipeline/common/LabkeyTools.py /app/common/
+    fi
 
-# Installation de Yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarnkey.gpg
-echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
-apt-get update && apt-get install -y yarn
+    # Nettoyage du depot Git
+    rm -rf /git
 
-# Création du répertoire de travail
-mkdir -p /app
-cd /app
+    # Verification de la structure de l'application
+    echo ""
+    echo "=== Verification de la structure ==="
+    cd /app
+    
+    if [ ! -f "package.json" ]; then
+        echo "ERREUR: package.json non trouve"
+        exit 1
+    fi
+    echo "package.json trouve"
 
-# Initialisation d'un projet React avec create-react-app
-npx create-react-app quark --template typescript
+    if [ ! -d "src" ]; then
+        echo "ERREUR: Le dossier src n'existe pas"
+        exit 1
+    fi
+    echo "Dossier src trouve"
 
-# Configuration de yarn offline
-yarn config set yarn-offline-mirror ./yarn-offline-mirror
-yarn config set yarn-offline-mirror-pruning true
+    if [ ! -d "public" ]; then
+        echo "ERREUR: Le dossier public n'existe pas"
+        exit 1
+    fi
+    echo "Dossier public trouve"
 
-# Installation des dépendances spécifiées
-yarn add tailwindcss postcss autoprefixer
-yarn add lucide-react
-yarn add react-scripts
+    # Installation des dependances avec yarn
+    echo ""
+    echo "=== Installation des dependances npm via yarn ==="
+    echo "Cela peut prendre plusieurs minutes..."
+    
+    yarn install
+    
+    # Verification de l'installation
+    if [ ! -d "node_modules" ]; then
+        echo "ERREUR: node_modules n'a pas ete cree"
+        exit 1
+    fi
 
-# Configuration de Tailwind CSS
-npx tailwindcss init -p
+    echo ""
+    echo "node_modules cree avec succes"
+    echo "Taille: $(du -sh node_modules | cut -f1)"
+    echo "Packages installes: $(ls node_modules | wc -l)"
 
+    # Variables d'environnement
+    echo "export NODE_ENV=development" >> $SINGULARITY_ENVIRONMENT
+    echo "export PATH=/usr/local/bin:\$PATH" >> $SINGULARITY_ENVIRONMENT
+    echo "export GAD_VERSION=${GAD_VERSION}" >> $SINGULARITY_ENVIRONMENT
 
+    # Nettoyage final
+    echo ""
+    echo "Nettoyage des caches temporaires..."
+    yarn cache clean
+    
+    find /tmp -mindepth 1 -maxdepth 1 \
+        ! -name 'build-temp-*' \
+        ! -name 'bundle-temp-*' \
+        ! -name 'systemd-*' \
+        ! -name 'snap-*' \
+        -exec rm -rf {} + 2>/dev/null || true
+    
+    rm -rf /root/.npm 2>/dev/null || true
+    rm -rf /root/.cache 2>/dev/null || true
+    rm -rf /root/.yarn 2>/dev/null || true
+    rm -rf /usr/local/share/.cache 2>/dev/null || true
 
+    chmod -R 755 /app
 
-# GitLab GAD 
-
-mkdir /git
-echo "export GAD_VERSION=${GAD_VERSION}" >> ${SINGULARITY_ENVIRONMENT}
-
-git clone --branch ${GAD_VERSION} http://gitlab.gad-bioinfo.org/gad/gadpipeline.git /git/gadpipeline/
-
-## Token/ Clé SSH ; ${TOKEN_IDENTIFICATION}
-
-mv -v /git/gadpipeline/quark/ /git/gadpipeline/common/GeneralTools.py /git/gadpipeline/common/LabkeyTools.py
-echo "Version du pipeline utilisé pour créer ce conteneur: \"${GAD_VERSION}\"
-
-# Cleaner (non utilisé mais si jamais)
-# rm -rf /git/
-
-
-
-
-# Variables d'environnement
-echo "export NODE_ENV=production" >> $SINGULARITY_ENVIRONMENT
-echo "export PATH=/usr/local/bin:\$PATH" >> $SINGULARITY_ENVIRONMENT
-echo "export YARN_CACHE_FOLDER=/app/.yarn-cache" >> $SINGULARITY_ENVIRONMENT
-
-# Création d'un fichier de configuration Tailwind personnalisé
-cat > /app/tailwind.config.js << 'EOF'
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-EOF
-
-# Ajout de Tailwind CSS au fichier CSS principal
-cat > /app/src/index.css << 'EOF'
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-EOF
-
-# Configuration du cache yarn
-mkdir -p /app/.yarn-cache
-yarn config set cache-folder /app/.yarn-cache
-
-# Installation de toutes les dépendances en mode offline
-yarn install --frozen-lockfile --offline || yarn install --frozen-lockfile
-
-# Build de l'application pour la production
-yarn build
-
-# Nettoyage
-apt-get autoremove -y
-apt-get clean
-rm -rf /var/lib/apt/lists/*
-rm -rf /tmp/*
-rm -rf /var/tmp/*
-
-# Permissions
-chmod -R 755 /app
-
-
-
-
+    echo ""
+    echo "=========================================="
+    echo "Installation terminee avec succes"
+    echo "Version du pipeline: ${GAD_VERSION}"
+    echo "=========================================="
 
 %runscript
-cd /app
-echo "Démarrage de l'application React Quark..."
-echo "Mode disponibles:"
-echo "  - dev:   yarn start (développement)"
-echo "  - build: yarn build (construction)"
-echo "  - serve: npx serve -s build (servir la version build)"
-echo ""
-echo "Utilisation: singularity run container.sif [dev|build|serve]"
-echo "    Par défaut : dev"
-echo ""
+    # Configuration des caches vers /tmp (accessible en ecriture)
+    export TMPDIR="${TMPDIR:-/tmp}"
+    export YARN_CACHE_FOLDER="${TMPDIR}/yarn-cache-$$"
+    export npm_config_cache="${TMPDIR}/npm-cache-$$"
+    
+    # IMPORTANT: Rediriger le cache ESLint et autres caches React
+    export ESLINT_CACHE_LOCATION="${TMPDIR}/eslint-cache-$$"
+    export BABEL_CACHE_PATH="${TMPDIR}/babel-cache-$$"
+    
+    # Desactiver le cache dans node_modules (lecture seule)
+    export DISABLE_ESLINT_PLUGIN="true"
+    
+    # Creer les repertoires de cache
+    mkdir -p "${YARN_CACHE_FOLDER}"
+    mkdir -p "${npm_config_cache}"
+    mkdir -p "${ESLINT_CACHE_LOCATION}"
+    mkdir -p "${BABEL_CACHE_PATH}"
+    
+    cd /app
+    
+    # Verification que node_modules existe
+    if [ ! -d "node_modules" ]; then
+        echo "ERREUR: node_modules n'existe pas dans le conteneur"
+        exit 1
+    fi
+    
+    echo "==================================="
+    echo "   Application React Quark"
+    echo "   Version: ${GAD_VERSION}"
+    echo "==================================="
+    echo ""
+    echo "Modes disponibles:"
+    echo "  dev   : yarn start (developpement) [PAR DEFAUT]"
+    echo "  build : yarn build (production)"
+    echo "  serve : serve build sur port 3000"
+    echo ""
 
-case "$1" in
-    "dev")
-        echo "Démarrage en mode développement..."
-        yarn start
-        ;;
-    "build") 
-        echo "Construction de l'application..."
-        yarn build
-        ;;
-    "serve")
-        echo "Service de l'application construite..."
-        npx serve -s build -p 3000
-        ;;
-    *)
-        echo "Démarrage par défaut en mode développement..."
-        yarn start
-        ;;
-esac
+    case "$1" in
+        "dev")
+            echo "Demarrage en mode developpement..."
+            echo "Application accessible sur http://localhost:3000"
+            echo ""
+            # Lancer avec variables d'environnement pour eviter les caches en lecture seule
+            SKIP_PREFLIGHT_CHECK=true yarn start
+            ;;
+        "build") 
+            echo "Construction de l'application pour la production..."
+            echo ""
+            SKIP_PREFLIGHT_CHECK=true yarn build
+            if [ -d "/app/build" ]; then
+                echo ""
+                echo "Build termine avec succes"
+                echo "Taille du build: $(du -sh /app/build | cut -f1)"
+            else
+                echo "ERREUR: Le build a echoue"
+                exit 1
+            fi
+            ;;
+        "serve")
+            if [ ! -d "/app/build" ]; then
+                echo "ERREUR: Aucun build trouve"
+                echo "Construisez d'abord avec: singularity run quark.sif build"
+                exit 1
+            fi
+            echo "Service de l'application construite..."
+            echo "Application accessible sur http://localhost:3000"
+            echo ""
+            npx serve -s build -p 3000
+            ;;
+        "")
+            echo "Mode par defaut: developpement"
+            echo "Application accessible sur http://localhost:3000"
+            echo ""
+            SKIP_PREFLIGHT_CHECK=true yarn start
+            ;;
+        *)
+            echo "ERREUR: Mode '$1' inconnu"
+            echo ""
+            echo "Modes disponibles:"
+            echo "  dev   : mode developpement (par defaut)"
+            echo "  build : construction pour production"
+            echo "  serve : servir le build de production"
+            exit 1
+            ;;
+    esac
 
 %test
-echo "=== Tests de l'environnement ==="
-echo "Version de Node.js:"
-node --version
-echo ""
-echo "Version de npm:"
-npm --version
-echo ""
-echo "Version de yarn:"
-yarn --version
-echo ""
-echo "Vérification des dépendances React:"
-cd /app
-echo "Packages installés:"
-yarn list --depth=0 | grep -E "(react|tailwind|lucide)"
-echo ""
-echo "Vérification de la configuration Tailwind:"
-if [ -f "tailwind.config.js" ]; then
-    echo "Configuration Tailwind trouvée"
-else
-    echo "Configuration Tailwind manquante"
-fi
-echo ""
-echo "Vérification du build:"
-if [ -d "build" ]; then
-    echo "Répertoire build présent"
-else
-    echo "Répertoire build manquant"
-fi
+    echo "=== Tests de l'environnement ==="
+    echo ""
+    echo "Version de Node.js: $(node --version)"
+    echo "Version de npm: $(npm --version)"
+    echo "Version de yarn: $(yarn --version)"
+    echo ""
+    
+    cd /app
+    
+    echo "Verification de la structure:"
+    
+    if [ -f "package.json" ]; then
+        echo "  - package.json: OK"
+    else
+        echo "  - package.json: MANQUANT"
+        exit 1
+    fi
+    
+    if [ -d "src" ]; then
+        echo "  - src: OK ($(find src -type f | wc -l) fichiers)"
+    else
+        echo "  - src: MANQUANT"
+        exit 1
+    fi
+    
+    if [ -d "public" ]; then
+        echo "  - public: OK"
+    else
+        echo "  - public: MANQUANT"
+        exit 1
+    fi
+    
+    if [ -d "node_modules" ]; then
+        echo "  - node_modules: OK ($(du -sh node_modules | cut -f1))"
+    else
+        echo "  - node_modules: MANQUANT"
+        exit 1
+    fi
+    
+    echo ""
+    echo "=== Tests termines avec succes ==="
 
 %environment
-export NODE_ENV=production
-export PATH=/usr/local/bin:$PATH
-export YARN_CACHE_FOLDER=/app/.yarn-cache
+    export NODE_ENV=development
+    export PATH=/usr/local/bin:$PATH
 
 %startscript
-cd /app
-yarn start
+    export TMPDIR="${TMPDIR:-/tmp}"
+    export YARN_CACHE_FOLDER="${TMPDIR}/yarn-cache-$$"
+    export npm_config_cache="${TMPDIR}/npm-cache-$$"
+    export ESLINT_CACHE_LOCATION="${TMPDIR}/eslint-cache-$$"
+    export BABEL_CACHE_PATH="${TMPDIR}/babel-cache-$$"
+    
+    mkdir -p "${YARN_CACHE_FOLDER}"
+    mkdir -p "${npm_config_cache}"
+    mkdir -p "${ESLINT_CACHE_LOCATION}"
+    mkdir -p "${BABEL_CACHE_PATH}"
+    
+    cd /app
+    SKIP_PREFLIGHT_CHECK=true yarn start
