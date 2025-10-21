@@ -114,28 +114,47 @@ function watchCollections() {
   ];
 
   collectionsToWatch.forEach(model => {
-    // fullDocument: 'updateLookup' récupère le document complet lors des mises à jour.
-    const changeStream = model.collection.watch([], { fullDocument: 'updateLookup' });
-    changeStream.on('change', (change) => {
-      console.log(`Changement détecté dans '${model.collection.name}':`, change.operationType);
+    try {
+      // fullDocument: 'updateLookup' récupère le document complet lors des mises à jour.
+      const changeStream = model.collection.watch([], { fullDocument: 'updateLookup' });
       
-      // Préparer les données à émettre. fullDocument est disponible pour 'insert' et 'update'.
-      const dataToEmit = {
-        collection: model.collection.name,
-        operation: change.operationType,
-        document: change.fullDocument || change.documentKey // Utiliser fullDocument ou documentKey pour les opérations 'delete'
-      };
-      io.emit('data_updated', dataToEmit);
-    });
+      changeStream.on('change', (change) => {
+        console.log(`Changement détecté dans '${model.collection.name}':`, change.operationType);
+        
+        let documentToSend = change.fullDocument || change.documentKey;
 
-    // Gérer les erreurs pour éviter que le serveur ne crash
-    changeStream.on('error', (error) => {
-      console.error(`Erreur sur le Change Stream pour '${model.collection.name}':`, error.message);
-      if (error.code === 40573) { // Code d'erreur pour "not a replica set"
-        console.error("ASTUCE: Assurez-vous que votre MongoDB est lancé en tant que Replica Set et que votre URI de connexion contient '?replicaSet=rs0'.");
-      }
-    });
-    console.log(`-> Surveillance active sur '${model.collection.name}'`);
+        // SI on a un document complet (insert, update/replace), on le nettoie
+        if (change.fullDocument) {
+            // Utilise toObject() pour obtenir un objet JS propre (supprime les méthodes Mongoose)
+            documentToSend = change.fullDocument.toObject({ virtuals: true, getters: true });
+            
+            // Force _id à être une chaîne de caractères (méthode la plus fiable)
+            if (documentToSend._id) {
+                documentToSend._id = documentToSend._id.toString();
+            }
+        }
+        
+        // Préparer les données à émettre.
+        const dataToEmit = {
+          collection: model.collection.name,
+          operation: change.operationType,
+          document: documentToSend // Utilise le document nettoyé
+        };
+        io.emit('data_updated', dataToEmit);
+      });
+
+      // Gérer les erreurs ASYNCHRONES
+      changeStream.on('error', (error) => {
+        console.error(`Erreur ASYNCHRONE sur le Change Stream pour '${model.collection.name}':`, error.message);
+        if (error.code === 40573) { 
+          console.error("ASTUCE: Assurez-vous que votre MongoDB est lancé en tant que Replica Set et que votre URI de connexion contient '?replicaSet=rs0'.");
+        }
+      });
+      console.log(`-> Surveillance active sur '${model.collection.name}'`);
+
+    } catch (error) { // <-- AJOUTER UN CATCH pour les erreurs SYNCHRONES
+      console.error(`Erreur SYNCHRONE critique lors de la mise en place du Change Stream pour '${model.collection.name}':`, error.message);
+    }
   });
 }
 
