@@ -37,11 +37,7 @@ const analysisInfosSchema = new mongoose.Schema({
 const analysisSummariesSchema = new mongoose.Schema({
   analysis_id:       { type: String, required: true, unique: true },
   status:            { type: String, enum: ['running', 'error', 'pending', 'completed'], required: true },
-  last_update:       { type: Date, default: Date.now,
-    // Crée un index TTL. Utilise la variable d'environnement SUMMARIES_TTL_SECONDS,
-    // avec une valeur par défaut de 7 jours (604800s) si non définie.
-    expires: parseInt(process.env.SUMMARIES_TTL_SECONDS || '604800', 10)
-  },
+  last_update:       { type: Date, default: Date.now },
   infos:             analysisInfosSchema
 });
 

@@ -30,7 +30,7 @@ def serialize_docs(docs):
     return [serialize_doc(doc) for doc in docs]
 
 # Routes analyses
-@app.route('/api/analyses', methods=['GET'])
+@app.route('/api/analysis_summaries', methods=['GET'])
 def get_analyses():
     """Liste toutes les analyses"""
     status = request.args.get('status')
@@ -90,7 +90,7 @@ def get_cluster_history():
     
     return jsonify(serialize_docs(snapshots))
 
-@app.route('/api/utility_job_snapshot/metrics', methods=['GET'])
+@app.route('/api/utility_job_snapshots/jobs', methods=['GET'])
 def get_utility_job_metrics():
     """Dernier snapshot des jobs utilitaires."""
     snapshot = db.utility_job_snapshots.find_one(

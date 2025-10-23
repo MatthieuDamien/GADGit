@@ -68,8 +68,8 @@ export const useRealtimeData = () => {
                     }
                     break;
                 case COLLECTIONS.UTILITY:
-                    if (document && document.raw_data) { // Vérifie que le document et raw_data sont présents
-                        setUtilityJobMetrics(document.raw_data);
+                    if (document) { // On veut le document entier, incluant `jobs` et `raw_data`
+                        setUtilityJobMetrics(document);
                     } else {
                         // Fallback de sécurité
                         fetchUtilityJobMetrics();

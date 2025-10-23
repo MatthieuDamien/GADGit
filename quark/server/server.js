@@ -75,14 +75,16 @@ app.get('/api/analysis_summaries', async (req, res) => {
   }
 });
 
-// Route pour récupérer les métriques du dernier snapshot de jobs utilitaires
-app.get('/api/utility_job_snapshot/metrics', async (req, res) => {
+// Route pour récupérer le DERNIER snapshot complet des jobs utilitaires
+// C'est cette route que le frontend utilisera pour l'affichage détaillé.
+app.get('/api/utility_job_snapshots/jobs', async (req, res) => {
   try {
     const latestSnapshot = await UtilityJobSnapshot.findOne().sort({ timestamp: -1 });
     if (!latestSnapshot) {
       return res.status(200).json(null);
     }
-    res.status(200).json(latestSnapshot.raw_data || null);
+    // On renvoie le document complet
+    res.status(200).json(latestSnapshot);
   } catch (error) {
     console.error('Erreur lors de la recherche du snapshot de jobs utilitaires :', error);
     res.status(500).json({ error: error.message });

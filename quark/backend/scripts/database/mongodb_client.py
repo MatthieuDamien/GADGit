@@ -16,8 +16,7 @@ class MongoDBClient:
         mongo_uri = os.getenv('MONGO_URI', default_mongo_uri)
         
         try:
-            # Ajout du paramètre replicaSet directement dans l'appel si non présent dans l'URI
-            # pour plus de robustesse. Le nom 'rs0' est déduit de votre prompt.
+            # Ajout du paramètre replicaSet directement dans l'appel si non présent dans l'URI pour plus de robustesse
             self.client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000, replicaSet='rs0')
             self.client.server_info()
             self.db = self.client['quark_db']
@@ -58,14 +57,37 @@ class MongoDBClient:
             # Index unique sur l'ID pour les upserts rapides
             self.analysis_summaries.create_index([('analysis_id', 1)], unique=True, name='idx_summary_analysis_id')
             
-            # Index TTL sur `last_update` pour le nettoyage automatique.
-            ttl_seconds = int(os.getenv('SUMMARIES_TTL_SECONDS', 300)) # 5min par défaut
-            self.analysis_summaries.create_index([('last_update', 1)], expireAfterSeconds=ttl_seconds, name='idx_ttl_last_update')
+            # --- Gestion de l'index TTL pour analysis_summaries ---
+            ttl_seconds = int(os.getenv('SUMMARIES_TTL_SECONDS', 21600)) # 6h par défaut
+            index_name = 'idx_ttl_last_update'
+            logger.info("TTL for analysis_summaries configured to %s seconds (from SUMMARIES_TTL_SECONDS env var or default).", ttl_seconds)
 
+            # Avertissement si la valeur est très basse pour éviter les erreurs de configuration silencieuses
+            if ttl_seconds < 3600: # Moins d'une heure
+                logger.warning(
+                    "ATTENTION: Le TTL pour 'analysis_summaries' est configuré à une valeur très basse (%s secondes). "
+                    "Les données disparaîtront rapidement. Vérifiez la variable d'environnement 'SUMMARIES_TTL_SECONDS'.", ttl_seconds
+                )
+            
+            # ÉTAPE 1: Vérifier si l'index TTL existe et si sa valeur est incorrecte. Si c'est le cas, le supprimer.
+            existing_indexes = self.analysis_summaries.index_information()
+            if index_name in existing_indexes and existing_indexes[index_name].get('expireAfterSeconds') != ttl_seconds:
+                logger.warning(
+                    "L'index TTL '%s' a une valeur incorrecte (%s). Il va être recréé avec la valeur %s secondes.",
+                    index_name,
+                    existing_indexes[index_name].get('expireAfterSeconds'),
+                    ttl_seconds
+                )
+                self.analysis_summaries.drop_index(index_name)
+                logger.info("Ancien index TTL '%s' supprimé.", index_name)
+            
+            # ÉTAPE 2: Créer les index. PyMongo est assez intelligent pour ne pas recréer ceux qui existent déjà et sont corrects.
+            # Index unique sur l'ID pour les upserts rapides
+            self.analysis_summaries.create_index([('analysis_id', 1)], unique=True, name='idx_summary_analysis_id')
+            # Index TTL pour la suppression automatique
+            self.analysis_summaries.create_index([('last_update', 1)], expireAfterSeconds=ttl_seconds, name='idx_ttl_last_update')
             # Index sur le statut pour le filtrage dans l'UI
             self.analysis_summaries.create_index([('status', 1)], name='idx_summary_status')
-
-            # ====================================================================
 
             # Index pour les snapshots de jobs utilitaires (inchangé)
             self.utility_job_snapshots.create_index([('timestamp', -1)], name='idx_utility_snapshot_time')

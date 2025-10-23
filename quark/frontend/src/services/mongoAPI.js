@@ -10,7 +10,7 @@ export const getClusterMetrics = () => {
 };
 
 export const getUtilityJobMetrics = () => {
-  return mongoAPI.get('/utility_job_snapshot/metrics');
+  return mongoAPI.get('/utility_job_snapshots/jobs');
 };
 
 export const getAnalysisSummaries = () => {

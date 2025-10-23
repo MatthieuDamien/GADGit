@@ -6,6 +6,7 @@ Script de lancement de Quark en mode ponctuel (sans daemon)
 
 import sys
 import logging
+import os
 from scripts.scheduler import QuarkScheduler
 
 # Configuration logging
@@ -22,12 +23,14 @@ def main():
     '''
     Lanceur de Quark
     '''
-    # Configuration
+    # Configuration via variables d'environnement avec des valeurs par défaut
     scheduler = QuarkScheduler(
-        host='login-1.mesobfc.fr',
-        username='umw040ir',
-        password='PaeDaegh5uiX'
+        host=os.getenv('SLURM_HOST', 'login-1.mesobfc.fr'),
+        username=os.getenv('SLURM_USER', 'umw040ir'),
+        password=os.getenv('SLURM_PASSWORD', 'PaeDaegh5uiX')
     )
+    
+    logging.info("Lancement d'un cycle Quark pour l'hôte %s...", os.getenv('SLURM_HOST', 'login-1.mesobfc.fr'))
     # Lancer un cycle
     try:
         scheduler.run_cycle()

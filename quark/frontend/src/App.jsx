@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/dashboard/Header';
 import TaskDialog from './components/dialogs/TaskDialog';
 import ClusterMetrics from './components/hooks/ClusterMetrics';
+import UtilityJobs from './components/dashboard/UtilityJobs'; // La liste détaillée
 import AnalysisSection from './components/dashboard/AnalysisSection';
 import AnalysisSectionParent from './components/dashboard/AnalysisSectionParent';
 import { getAnalysisSummaries, getHealthStatus } from './services/mongoAPI'; // Ajout de getHealthStatus
@@ -98,7 +99,7 @@ const QuarkDashboard = () => {
                     from-blue-3 via-gray-2 to-blue-3 
                     dark:from-lime-2 dark:via-gray-2 dark:to-lime-2
                     bg-lime-1 text-gray-12 dark:text-lime-12 
-                    transition-colors duration-300" >
+                    transition-colors duration-300">
         {/* Métriques du cluster */}
         <section className="mb-6">
           <ClusterMetrics />
@@ -118,6 +119,12 @@ const QuarkDashboard = () => {
             <AnalysisSectionParent analyses={analyses} />
           )}
         </section>
+
+        {/* Section des jobs utilitaires (métriques + liste) */}
+        <section className="mb-6 space-y-6">
+          <UtilityJobs />       {/* La liste détaillée des jobs */}
+        </section>
+
       </main>
       <TaskDialog />
     </div>
