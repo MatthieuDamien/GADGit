@@ -1,19 +1,20 @@
 // src/components/hooks/useRealtimeData.js
 import { useState, useEffect, useCallback } from 'react';
-import { getClusterMetrics, getAnalysisSummaries, getUtilityJobMetrics } from '../../services/mongoAPI';
+import { getClusterMetrics, getAnalysisSummaries, getUniqueJobs } from '../../services/mongoAPI';
 import realtimeService from '../../services/realtimeService';
 
-// Noms des collections en minuscules, tels qu'émis par le backend
 const COLLECTIONS = {
     CLUSTER: 'cluster_snapshots',
     ANALYSIS: 'analysis_summaries',
-    UTILITY: 'utility_job_snapshots',
+    // MODIFIÉ: Nom de collection corrigé et ajout de RAW pour référence future
+    UNIQUE: 'unique_jobs',
+    RAW: 'raw_jobs',
 };
 
 export const useRealtimeData = () => {
     const [clusterMetrics, setClusterMetrics] = useState(null);
     const [analysisSummaries, setAnalysisSummaries] = useState([]);
-    const [utilityJobMetrics, setUtilityJobMetrics] = useState(null);
+    const [uniqueJobs, setUniqueJobs] = useState([]); // MODIFIÉ: Initialisé comme un tableau
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -32,10 +33,11 @@ export const useRealtimeData = () => {
         } catch (err) { setError(err.message); }
     }, []);
 
-    const fetchUtilityJobMetrics = useCallback(async () => {
+    // MODIFIÉ: Renommé pour correspondre à la nouvelle terminologie
+    const fetchUniqueJobs = useCallback(async () => {
         try {
-            const response = await getUtilityJobMetrics();
-            setUtilityJobMetrics(response.data);
+            const response = await getUniqueJobs();
+            setUniqueJobs(response.data || []); // S'assurer que c'est toujours un tableau
         } catch (err) { setError(err.message); }
     }, []);
 
@@ -44,90 +46,156 @@ export const useRealtimeData = () => {
         await Promise.all([
             fetchClusterMetrics(),
             fetchAnalysisSummaries(),
-            fetchUtilityJobMetrics()
+            fetchUniqueJobs()
         ]);
         setLoading(false);
-    }, [fetchClusterMetrics, fetchAnalysisSummaries, fetchUtilityJobMetrics]);
+    }, [fetchClusterMetrics, fetchAnalysisSummaries, fetchUniqueJobs]);
 
     useEffect(() => {
         realtimeService.connect();
         fetchData();
 
         const handleDataUpdate = (updateInfo) => {
-            console.log('Mise à jour reçue via WebSocket:', updateInfo);
+            console.log('📡 Mise à jour reçue via WebSocket:', updateInfo);
             const { collection, operation, document } = updateInfo;
 
             switch (collection) {
-                // Pour les snapshots (dernier document), on met à jour le state directement
                 case COLLECTIONS.CLUSTER:
-                    if (document && document.metrics) { // Vérifie que le document et les métriques sont présents
-                        setClusterMetrics(document.metrics);
+                    if (document && document.metrics) {
+                        setClusterMetrics({ ...document.metrics });
+                        console.log('✅ ClusterMetrics mis à jour');
                     } else {
-                        // Fallback de sécurité : si le document est incomplet, on refait un fetch
                         fetchClusterMetrics();
                     }
                     break;
-                case COLLECTIONS.UTILITY:
-                    if (document) { // On veut le document entier, incluant `jobs` et `raw_data`
-                        setUtilityJobMetrics(document);
-                    } else {
-                        // Fallback de sécurité
-                        fetchUtilityJobMetrics();
+                    
+                // MODIFIÉ: Logique de mise à jour pour le tableau de jobs uniques
+                case COLLECTIONS.UNIQUE:
+                    if (!document || !document.JOBID) {
+                        // Si le document est invalide, refetcher toute la liste par sécurité
+                        fetchUniqueJobs();
+                        return;
                     }
+
+                    const incomingJobId = document.JOBID;
+
+                    setUniqueJobs(prevJobs => {
+                        const jobExists = prevJobs.some(job => job.JOBID === incomingJobId);
+
+                        if (operation === 'insert' && !jobExists) {
+                            console.log('➕ INSERT unique job:', incomingJobId);
+                            // Ajoute le nouveau job au début de la liste
+                            return [document, ...prevJobs];
+                        }
+
+                        if (operation === 'update' || operation === 'replace') {
+                            console.log('✏️ UPDATE unique job:', incomingJobId);
+                            // Si le job existe, on le remplace. Sinon, on l'ajoute (comportement upsert).
+                            return jobExists
+                                ? prevJobs.map(job => (job.JOBID === incomingJobId ? document : job))
+                                : [document, ...prevJobs];
+                        }
+
+                        if (operation === 'delete') {
+                            console.log('🗑️ DELETE unique job (non implémenté côté client, refetch)');
+                            // Pour 'delete', le document est souvent null. Un refetch est plus simple.
+                            fetchUniqueJobs();
+                            return prevJobs;
+                        }
+
+                        return prevJobs; // Ne rien faire pour les autres opérations
+                    });
                     break;
                 
-                // Le code existant pour ANALYSIS est déjà parfait pour l'hydratation
                 case COLLECTIONS.ANALYSIS:
                     if (!document || !document._id) {
-                         // Si on n'a pas le document, on refetch par sécurité
-                         fetchAnalysisSummaries(); 
-                         return;
+                        fetchAnalysisSummaries(); 
+                        return;
                     }
 
-                    // 1. Normalisation de l'ID entrant en chaîne de caractères (Défense en profondeur)
-                    const incomingId = String(document._id); 
+                    const cleanedDocument = JSON.parse(JSON.stringify(document)); 
+                    const incomingId = cleanedDocument._id.toString(); 
                     
-                    // 2. Clonage (nouvelle référence) du document pour forcer la détection de changement par React
-                    // L'objet est déjà "propre" grâce à la correction du backend
-                    const newDocumentReference = { ...document };
-
                     setAnalysisSummaries(prevSummaries => {
+                        let newSummaries;
                         
                         switch (operation) {
                             case 'insert':
-                                console.log('ACTION: INSERTING new analysis document'); // Log de confirmation
-                                // Insère la nouvelle référence en tête de liste
-                                return [newDocumentReference, ...prevSummaries];
+                                console.log('➕ INSERT analysis:', incomingId);
+                                
+                                // 🔧 DÉDUPLICATION : Vérifier si l'ID existe déjà
+                                const alreadyExists = prevSummaries.some(
+                                    summary => summary._id.toString() === incomingId
+                                );
+                                
+                                if (alreadyExists) {
+                                    console.warn('⚠️ Duplicate insert ignored for:', incomingId);
+                                    return prevSummaries; // Ne rien faire, éviter le doublon
+                                }
+                                
+                                newSummaries = [cleanedDocument, ...prevSummaries];
+                                break;
                             
                             case 'replace':
                             case 'update':
-                                console.log('ACTION: UPDATING analysis document with ID', incomingId); // Log de confirmation
-                                return prevSummaries.map(summary => 
-                                    // DÉFENSE EN PROFONDEUR : Convertit l'ID du summary existant en chaîne pour la comparaison
-                                    String(summary._id) === incomingId ? newDocumentReference : summary
+                                console.log('✏️ UPDATE analysis:', incomingId);
+                                newSummaries = prevSummaries.map(summary => 
+                                    summary._id.toString() === incomingId ? cleanedDocument : summary
                                 );
+                                break;
                             
                             case 'delete':
-                                console.log('ACTION: DELETING analysis document with ID', incomingId); // Log de confirmation
-                                // Filtre en comparant les chaînes (Défense en profondeur)
-                                return prevSummaries.filter(summary => 
-                                    String(summary._id) !== incomingId
+                                console.log('🗑️ DELETE analysis:', incomingId);
+                                newSummaries = prevSummaries.filter(summary => 
+                                    summary._id.toString() !== incomingId
                                 );
+                                break;
                             
                             default:
                                 return prevSummaries;
                         }
+                        
+                        // 🔧 DÉDUPLICATION FINALE : Au cas où
+                        const deduped = deduplicateAnalyses(newSummaries);
+                        console.log(`📊 État final: ${deduped.length} analyses uniques`);
+                        
+                        return [...deduped];
                     });
                     break;
+                    
                 default:
-                    console.log(`Changement non géré pour la collection: ${collection}`);
+                    console.log(`⚠️ Changement non géré pour la collection: ${collection}`);
             }
         };
 
         realtimeService.onDataUpdated(handleDataUpdate);
 
-        // Nettoyage non implémenté car le service est un singleton.
-    }, [fetchData, fetchClusterMetrics, fetchAnalysisSummaries, fetchUtilityJobMetrics]);
+    }, [fetchData, fetchClusterMetrics, fetchAnalysisSummaries, fetchUniqueJobs]);
 
-    return { clusterMetrics, analysisSummaries, utilityJobMetrics, loading, error };
+    return { clusterMetrics, analysisSummaries, uniqueJobs, loading, error };
 };
+
+// DÉDUPLICATION
+// Garde uniquement la version la plus récente de chaque analyse
+function deduplicateAnalyses(analyses) {
+    const seen = new Map();
+    
+    analyses.forEach(analysis => {
+        const id = analysis._id?.toString() || analysis.analysis_id;
+        
+        if (!seen.has(id)) {
+            seen.set(id, analysis);
+        } else {
+            // Garder la version avec la date de mise à jour la plus récente
+            const existing = seen.get(id);
+            const existingDate = new Date(existing.last_update);
+            const newDate = new Date(analysis.last_update);
+            
+            if (newDate > existingDate) {
+                seen.set(id, analysis);
+            }
+        }
+    });
+    
+    return Array.from(seen.values());
+}

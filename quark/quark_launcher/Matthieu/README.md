@@ -31,14 +31,14 @@ autolauncher/
 
 ```
 NovaSeqX → [1. concat] → incoming/
-                             ↓
-                        [2. organize] → incoming/organize/
-                             ↓
-                        [3. infofile] → sample_correspondance.info
-                             ↓
-                        [4. analysis] → analyse/PED*/
-                             ↓
-                        [5. check] → Surveillance continue
+                 ↓
+           [2. organize] → incoming/organize/
+                 ↓
+           [3. infofile] → sample_correspondance.info
+                 ↓
+           [4. analysis] → analyse/PED*/
+                 ↓
+           [5. check] → Surveillance continue
 ```
 
 ## Utilisation
@@ -52,11 +52,13 @@ python3 main.py -d /path/to/seq1/ --concat
 ```
 
 **Prérequis** :
+
 - Fichier `concat.list` dans le répertoire d'entrée
 - Flowcells dans des dossiers nommés `2*`
 - Fichier `CopyComplete.txt` dans chaque run
 
 **Sorties** :
+
 - FASTQ concaténés dans `/work/work/shared/s-neomics/data/incoming/`
 - Logs dans `incoming/logs/concat/`
 
@@ -69,6 +71,7 @@ python3 main.py -d /path/to/incoming/ --organize
 ```
 
 **Vérifications effectuées** :
+
 - Paires R1/R2 complètes
 - Taille minimale des fichiers (>10 Mo)
 - Concaténation terminée (fichiers .end)
@@ -76,6 +79,7 @@ python3 main.py -d /path/to/incoming/ --organize
 - Statut des échantillons dans LabKey
 
 **Sorties** :
+
 - Dossiers organisés dans `incoming/organize/`
 - Fichier `samples_to_organize.list`
 
@@ -88,6 +92,7 @@ python3 main.py -d /path/to/incoming/organize/ --infofile
 ```
 
 **Sorties** :
+
 - `sample_correspondance.info` avec les métadonnées
 
 ### 4. Étape de lancement des analyses
@@ -99,6 +104,7 @@ python3 main.py -d /path/to/incoming/organize/ --analysis
 ```
 
 **Sorties** :
+
 - Analyses lancées dans `/work/work/shared/s-neomics/data/analyse/`
 - Logs de dispatch dans `organize/logs/`
 
@@ -111,6 +117,7 @@ python3 main.py -d /path/to/analyse/ --check
 ```
 
 **Vérifications** :
+
 - Dispatch réussi
 - État de l'analyse (status.tsv)
 - Détection des échecs
@@ -125,7 +132,7 @@ python3 main.py \
   -l autolauncher.log \          # Fichier de log
   -e autolauncher.events \       # Registre d'événements
   -m autolauncher_mailing.sh \   # Script de notifications
-  --[étape]                       # concat|organize|infofile|analysis|check
+  --[étape]                      # concat|organize|infofile|analysis|check
 ```
 
 ## Système d'événements
@@ -140,6 +147,7 @@ Le registre d'événements (`autolauncher.events`) compte le nombre de fois qu'u
 ### Types d'événements
 
 **Erreurs bloquantes** :
+
 - `concat_file_missing` : Fichier concat.list manquant
 - `paired_not_found` : Fichier R1 ou R2 manquant
 - `fastq_too_small` : Fichier FASTQ < 10 Mo
@@ -147,6 +155,7 @@ Le registre d'événements (`autolauncher.events`) compte le nombre de fois qu'u
 - `family_missing` : Membres de famille manquants
 
 **Événements de suivi** :
+
 - `analysis_launched` : Analyse démarrée
 - `analysis_ended` : Analyse terminée
 - `analysis_ok` : Analyse réussie
@@ -298,6 +307,7 @@ tests/
 ## Support
 
 Pour toute question ou problème :
+
 - Consulter les logs : `autolauncher.log`
 - Vérifier le registre : `autolauncher.events`
 - Contacter : gad-astreinte-bioinfo@u-bourgogne.fr ou matthieu.damien@icloud.com

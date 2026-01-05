@@ -1,0 +1,98 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%help
+This is a Singularity container to launch the Quark Autolauncher Python application.
+Includes: Python 3.11 and dependencies (including LabKey API).
+Author : matt.damien@icloud.com
+
+%labels
+    Author Matthieu Damien
+    Version 0.2
+    Description Python application for Quark Autolauncher (LabKey integration)
+    Maintainer matt.damien@icloud.com
+    Python_version 3.11.x
+    Base_image python:3.11-slim
+
+%post
+    set -e  # stop on first error
+
+    echo "=== Configuration de l'environnement ==="
+    export GAD_VERSION=quark
+    export DEBIAN_FRONTEND=noninteractive
+
+    # Mise à jour et installation des dépendances (git)
+    apt-get update && apt-get install -y --no-install-recommends \
+        git \
+        ca-certificates
+    rm -rf /var/lib/apt/lists/*
+
+    # Vérification Python
+    echo "Python version: $(python3 --version)"
+    python3 -m ensurepip
+    python3 -m pip install --upgrade pip setuptools wheel
+
+    # Installation du client LabKey Python
+    echo "Installation du client LabKey..."
+    python3 -m pip install --no-cache-dir labkey==4.0.1
+
+    # Vérification
+    python3 -c "import labkey; print('✅ LabKey installé avec succès :', labkey.__version__)"
+
+    # Préparation de l'application
+    mkdir -p /app /git
+
+    echo "Clonage du repository GitLab (branche ${GAD_VERSION})..."
+    git clone --branch ${GAD_VERSION} \
+        http://gitlab.gad-bioinfo.org/gad/gadpipeline.git \
+        /git/gadpipeline || { echo '❌ ERREUR: clonage échoué'; exit 1; }
+
+    if [ -d "/git/gadpipeline/quark/quark_launcher/Matthieu" ]; then
+        cp -r /git/gadpipeline/quark/quark_launcher/Matthieu/* /app/
+        echo "✅ Application copiée avec succès vers /app"
+    else
+        echo "❌ ERREUR: Le répertoire quark/quark_launcher/Matthieu n'existe pas"
+        exit 1
+    fi
+
+    rm -rf /git
+
+    # Variables d'environnement du conteneur
+    echo "export GAD_VERSION=${GAD_VERSION}" >> $SINGULARITY_ENVIRONMENT
+    echo "export PYTHONPATH=/app" >> $SINGULARITY_ENVIRONMENT
+
+    chmod -R 755 /app
+    echo "=== Installation terminée avec succès ==="
+
+%runscript
+    cd /app
+    echo "==================================="
+    echo "        Quark Autolauncher"
+    echo "   Version du pipeline: ${GAD_VERSION}"
+    echo "==================================="
+    echo ""
+    echo "Exécution de main.py avec les arguments: $@"
+    echo ""
+    
+    exec python3 main.py "$@"
+
+%test
+    echo "=== Tests de l'environnement ==="
+    python3 --version
+    pip --version
+
+    echo "Vérification de l'import LabKey..."
+    python3 -c "import labkey; print('LabKey OK - version', labkey.__version__)"
+
+    cd /app
+    if [ -f "main.py" ]; then
+        echo "✅ main.py présent"
+    else
+        echo "❌ main.py manquant"
+        exit 1
+    fi
+
+    echo "Vérification d'import interne..."
+    python3 -c "from config import Config; print('Config importé OK')"
+
+    echo "=== Tests terminés avec succès ==="

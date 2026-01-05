@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "LiBus",
-      "LiBeer",
-      "LiPartyPopper",
-      "LiRadioTower",
-      "LiCloudRainWind"
+      "LiPcCase",
+      "LiTrainFront",
+      "LiSnail",
+      "LiCross",
+      "LiUserRoundSearch"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -54,5 +54,10 @@
   "Notes/Octobre/Semaine 40": "LiPartyPopper",
   "Notes/Octobre/Semaine 41": "LiBeer",
   "Notes/Octobre/Semaine 42": "LiRadioTower",
-  "Notes/Octobre/Semaine 43": "LiBus"
+  "Notes/Octobre/Semaine 43": "LiBus",
+  "Notes/Octobre/Semaine 44": "LiPiano",
+  "Notes/Novembre/Semaine 45": "LiCross",
+  "Notes/Novembre/Semaine 46": "LiSnail",
+  "Notes/Novembre/Semaine 47": "LiTrainFront",
+  "Notes/Novembre/Semaine 48": "LiPcCase"
 }

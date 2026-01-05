@@ -5,3 +5,6 @@ Matthieu/.coverage
 
 Valentin/__pycache__
 Valentin/.coverage
+tests/
+
+COMPARISON_REPORT.md

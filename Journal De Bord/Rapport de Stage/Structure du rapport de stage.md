@@ -122,3 +122,5 @@ Afin de valoriser le travail personnel, l'équité, la propriété intellectuell
 ### Déclaration en lien avec l'utilisation de l'IA générative :
 
 Durant la rédaction de ce rapport, j'ai utilisé l'IA générative <nom du service> afin de <décrire ici les usages / décrire les types de corrections / ...>. Après avoir utilisé cet outil, j'ai relu et édité le contenu produit et j'assume toute responsabilité quant au contenu livré.
+
+SWOT, SMART, 

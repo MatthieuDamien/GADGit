@@ -2,8 +2,16 @@
 # -*- coding: utf-8 -*-
 
 """
+steps/concat.py
+
+Description:
 Étape de concaténation des fichiers FASTQ des flowcells.
 Concatène les fichiers FASTQ par lane pour chaque échantillon.
+
+Auteur: Matthieu Damien
+Creation Date: 2025-10-07
+Dernière modification: 2025-10-31
+Commentaires:
 """
 
 
@@ -12,16 +20,16 @@ import glob
 import logging
 from datetime import datetime
 
-from .base import BaseStep
 # pylint: disable-next=E0401
 from utils import file_exists, ensure_directory, string_in_file
+from .base import BaseStep
 
 class ConcatStep(BaseStep):
     """
     Étape de concaténation des FASTQ.
     Traite les flowcells NovaSeq X et lance la concaténation.
     """
-    
+
     def execute(self, input_dir: str) -> bool:
         """
         Exécute la concaténation des FASTQ.
@@ -33,35 +41,35 @@ class ConcatStep(BaseStep):
             True si au moins une flowcell a été traitée
         """
         self.log_start(input_dir)
-        
+
         # Vérification du fichier concat.list
         concat_file = os.path.join(input_dir, "concat.list")
         if not self._check_concat_file(concat_file, input_dir):
             self.log_end(False)
             return False
-        
+
         # Récupération des flowcells
         flowcells = self._get_flowcells(input_dir)
         if not flowcells:
             logging.info("Aucune flowcell trouvée")
             self.log_end(True)
             return True
-        
+
         # Traitement de chaque flowcell
         success_count = 0
         for flowcell_path in flowcells:
             flowcell_name = os.path.basename(flowcell_path)
-            
+
             if self._is_already_concatenated(flowcell_name, concat_file):
-                logging.info(f"Flowcell {flowcell_name} déjà concaténée")
+                logging.info("Flowcell %s déjà concaténée", flowcell_name)
                 continue
-            
+
             if self._process_flowcell(flowcell_path, flowcell_name, concat_file, input_dir):
                 success_count += 1
-        
+
         self.log_end(True)
         return success_count > 0
-    
+
     def _check_concat_file(self, concat_file: str, input_dir: str) -> bool:
         """
         Vérifie l'existence du fichier concat.list.
@@ -80,10 +88,10 @@ class ConcatStep(BaseStep):
                 input_dir, concat_file, "concat_file_missing", error_msg
             )
             return False
-        
+
         self.clear_event(input_dir, concat_file, "concat_file_missing")
         return True
-    
+
     def _get_flowcells(self, input_dir: str) -> list:
         """
         Récupère la liste des flowcells à traiter.
@@ -98,12 +106,12 @@ class ConcatStep(BaseStep):
             folder for folder in glob.glob(os.path.join(input_dir, "2*"))
             if os.path.isdir(folder) and not folder.endswith("logs")
         ]
-        
+
         for flowcell in flowcells:
-            logging.info(f"Flowcell trouvée: {os.path.basename(flowcell)}")
-        
+            logging.info("Flowcell trouvée: %s", os.path.basename(flowcell))
+
         return flowcells
-    
+
     def _is_already_concatenated(self, flowcell_name: str, concat_file: str) -> bool:
         """
         Vérifie si une flowcell a déjà été concaténée.
@@ -116,7 +124,7 @@ class ConcatStep(BaseStep):
             True si déjà concaténée
         """
         return string_in_file(flowcell_name, concat_file)
-    
+
     def _process_flowcell(
         self,
         flowcell_path: str,
@@ -141,26 +149,24 @@ class ConcatStep(BaseStep):
             folder for folder in glob.glob(os.path.join(flowcell_path, "Analysis", "*"))
             if os.path.isdir(folder)
         ]
-        
+
         if not self._check_run_ambiguity(run_folders, flowcell_name, input_dir):
             return False
-        
+
         # Vérification du fichier CopyComplete.txt
         run_folder = run_folders[0]
         completion_file = os.path.join(run_folder, "CopyComplete.txt")
-        
+
         if not file_exists(completion_file, "Lancement de la concaténation"):
-            logging.warning(
-                f"Séquençage non terminé pour {flowcell_name} "
-                "(pas de CopyComplete.txt). En attente."
-            )
+            logging.warning("Séquençage non terminé pour %s (pas de CopyComplete.txt). En attente.",
+                            flowcell_name)
             return False
-        
+
         # Lancement de la concaténation
         return self._launch_concatenation(
             run_folder, flowcell_name, concat_file, input_dir
         )
-    
+
     def _check_run_ambiguity(
         self,
         run_folders: list,
@@ -188,10 +194,10 @@ class ConcatStep(BaseStep):
                 input_dir, flowcell_name, "concat_ambiguity", error_msg
             )
             return False
-        
+
         self.clear_event(input_dir, flowcell_name, "concat_ambiguity")
         return True
-    
+
     def _launch_concatenation(
         self,
         run_folder: str,
@@ -214,25 +220,25 @@ class ConcatStep(BaseStep):
         current_date = datetime.now().strftime("%Y-%m-%d")
         fastq_dir = os.path.join(run_folder, "Data", "BCLConvert", "fastq")
         output_dir = self.config.concat_out_dir
-        
+
         # Préparation des répertoires
         ensure_directory(output_dir)
         ensure_directory(os.path.join(output_dir, "logs"))
         ensure_directory(os.path.join(output_dir, "logs", "concat"))
-        
+
         log_file = os.path.join(
             output_dir, "logs", "concat", f"{flowcell_name}.concat.{current_date}.log"
         )
-        
+
         # Lancement du subprocess
         try:
             self.pipeline.run_concat_wrapper(fastq_dir, output_dir, log_file)
-            
+
             # Ajout au fichier concat.list
-            with open(concat_file, 'a') as f:
+            with open(concat_file, 'a', encoding='utf-8') as f:
                 f.write(f"{flowcell_name}\n")
-            
-            logging.info(f"Concaténation lancée avec succès pour {flowcell_name}")
+
+            logging.info("Concaténation lancée avec succès pour %s", flowcell_name)
             self.clear_event(input_dir, flowcell_name, "concat_subprocess_fail")
             self.mail.send_success(
                 flowcell_name,
@@ -240,8 +246,8 @@ class ConcatStep(BaseStep):
                 "Lancé avec succès"
             )
             return True
-            
-        except Exception as e:
+
+        except (OSError, IOError, RuntimeError) as e:
             error_msg = f"Échec de la concaténation: {str(e)}"
             logging.error(error_msg)
             self.handle_event(

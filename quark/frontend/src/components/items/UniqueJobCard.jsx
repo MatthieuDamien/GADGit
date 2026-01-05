@@ -1,7 +1,7 @@
 import React from 'react';
 import { User, Server, Clock } from 'lucide-react';
 
-const UtilityJobCard = ({ job }) => {
+const UniqueJobCard = ({ job }) => {
   const { JOBID, JOBNAME, USER, PARTITION, TIME, ELAPSED } = job;
 
   return (
@@ -20,4 +20,4 @@ const UtilityJobCard = ({ job }) => {
   );
 };
 
-export default UtilityJobCard;
+export default UniqueJobCard;

@@ -7,9 +7,12 @@ const analysisInfosSchema = new mongoose.Schema({
   user_name: String,
 
   // Timestamps
-  created_at: Date,
-  started_at: Date,
-  finished_at: Date,
+  created_at: { type: Date },
+  started_at: { type: Date },   // Premier job de l'analyse à démarrer
+  finished_at: { type: Date },  // Dernier job de l'analyse à finir
+  submitted_at: { type: Date }, // Premier job de l'analyse à être soumis
+  first_job_start: { type: Date },
+  last_job_end: { type: Date },
 
   // Métriques de temps
   total_time_seconds: Number,
@@ -37,7 +40,7 @@ const analysisInfosSchema = new mongoose.Schema({
 const analysisSummariesSchema = new mongoose.Schema({
   analysis_id:       { type: String, required: true, unique: true },
   status:            { type: String, enum: ['running', 'error', 'pending', 'completed'], required: true },
-  last_update:       { type: Date, default: Date.now },
+  last_update:       { type: Date, default: Date.now, expires: parseInt(process.env.ANALYSES_SUMMARIES_TTL_SECONDS || '21600', 10) },
   infos:             analysisInfosSchema
 });
 

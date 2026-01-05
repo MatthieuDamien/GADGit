@@ -1,0 +1,11 @@
+PatientId	PED8460.3
+GAD	31698
+Sex	Femme
+Parente	Mère
+Statut	Atteint
+Numero autre	None
+Origine	sang
+Path to target	/work/work/shared/s-neomics/data/database/grch38/targets//refseq.cds.2bp.grch38.with_genes.interval_list
+Urgent	None
+NBSListChoice	L1
+Readgroup	@RG\tID:31698\tSM:dijen2224\tDS:PED8460.3\tPL:ILLUMINA\tPM:NovaSeq X\tCN:Neomics\tLB:31698_RefSeq

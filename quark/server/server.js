@@ -6,8 +6,9 @@ const http = require('http');
 const { Server } = require("socket.io");
 
 const ClusterSnapshot = require('./models/ClusterSnapshot');
-const AnalysisSummary = require('./models/AnalysisSummaries');
-const UtilityJobSnapshot = require('./models/UtilityJobSnapshot');
+const AnalysisSummary = require('./models/AnalysisSummaries')
+const UniqueJob = require('./models/UniqueJob');
+const RawJob = require('./models/RawJob');
 
 const app = express();
 app.use(cors());
@@ -25,7 +26,8 @@ const io = new Server(server, {
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connecté à MongoDB !');
-    // Démarrer l'écoute des changements une fois connecté
+    // La création des index (y compris TTL) est maintenant gérée par le script Python.
+    // On démarre directement l'écoute des changements.
     watchCollections();
   })
   .catch(err => console.error('Erreur de connexion à MongoDB :', err));
@@ -75,18 +77,28 @@ app.get('/api/analysis_summaries', async (req, res) => {
   }
 });
 
-// Route pour récupérer le DERNIER snapshot complet des jobs utilitaires
-// C'est cette route que le frontend utilisera pour l'affichage détaillé.
-app.get('/api/utility_job_snapshots/jobs', async (req, res) => {
+// Route pour récupérer TOUS les jobs uniques.
+app.get('/api/unique_jobs', async (req, res) => {
   try {
-    const latestSnapshot = await UtilityJobSnapshot.findOne().sort({ timestamp: -1 });
-    if (!latestSnapshot) {
-      return res.status(200).json(null);
-    }
-    // On renvoie le document complet
-    res.status(200).json(latestSnapshot);
+    // On trie par 'last_seen' pour avoir les plus récents en premier.
+    const jobs = await UniqueJob.find().sort({ last_seen: -1 });
+    // Renvoie un tableau (potentiellement vide) de jobs.
+    res.status(200).json(jobs || []);
   } catch (error) {
-    console.error('Erreur lors de la recherche du snapshot de jobs utilitaires :', error);
+    console.error('Erreur lors de la récupération des jobs uniques :', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route pour récupérer TOUS les jobs bruts.
+app.get('/api/raw_jobs', async (req, res) => {
+  try {
+    // On trie par 'last_seen' pour avoir les plus récents en premier.
+    // On peut ajouter une limite pour ne pas surcharger le client si nécessaire.
+    const jobs = await RawJob.find().sort({ last_seen: -1 }).limit(5000);
+    res.status(200).json(jobs || []);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des jobs bruts :', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -112,7 +124,8 @@ function watchCollections() {
   const collectionsToWatch = [
     ClusterSnapshot,
     AnalysisSummary,
-    UtilityJobSnapshot
+    UniqueJob, // MODIFIÉ
+    RawJob     // MODIFIÉ
   ];
 
   collectionsToWatch.forEach(model => {
@@ -121,19 +134,18 @@ function watchCollections() {
       const changeStream = model.collection.watch([], { fullDocument: 'updateLookup' });
       
       changeStream.on('change', (change) => {
-        console.log(`Changement détecté dans '${model.collection.name}':`, change.operationType);
-        
-        let documentToSend = change.fullDocument || change.documentKey;
+          console.log('📡 Change détecté:', {
+          collection: model.collection.name,
+          operation: change.operationType,
+          hasDocument: !!change.fullDocument,
+          docId: change.documentKey?._id
+      });
 
-        // SI on a un document complet (insert, update/replace), on le nettoie
-        if (change.fullDocument) {
-            // Utilise toObject() pour obtenir un objet JS propre (supprime les méthodes Mongoose)
-            documentToSend = change.fullDocument.toObject({ virtuals: true, getters: true });
-            
-            // Force _id à être une chaîne de caractères (méthode la plus fiable)
-            if (documentToSend._id) {
-                documentToSend._id = documentToSend._id.toString();
-            }
+        let documentToSend = change.fullDocument;
+        if (documentToSend) {
+            // Utilise toJSON() qui est souvent plus fiable pour la sérialisation
+            // et gère la conversion de l'ObjectId en chaîne.
+            documentToSend = JSON.parse(JSON.stringify(documentToSend));
         }
         
         // Préparer les données à émettre.

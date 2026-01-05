@@ -1,69 +1,63 @@
+"""
+Module pour la gestion des connexions SSH et l'exécution de commandes de base sur un cluster SLURM.
+"""
 import paramiko
-import time
 
-def connect_ssh(HOST, USERNAME, PASSWORD, timeout=30):
+def connect_ssh(host, username, password, timeout=30):
     """
     Connexion SSH avec gestion d'erreurs améliorée
     """
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    
+    ssh_client = paramiko.SSHClient()
+    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
     try:
-        print(f"Tentative de connexion à {HOST} avec l'utilisateur {USERNAME}...")
-        ssh.connect(
-            hostname=HOST, 
-            username=USERNAME, 
-            password=PASSWORD,
+        # print(f"Tentative de connexion à {host} avec l'utilisateur {username}...")
+        ssh_client.connect(
+            hostname=host,
+            username=username,
+            password=password,
             timeout=timeout,
             banner_timeout=30,
             auth_timeout=30
         )
-        
+
         # Test de la connexion avec une commande simple
-        stdin, stdout, stderr = ssh.exec_command("whoami", timeout=10)
+        _, stdout, stderr = ssh_client.exec_command("whoami", timeout=10)
         output = stdout.read().decode().strip()
         error = stderr.read().decode().strip()
-        
+
         if error:
             print(f"Avertissement lors du test de connexion: {error}")
-        
-        if output == USERNAME:
-            print(f"✅ Connexion SSH établie avec succès à {HOST}")
-            return ssh
+
+        if output == username:
+            # print(f"✅ Connexion SSH établie avec succès à {host}")
+            return ssh_client
         else:
-            print(f"❌ Test de connexion échoué - utilisateur attendu: {USERNAME}, reçu: {output}")
-            ssh.close()
+            # print(f"❌ Test de connexion échoué - utilisateur attendu: {username}, reçu: {output}")
+            ssh_client.close()
             return None
-            
+
     except paramiko.AuthenticationException:
         print("❌ Erreur d'authentification - vérifiez le nom d'utilisateur et le mot de passe")
         return None
     except paramiko.SSHException as ssh_exception:
         print(f"❌ Erreur SSH: {ssh_exception}")
         return None
-    except Exception as e:
+    except (IOError, TimeoutError) as e:
         print(f"❌ Erreur de connexion: {e}")
         return None
 
 # ------------------------------------------------------------------------------
 
-
-# Configuration SSH de matt.damien@icloud.com
-USERNAME = "umw040ir"
-HOST = "login-1.mesobfc.fr"
-PASSWORD = "PaeDaegh5uiX"
-
-ssh = paramiko.SSHClient()
-
-# ------------------------------------------------------------------------------
-
 # Commandes de base à récupérer
-squeue = "squeue -a --format \"%.18i %.9P %.50j %.8u %.2t %.10M %.6D %R\""
-sacct  = "sacct -a -X --format JobID,JobName%50,Partition,AllocCPUS,State,ExitCode,Elapsed,NNodes,NodeList" #,NTasks mais toujours null
-sinfo  = "sinfo -a --format=\"%20P %10a %5D %15F %10T %6c %10m %20f %15l %20b %N\""
+SQUEUE_CMD = "squeue -a --format \"%.18i %.9P %.50j %.8u %.2t %.10M %.6D %R\""
+SACCT_CMD = ("sacct -a -X --format JobID,JobName%50,Partition,AllocCPUS,State,ExitCode,"
+             "Elapsed,NNodes,NodeList,User,Start,End,Submit,Timelimit,WorkDir,ReqMem,MaxRSS")
+SINFO_CMD = "sinfo -a --format=\"%20P %10a %5D %15F %10T %6c %10m %20f %15l %20b %N\""
 
 # Si besoin de supprimer un job de la liste
 def drop_job_from_queue(job_id_a_supprimer, list_jobs):
+    """Supprime un job d'une liste de jobs en se basant sur son JOBID."""
     # Trouver l'index du job avec cet ID
     for i, job in enumerate(list_jobs):
         if job["JOBID"] == job_id_a_supprimer:
@@ -72,37 +66,51 @@ def drop_job_from_queue(job_id_a_supprimer, list_jobs):
 
 
 # Affiche la sortie d'une commande SSH
-def exec_sortie_ssh(command):
-    stdin, stdout, stderr = ssh.exec_command(command)
+def exec_sortie_ssh(ssh_client, command):
+    """Exécute une commande sur le client SSH et affiche la sortie."""
+    _, stdout, stderr = ssh_client.exec_command(command)
     output = stdout.read().decode()
     error  = stderr.read().decode()
-        
+
     if output:
         print(f"\nSortie de la commande {command} :\n{output}")
     if error:
         print(f"Erreur :\n{error}")
 
 # ------------------------------------------------------------------------------
-
-# Connexion SSH avec la configuration de matt.damien@icloud.com
-def connect_ssh_base():
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    try:
-        ssh.connect(HOST, username=USERNAME, password=PASSWORD)
-        print(f"Connexion SSH établie avec succès à {HOST} !")
-        # ssh.exec_command("cd /work/work/shared/s-neomics && ls")
-        exec_sortie_ssh("cd /work/work/shared/s-neomics && ls")
-    except Exception as e:
-        print(f"Erreur de connexion ou d'exécution : {e}")
-
-# ------------------------------------------------------------------------------
-
-# Test de la connexion et des commandes
-def printer():
-    connect_ssh_base()
-    # exec_sortie_ssh(sinfo)
-    # exec_sortie_ssh(squeue)
-    # exec_sortie_ssh(sacct)
-
 if __name__ == "__main__":
+    import json
+    # pylint: disable=E0401
+    from slurmSacct import get_sacct
+
+    # Configuration SSH pour le test local
+    TEST_USERNAME = "umw040ir"
+    TEST_HOST = "login-1.mesobfc.fr"
+    TEST_PASSWORD = "PaeDaegh5uiX"
+
+    def printer():
+        """Fonction de test pour la connexion et les commandes."""
+        print("--- Lancement du test pour slurmAccess.py ---")
+        ssh_client = connect_ssh(
+            host=TEST_HOST,
+            username=TEST_USERNAME,
+            password=TEST_PASSWORD
+        )
+
+        if ssh_client:
+            try:
+                # exec_sortie_ssh(ssh_client, SINFO_CMD)
+                # exec_sortie_ssh(ssh_client, SQUEUE_CMD)
+                # exec_sortie_ssh(ssh_client, SACCT_CMD)
+                print("\nAppel de get_sacct pour tester le parsing...")
+                sacct_jobs = get_sacct(ssh_client)
+                if sacct_jobs != "Error" and isinstance(sacct_jobs, list):
+                    print(f"✅ {len(sacct_jobs)} jobs récupérés et parsés depuis sacct.")
+                    if sacct_jobs:
+                        print("\n--- Premier job parsé ---")
+                        print(json.dumps(sacct_jobs[0], indent=4, ensure_ascii=False))
+            finally:
+                ssh_client.close()
+                print("Connexion SSH de test fermée.")
+
     printer()

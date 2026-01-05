@@ -26,14 +26,14 @@ const Header = ({ lastUpdate, onRefresh, isDarkMode, onToggleDarkMode }) => (
         </div>
         <div className="flex items-center gap-4">
           <DarkModeToggle isDark={isDarkMode} onToggle={onToggleDarkMode} />
-          <button 
+          {/* <button 
             onClick={onRefresh}
             className="p-2 hover:bg-gray-4 dark:hover:bg-lime-4 
                        rounded-lg transition-colors"
             aria-label="Rafraîchir"
           >
             <RefreshCw className="w-5 h-5 text-gray-11 dark:text-lime-11" />
-          </button>
+          </button> */}
           <div className="text-sm text-gray-11 dark:text-lime-11">
             MAJ: {lastUpdate.toLocaleTimeString()}
           </div>

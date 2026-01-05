@@ -1,8 +1,10 @@
+// src/components/items/AnalysisCard.jsx
 import React from 'react';
 import { ProgressBar } from '../ui/ProgressBar';
+import { Link } from 'react-router-dom';
 import StatusBadge from '../ui/StatusBadge';
 
-const AnalysisCard = ({ analysis }) => {
+const AnalysisCard = ({ analysis, onClick}) => {
   const { analysis_id, status, infos, last_update } = analysis;
 
   const formatDate = (dateString) => {
@@ -22,9 +24,11 @@ const AnalysisCard = ({ analysis }) => {
     : 0;
 
   return (
-    <div className="p-4 rounded-lg shadow-md bg-gray-2 dark:bg-gray-3 border border-transparent hover:border-blue-7 dark:hover:border-lime-7 transition-all duration-200">
+    <Link
+      to={`/analysis/${analysis_id}`}
+      className="p-4 rounded-lg shadow-md cursor-pointer bg-gray-2 dark:bg-gray-3 border border-transparent hover:border-blue-7 dark:hover:border-lime-7 transition-all duration-200">
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center">
+        <div className="flex item-center space-x-2">
           <h3 className="font-bold text-md text-gray-12 dark:text-white truncate">{analysis_id}</h3>
         </div>
         <StatusBadge status={status} />
@@ -39,9 +43,9 @@ const AnalysisCard = ({ analysis }) => {
           </div>
           <span className="ml-2 w-12 text-right">{Math.round(progressPercent)} %</span>
         </div>
-        <p className="text-xs pt-2">Dernière MàJ: {formatDate(last_update)}</p>
+        <p className="text-xs pt-2">Créé à : {formatDate(infos.submitted_at)}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

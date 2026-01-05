@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
-PARTITIONS_TO_IGNORE = ['transfer', 'mpi1']
+PARTITIONS_TO_IGNORE = [] # 'transfer', 'mpi1'
 GPU_CONFIG = {
     'partitions': {'gpu': 2, 'nompi': 0, 'mpi1': 0, 'mpi2': 0, 'transfer': 0},
     'node_patterns': {r'cn0-1[8-9]': 2, r'cn0-20': 2},
@@ -82,6 +82,7 @@ class SlurmInfoCollector:
                 partition = node_info.get('PARTITION', '').strip('*')
                 if partition in PARTITIONS_TO_IGNORE:
                     continue
+
                 if partition not in metrics['partitions']:
                     metrics['partitions'][partition] = {
                         'nodes': {'total': 0, 'allocated': 0, 'idle': 0, 'other': 0},
@@ -91,6 +92,7 @@ class SlurmInfoCollector:
 
                 nodes_aiot = node_info.get('NODES_AIOT', '0/0/0/0')
                 allocated, idle, other, total = map(int, nodes_aiot.split('/'))
+
                 cpus_per_node = int(node_info.get('CPUS', 0))
                 gpus_per_node = self._parse_gpu_count(node_info)
 

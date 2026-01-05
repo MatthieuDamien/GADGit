@@ -1,0 +1,11 @@
+key,value,comment
+,, # Fichier de configuration pour tests locaux
+mail_bioinfo,test@local.dev
+labkey_address,translad.chu-dijon.fr
+,, # Paramètres communs - chemins relatifs pour tests locaux
+concat_out_dir,../../tests/incoming/,"Dossier des données (relatif)"
+analysis_out_dir,../../tests/analyse/,"Dossier de sortie des analyses (relatif)"
+,, # Paramètres spécifiques - utilise le dossier tests existant
+pipeline_base,../../tests/tests/2.11.0,"Répertoire de base des pipelines (relatif)"
+target_list,../../tests/targets/,"Dossier contenant les fichiers bed des panels cibles (relatif)"
+dev_test_dir,../../tests/dev/,"Dossier pour les fichiers de tests de l'autolauncher en dev (relatif)"

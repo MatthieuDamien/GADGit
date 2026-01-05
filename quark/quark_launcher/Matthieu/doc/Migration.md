@@ -35,6 +35,7 @@ autolauncher/
 ### Configuration
 
 **Ancien (lignes 23-33)** :
+
 ```python
 configfile = "/work/work/shared/s-neomics/pipeline/..."
 mail_bioinfo = "gad-astreinte-bioinfo@u-bourgogne.fr"
@@ -46,6 +47,7 @@ with open(file=configfile, mode="r") as f:
 ```
 
 **Nouveau (config.py)** :
+
 ```python
 class Config:
     def __init__(self, config_file: str = None):
@@ -57,6 +59,7 @@ class Config:
 ### Gestion des événements
 
 **Ancien (lignes 100-200)** :
+
 ```python
 class events_register:
     def __init__(self, event_file):
@@ -71,6 +74,7 @@ class events_register:
 ```
 
 **Nouveau (events.py)** :
+
 ```python
 class EventsRegister:
     EVENT_TYPES = [...]  # Types validés
@@ -84,6 +88,7 @@ class EventsRegister:
 ### Notifications mail
 
 **Ancien (lignes 85-95)** :
+
 ```python
 def send_mail(target, launcherflag, comment, keyword="OK", error=False):
     if error == True:
@@ -92,6 +97,7 @@ def send_mail(target, launcherflag, comment, keyword="OK", error=False):
 ```
 
 **Nouveau (mail.py)** :
+
 ```python
 class MailManager:
     def send_notification(self, target, step, comment, 
@@ -105,6 +111,7 @@ class MailManager:
 ### Étape de concaténation
 
 **Ancien (lignes 250-350)** :
+
 ```python
 if args.concat is not None:
     logging.info(f"--concat option specified...")
@@ -118,6 +125,7 @@ if args.concat is not None and unlocked_to_locked(in_dir):
 ```
 
 **Nouveau (steps/concat.py)** :
+
 ```python
 class ConcatStep(BaseStep):
     def execute(self, input_dir: str) -> bool:
@@ -131,6 +139,7 @@ class ConcatStep(BaseStep):
 ```
 
 **Avantages** :
+
 - Logique découpée en méthodes privées claires
 - Gestion d'erreur centralisée
 - Plus facile à tester et débugger
@@ -138,6 +147,7 @@ class ConcatStep(BaseStep):
 ### Étape d'organisation avec LabKey
 
 **Ancien (lignes 400-600)** :
+
 ```python
 if args.organize is not None:
     # 200 lignes avec:
@@ -149,6 +159,7 @@ if args.organize is not None:
 ```
 
 **Nouveau (steps/organize.py)** :
+
 ```python
 class OrganizeStep(BaseStep):
     def execute(self, input_dir: str) -> bool:
@@ -165,13 +176,19 @@ class OrganizeStep(BaseStep):
 ```
 
 **Avantages** :
+
 - Chaque méthode fait une chose précise
 - Logique métier séparée des détails techniques
 - Facile d'ajouter des tests unitaires
 
+**Désavantages** :
+
+- Migration vers Labkey 4.0.1 donc il est possible que le code ne soit plus fonctionnel
+
 ### Exécution de subprocess
 
 **Ancien (lignes 340-360)** :
+
 ```python
 concat_script_path = os.path.join(pipelinebase, "common/fastq/...")
 option_dict = {"INPUTDIR": ..., "OUTPUTDIR": ...}
@@ -184,6 +201,7 @@ if sub.returncode != 0:
 ```
 
 **Nouveau (subprocess_runner.py)** :
+
 ```python
 class PipelineRunner:
     def run_concat_wrapper(self, input_dir, output_dir, log_file):
@@ -194,9 +212,10 @@ class PipelineRunner:
 ```
 
 **Avantages** :
+
 - Code réutilisable pour tous les subprocess
 - Gestion d'erreur centralisée
-- Timeout configurable
+- Timeout configurable (encore à revoir)
 - Logging standardisé
 
 ## Tableau de correspondance des fonctions
@@ -366,14 +385,14 @@ Après migration complète :
 - **Débogage** : modules isolés
 - **Extensibilité** : ajout facile de features
 - **Tests** : code testable
-- **Documentation** : inline + README
+- **Documentation** : inline + README (non à jour)
 
 ## Prochaines étapes
 
 Après migration réussie, envisager :
 
-1. Ajout de tests unitaires
-2. Monitoring avec métriques
-3. Dashboard web pour visualiser l'état
+1. Ajout de tests unitaires (quelques-uns réalisés dans tests/)
+2. Monitoring avec métriques (à implémenter dans quark)
+3. Dashboard web pour visualiser l'état (à implémenter dans quark)
 4. API REST pour contrôle à distance
-5. Intégration avec Dashboard React
+5. Intégration avec Dashboard React (à implémenter dans quark)

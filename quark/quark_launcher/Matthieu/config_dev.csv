@@ -1,0 +1,37 @@
+key,value,comment,updated
+,, # Paramètres LabKey
+labkey_address,translad.chu-dijon.fr
+
+,, # Paramètres Mails
+mail_bioinfo,matthieu.damien@reseau.eseo.fr,"Adresse mail de la personne en charge de l'astreinte bioinfo",2025-11-07
+mail_bio,biologistesuf6254@u-bourgogne.fr,"Adresse mail des biologistes",2025-09-01
+mail_responsable_bioinfo,yannis.duffourd@u-bourgogne.fr,"Adresse mail du Responsable de l'unité Bioinformatique",2025-09-01
+
+,, # Fichier de configuration Slurm
+main_queue,batch,"Commande pour soumettre un job au cluster sur la queue principale",2025-09-01
+
+,, # Paramètres communs à toutes les infrastructures
+main_dir,/work/work/shared/s-neomics/data/sandbox/quark/tests/,"Dossier principal de l'autolauncher",2025-11-07
+concat_in_dir,/work/work/shared/s-neomics/data/sandbox/quark/tests/concat/,"Dossier des données à concaténer",2025-11-07
+concat_out_dir,/work/work/shared/s-neomics/data/sandbox/quark/tests/concat/incoming/,"Dossier des données à analyser",2025-11-07
+analysis_out_dir,/work/work/shared/s-neomics/data/sandbox/quark/tests/concat/analyse/,"Dossier de sortie des analyses",2025-09-01
+logs_autolauncher,/work/work/shared/s-neomics/data/sandbox/quark/tests/logs,"Dossier des logs de l'autolauncher",2025-11-07
+
+,, # Paramètres spécifiques à l'infrastructure de Neomics
+pipeline_base,/work/work/shared/s-neomics/pipeline/2.11.1,"Version des pipelines utilisée",2025-09-01
+pipeline_config,/work/work/shared/s-neomics/pipeline/2.11.1/common/analysis_config_mesobfc.tsv,"Fichier de configuration TSV pour les scripts du pipeline",2025-11-10
+target_list,/work/work/shared/s-neomics/data/database/grch38/targets/,"Dossier contenant les fichiers bed des panels cibles",2025-09-01
+
+,, # Events
+events_dir,/work/work/shared/s-neomics/data/incoming/events/,"Dossier des fichiers évènements",2025-09-01
+mails_dir,/work/work/shared/s-neomics/data/incoming/logs/autolauncher/,"Dossier des mails",2025-09-01
+
+,, # Paramètres d'achivage des données
+archlogs,/archive/gad/shared/log/,"Dossier d'archivage des logs",2025-09-01
+archfastq,/archive/gad/shared/fastq/,"Dossier d'archivage des fastq",2025-09-01
+archbam,/archive/gad/shared/bam_GRCh38/,"Dossier d'archivage des bam",2025-09-01
+archqc,/archive/gad/shared/QC_GRCh38/,"Dossier d'archivage des rapports de contrôle qualité",2025-09-01
+archvcf,/archive/gad/shared/vcf_GRCh38/,"Dossier d'archivage des vcf",2025-09-01
+archgvcf,/archive/gad/shared/gvcf_GRCh38/,"Dossier d'archivage des gvcf",2025-09-01
+archcnv,/archive/gad/shared/cnv/,"Dossier d'archivage des cnv",2025-09-01
+archmito,/archive/gad/shared/bam_GRCh38/,"Dossier d'archivage des analyses mitochondriales?",2025-09-01

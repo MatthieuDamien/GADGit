@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const clusterSnapshotSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now ,
-    // Crée un index TTL. Utilise la variable d'environnement SNAPSHOT_TTL_SECONDS,
+    // Crée un index TTL. Utilise la variable d'environnement CLUSTER_SNAPSHOT_TTL_SECONDS,
     // avec une valeur par défaut de 24h (86400s) si non définie.
-    expires: parseInt(process.env.SNAPSHOT_TTL_SECONDS || '86400', 10)
+    expires: parseInt(process.env.CLUSTER_SNAPSHOTS_TTL_SECONDS || '86400', 10)
   },
   metrics: {
     total_nodes:         Number,

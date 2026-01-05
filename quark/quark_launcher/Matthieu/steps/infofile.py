@@ -2,8 +2,16 @@
 # -*- coding: utf-8 -*-
 
 """
+/steps/infofile.py
+
+Description:
 Étape de création/mise à jour du fichier d'information des échantillons.
 Génère le fichier sample_correspondance.info nécessaire au dispatch.
+
+Auteur: Matthieu Damien
+Creation Date: 2025-10-07
+Dernière modification: 2025-10-31
+Commentaires:
 """
 
 import os

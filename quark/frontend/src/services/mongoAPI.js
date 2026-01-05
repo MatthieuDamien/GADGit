@@ -9,8 +9,9 @@ export const getClusterMetrics = () => {
   return mongoAPI.get('/cluster_snapshots/metrics');
 };
 
-export const getUtilityJobMetrics = () => {
-  return mongoAPI.get('/utility_job_snapshots/jobs');
+// MODIFIÉ: Renommé et mis à jour pour la nouvelle collection/route
+export const getUniqueJobs = () => {
+  return mongoAPI.get('/unique_jobs');
 };
 
 export const getAnalysisSummaries = () => {

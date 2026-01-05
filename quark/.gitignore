@@ -14,3 +14,5 @@ backend/scripts/api/__pycache__/
 backend/scripts/database/__pycache__/
 backend/scripts/slurm/__pycache__/
 backend/tests/slurm/__pycache__/
+
+singularity/quark_autolauncher.sif

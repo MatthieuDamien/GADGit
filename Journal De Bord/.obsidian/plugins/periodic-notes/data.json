@@ -10,7 +10,7 @@
   "weekly": {
     "format": "gggg-[S]ww",
     "template": "Templates/Semaines.md",
-    "folder": "Notes/Octobre",
+    "folder": "Notes/Décembre",
     "enabled": true
   },
   "monthly": {

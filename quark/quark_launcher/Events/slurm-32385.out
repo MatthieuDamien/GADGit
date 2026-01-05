@@ -1,0 +1,6 @@
+/var/spool/slurm/job32385/slurm_script: line 30: /work/work/shared/s-neomics/data/incoming/logs/concat/20250805_LH00623_0039_B233MY3LT3.concat.2025-08-06.log: Permission denied
+2025-08-08_13-58-31: START
+/var/spool/slurm/job32385/slurm_script: line 71: /neomics/seq1/20250805_LH00623_0039_B233MY3LT3/Analysis/2/Data/BCLConvert/fastq/sample_list: Permission denied
+cat: /neomics/seq1/20250805_LH00623_0039_B233MY3LT3/Analysis/2/Data/BCLConvert/fastq/sample_list: No such file or directory
+cat: /neomics/seq1/20250805_LH00623_0039_B233MY3LT3/Analysis/2/Data/BCLConvert/fastq/sample_list: No such file or directory
+2025-08-08_13-58-31: END

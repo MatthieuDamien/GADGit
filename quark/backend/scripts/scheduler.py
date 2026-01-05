@@ -12,7 +12,7 @@ import paramiko  # NOUVEAU: Import pour la gestion SSH
 from .database.mongodb_client import MongoDBClient
 # MODIFIÉ: Imports des modules
 from .slurm.info_collector import SlurmInfoCollector
-from .slurm.job_grouper import SlurmAnalysisCollector  # NOUVEAU
+from .slurm.job_grouper import SlurmJobCollector, JobSeparator
 from .slurm.optimizer import JobOptimizer
 # NOUVEAU: Imports directs pour le fetch des données
 from .slurm.slurmAccess import connect_ssh
@@ -30,8 +30,9 @@ class QuarkScheduler:
     def __init__(self, host: str, username: str, password: str):
         self.db = MongoDBClient()
         # MODIFIÉ: Les collecteurs n'ont plus besoin d'identifiants
-        self.info_collector = SlurmInfoCollector()
-        self.analysis_collector = SlurmAnalysisCollector()
+        self.info_collector = SlurmInfoCollector() # Pour les métriques du cluster (sinfo)
+        self.job_collector = SlurmJobCollector()   # Pour tous les jobs (squeue, sacct)
+        self.job_separator = JobSeparator()        # Pour séparer analyses et jobs uniques
         self.optimizer = JobOptimizer()
         # MODIFIÉ: Le scheduler garde les identifiants
         self.host = host
@@ -47,9 +48,9 @@ class QuarkScheduler:
         try:
             logger.info("Connexion SSH à %s...", self.host)
             ssh = connect_ssh(
-                HOST=self.host,
-                USERNAME=self.username,
-                PASSWORD=self.password
+                host=self.host,
+                username=self.username,
+                password=self.password
             )
             if not ssh:
                 logger.error("Échec de la connexion SSH.")
@@ -94,9 +95,13 @@ class QuarkScheduler:
             logger.info("Génération du snapshot de l'état du cluster...")
             self.info_collector.process_and_store(sinfo_data, squeue_data)
 
-            # 2b. Snapshot des analyses groupées
-            logger.info("Génération du snapshot des analyses groupées...")
-            self.analysis_collector.process_and_store(sacct_data, squeue_data)
+            # 2b. Stockage du snapshot brut de tous les jobs
+            logger.info("Génération du snapshot brut de tous les jobs...")
+            self.job_collector.process_and_store(sacct_data, squeue_data)
+
+            # 2c. Séparation et traitement des jobs (analyses vs uniques)
+            logger.info("Séparation et traitement des jobs...")
+            self.job_separator.process_and_store()
 
             # 3. Sélection des jobs à soumettre
             logger.info("Sélection des prochains jobs...")

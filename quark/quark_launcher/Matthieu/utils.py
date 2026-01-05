@@ -2,12 +2,21 @@
 # -*- coding: utf-8 -*-
 
 """
+utils.py
+
+Description:
 Fonctions utilitaires génériques pour l'autolauncher.
+
+Auteur: Matthieu Damien
+Creation Date: 2025-10-07
+Dernière modification: 2025-10-31
+Commentaires:
 """
 
 import os
 import re
 import logging
+import glob
 from pathlib import Path
 from typing import Optional
 
@@ -25,7 +34,7 @@ def file_exists(file_path: str, comment: str = "", log: bool = True) -> bool:
         True si le fichier existe
     """
     exists = os.path.isfile(file_path)
-    
+
     if log:
         if exists:
             msg = f"Fichier trouvé: {file_path}"
@@ -33,10 +42,9 @@ def file_exists(file_path: str, comment: str = "", log: bool = True) -> bool:
                 msg += f" - {comment}"
             logging.info(msg)
         else:
-            logging.warning(f"Fichier introuvable: {file_path}")
-    
-    return exists
+            logging.warning("Fichier introuvable: %s", file_path)
 
+    return exists
 
 def ensure_directory(directory: str) -> None:
     """
@@ -47,8 +55,7 @@ def ensure_directory(directory: str) -> None:
     """
     if not os.path.isdir(directory):
         os.makedirs(directory, mode=0o770, exist_ok=True)
-        logging.info(f"Répertoire créé: {directory}")
-
+        logging.info("Répertoire créé: %s", directory)
 
 def string_in_file(string: str, file_name: str, log: bool = True) -> bool:
     """
@@ -63,28 +70,28 @@ def string_in_file(string: str, file_name: str, log: bool = True) -> bool:
         True si la string est trouvée
     """
     try:
-        with open(file_name, 'r') as f:
+        with open(file_name, 'r', encoding='utf-8') as f:
             matches = []
             for line in f:
                 if re.match(f"^{re.escape(string)}$", line.strip()):
                     matches.append(line)
-            
+
             if log:
                 if len(matches) == 1:
-                    logging.debug(f"String trouvée dans {file_name}: {string}")
+                    logging.debug("String trouvée dans %s: %s", file_name, string)
                 elif len(matches) > 1:
                     logging.error(
-                        f"String trouvée {len(matches)} fois dans {file_name}: {string}"
+                        "String trouvée %d fois dans %s: %s",
+                        len(matches), file_name, string
                     )
                 else:
-                    logging.debug(f"String non trouvée dans {file_name}: {string}")
-            
-            return len(matches) > 0
-    
-    except FileNotFoundError:
-        logging.error(f"Fichier introuvable pour recherche: {file_name}")
-        return False
+                    logging.debug("String non trouvée dans %s: %s", file_name, string)
 
+            return len(matches) > 0
+
+    except FileNotFoundError:
+        logging.error("Fichier introuvable pour recherche: %s", file_name)
+        return False
 
 def get_or_create_file(
     arg_path: str,
@@ -108,21 +115,20 @@ def get_or_create_file(
         file_path = os.path.join(input_dir, default_filename)
     else:
         file_path = arg_path
-    
+
     logging.debug("%s sera écrit dans: %s", file_category, file_path)
-    
+
     # Créer le répertoire parent si nécessaire
     parent_dir = os.path.dirname(file_path)
     if parent_dir:
         os.makedirs(parent_dir, mode=0o770, exist_ok=True)
-    
+
     if not os.path.isfile(file_path):
         Path(file_path).touch(mode=0o770, exist_ok=False)
         os.chmod(file_path, mode=0o770)
         logging.debug("Fichier %s créé: %s", file_category, file_path)
-    
-    return file_path
 
+    return file_path
 
 def get_file_size_mb(file_path: str) -> float:
     """
@@ -138,9 +144,8 @@ def get_file_size_mb(file_path: str) -> float:
         size_bytes = os.stat(file_path).st_size
         return size_bytes / (1024 * 1024)
     except FileNotFoundError:
-        logging.error(f"Impossible de déterminer la taille de {file_path}")
+        logging.error("Impossible de déterminer la taille de %s", file_path)
         return 0
-
 
 def find_paired_fastq(fastq_file: str, files_list: list) -> Optional[str]:
     """
@@ -159,9 +164,8 @@ def find_paired_fastq(fastq_file: str, files_list: list) -> Optional[str]:
         paired = fastq_file.replace("R2", "R1")
     else:
         return None
-    
-    return paired if paired in files_list else None
 
+    return paired if paired in files_list else None
 
 def get_flowcell_folders(directory: str) -> list:
     """
@@ -173,13 +177,11 @@ def get_flowcell_folders(directory: str) -> list:
     Returns:
         Liste des chemins des flowcells
     """
-    import glob
     flowcells = [
         folder for folder in glob.glob(os.path.join(directory, "2*"))
         if os.path.isdir(folder) and not folder.endswith("logs")
     ]
     return flowcells
-
 
 def parse_status_file(status_file: str) -> dict:
     """
@@ -195,21 +197,21 @@ def parse_status_file(status_file: str) -> dict:
         'has_failures': False,
         'failed_processes': []
     }
-    
+
     try:
-        with open(status_file, 'r') as f:
+        with open(status_file, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         status_lines = re.split(r'\n+', content)
         fail_pattern = re.compile(r'^.*FAIL\t?')
-        
+
         for line in status_lines:
             if fail_pattern.match(line):
                 result['has_failures'] = True
                 process_name = line.split('\t')[0]
                 result['failed_processes'].append(process_name)
-        
-    except Exception as e:
-        logging.error(f"Erreur lors du parsing de {status_file}: {e}")
-    
+
+    except (IOError, OSError) as e:
+        logging.error("Erreur lors du parsing de %s: %s", status_file, e)
+
     return result
